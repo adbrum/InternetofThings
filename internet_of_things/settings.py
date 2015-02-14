@@ -58,15 +58,19 @@ WSGI_APPLICATION = 'internet_of_things.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'iot',
+        'USER': 'root',
+        'PASSWORD': 'ArVl92br',
+        'HOST': '192.168.0.25',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-pt'
 
 TIME_ZONE = 'UTC'
 
