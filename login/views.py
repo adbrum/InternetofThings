@@ -18,7 +18,7 @@ def register(request):
                 password=form.cleaned_data['password1'],
                 email=form.cleaned_data['email']
             )
-            return HttpResponseRedirect('/register/success/')
+            return HttpResponseRedirect('login/register/success/')
     else:
         form = RegistrationForm()
     variables = RequestContext(request, {
@@ -26,14 +26,14 @@ def register(request):
     })
 
     return render_to_response(
-        'registration/register.html',
+        'login/registration/register.html',
         variables,
     )
 
 
 def register_success(request):
     return render_to_response(
-        'registration/success.html',
+        'Iiot/login/registration/success.html',
     )
 
 
@@ -45,6 +45,6 @@ def logout_page(request):
 @login_required
 def home(request):
     return render_to_response(
-        'home.html',
+        'login/home.html',
         {'user': request.user}
     )

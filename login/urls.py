@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+
 from views import logout_page, register, register_success, home
 
 

@@ -24,19 +24,19 @@ SECRET_KEY = '*#18z+=iwx7yxi3&mzxz0c9bnah#h!u%1j+4y6+hc!10t1ncd#'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #'django.template.loaders.eggs.Loader',
 )
 
 # TEMPLATE_DIRS = (
 #     os.path.join(os.path.dirname(__file__), 'templates'),
 # )
 
-TEMPLATE_DIRS = (
-    'templates',
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+# TEMPLATE_DIRS = (
+#     'templates',
+#     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+#     # Always use forward slashes, even on Windows.
+#     # Don't forget to use absolute paths, not relative paths.
+# )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -55,7 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'iot',
+    'login',
 )
 
 MIDDLEWARE_CLASSES = (
