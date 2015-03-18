@@ -27,10 +27,16 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates'),
-)
+# TEMPLATE_DIRS = (
+#     os.path.join(os.path.dirname(__file__), 'templates'),
+# )
 
+TEMPLATE_DIRS = (
+    'templates',
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,7 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'internet_of_things',
+    'iot',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,17 +77,24 @@ WSGI_APPLICATION = 'internet_of_things.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iot',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'POPOLINUX',  # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'iot.db'),
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'iot',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',  # Or an IP Address that your DB is hosted on
+#         'PORT': '',
+#     }
+# }
+
 # ESQUEMA DE LOGIN
-AUTH_PROFILE_MODULE = 'internet_of_things.login'
+AUTH_PROFILE_MODULE = 'InternetofThings.login'
 LOGIN_URL = '/InternetofThings/login'
 
 # Internationalization
@@ -100,6 +113,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+
 
 STATIC_URL = '/static/'
 
