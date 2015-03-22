@@ -28,10 +28,13 @@ class Equipment(models.Model):
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     dateManufacture = models.DateField()
-    dataHoraCriacao = models.DateTimeField(null = True)
-    utilizadorCriacao = models.CharField(null = True, max_length = 50)
-    dataHoraAlteracao = models.DateTimeField(null = True)
-    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+    dateTimeCreation = models.DateTimeField(null=True)
+    userCreation = models.CharField(null=True, max_length=50)
+    dateTimeChange = models.DateTimeField(null=True)
+    userAmendment = models.CharField(null=True, max_length=50)
+
+    def __str__(self):
+        return self.name
 
 
 class PhysicalCharacteristics(models.Model):
@@ -55,19 +58,19 @@ class Voltage(models.Model):
 class GPU(models.Model):
     type = models.CharField(max_length=100)
     clockSpeed = models.IntegerField()
-    dataHoraCriacao = models.DateTimeField(null = True)
-    utilizadorCriacao = models.CharField(null = True, max_length = 50)
-    dataHoraAlteracao = models.DateTimeField(null = True)
-    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+    userCreation = models.CharField(null=True, max_length=50)
+    userAmendment = models.CharField(null=True, max_length=50)
+    dateTimeCreation = models.DateTimeField(null=True)
+    dateTimeChange = models.DateTimeField(null=True)
 
 
 class Processor(models.Model):
     type = models.CharField(max_length=100)
     clockSpeed = models.IntegerField()
-    dataHoraCriacao = models.DateTimeField(null = True)
-    utilizadorCriacao = models.CharField(null = True, max_length = 50)
-    dataHoraAlteracao = models.DateTimeField(null = True)
-    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+    dateTimeCreation = models.DateTimeField(null=True)
+    userCreation = models.CharField(null=True, max_length=50)
+    dateTimeChange = models.DateTimeField(null=True)
+    userAmendment = models.CharField(null=True, max_length=50)
 
 
 class Interfaces(models.Model):
@@ -88,10 +91,10 @@ class Interfaces(models.Model):
 class OperationSystem(models.Model):
     name = models.CharField(max_length=100)
     version = models.CharField(max_length=50)
-    dataHoraCriacao = models.DateTimeField(null = True)
-    utilizadorCriacao = models.CharField(null = True, max_length = 50)
-    dataHoraAlteracao = models.DateTimeField(null = True)
-    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+    dateTimeCreation = models.DateTimeField(null=True)
+    userCreation = models.CharField(null=True, max_length=50)
+    dateTimeChange = models.DateTimeField(null=True)
+    userAmendment = models.CharField(null=True, max_length=50)
 
 
 class Expansion(models.Model):

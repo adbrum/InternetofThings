@@ -24,7 +24,7 @@ def register(request):
                 password=form.cleaned_data['password1'],
                 email=form.cleaned_data['email']
             )
-            return HttpResponseRedirect('login/register/success/')
+            return HttpResponseRedirect('success/')
     else:
         form = RegistrationForm()
     variables = RequestContext(request, {
@@ -32,14 +32,14 @@ def register(request):
     })
 
     return render_to_response(
-        'login/registration/register.html',
+        'registration/register.html',
         variables,
     )
 
 
 def register_success(request):
     return render_to_response(
-        'iot/login/registration/success.html',
+        'registration/success.html',
     )
 
 

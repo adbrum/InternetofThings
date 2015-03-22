@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="pt">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{%if tamLista == 0 %}
+	<div class="no_content">
+		<img src="/static/img/empty_arrow.png">
+		<p>Clique para criar um registo.</p>
+	</div>
+{%else%}
+
+<table cellpadding="0" cellspacing="0" border="0" class="display sumary_table " id="example" width="100%">
+	<thead>
+		<tr>
+			<th width="38px;"><input type="checkbox" class="checkAll"></th>
+			<th>{%	trans "Nome" %}</th>
+			<th>{%	trans "Modelo" %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for equipment in equipments %}
+			<tr >
+				<td><input type="checkbox" value="{{ equipment.id }}" class="checkable" ></td>
+				<td><a href="#" class = "editEquipment" name = "{{equipment.id}}" >{{ equipment.name }}</a></td>
+				<td>{{ equipment.model }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+
+		</tr>
+	</tfoot>
+</table>
+</body>
+</html>

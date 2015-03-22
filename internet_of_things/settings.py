@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'internet_of_things',
     'login',
+    'equipment',
 )
 
 MIDDLEWARE_CLASSES = (
