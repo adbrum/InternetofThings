@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 """
-Adriano Leal
-11951
+Nome Autor: Adriano Leal
+nº Aluno: 11951
 911911951@alunos.ipbeja.pt
 """
 from django.contrib.auth.models import User
@@ -21,36 +22,57 @@ class UserProfile(models.Model):
 
 
 class Equipment(models.Model):
+    processor = models.ForeignKey('Processor')
+    GPU = models.ForeignKey('GPU')
+    operationSystem = models.ForeignKey('OperationSystem')
+    name = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     dateManufacture = models.DateField()
-    typeModel = models.CharField(max_length=100)
-    processor = models.CharField(max_length=100)
-    clockSpeed = models.IntegerField()
+    dataHoraCriacao = models.DateTimeField(null = True)
+    utilizadorCriacao = models.CharField(null = True, max_length = 50)
+    dataHoraAlteracao = models.DateTimeField(null = True)
+    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+
+
+class PhysicalCharacteristics(models.Model):
+    equipment = models.ForeignKey('Equipment')
     length = models.FloatField()
     width = models.FloatField()
     weight = models.IntegerField()
-    RAM = models.IntegerField()
-    GPIO = models.IntegerField()
-    IOCurrentMax = models.CharField(max_length=10)
-    power = models.IntegerField()
 
 
-class Arduino(Equipment):
-    # microcontroller = models.CharField(max_length=100)
+class Voltage(models.Model):
+    equipment = models.ForeignKey('Equipment')
     operatingVoltage = models.IntegerField()
+    IOCurrentMax = models.IntegerField()
     inputVoltageRecommended = models.IntegerField()
-    digitalIOPins = models.IntegerField()
-    analogInputPins = models.IntegerField()
     DCCurrentperIOPin = models.IntegerField()
     DCCurrentfor3_3VPin = models.IntegerField()
-    flashMemory = models.IntegerField()
-    SRAM = models.IntegerField()
-    EEPROM = models.IntegerField()
+    powerRatings = models.CharField(max_length=50)
+    powerSource = models.CharField(max_length=50)
 
 
-class RasperryPI(Equipment):
-    operatingSystem = models.CharField(max_length=50)
-    GPU = models.CharField(max_length=50)
+class GPU(models.Model):
+    type = models.CharField(max_length=100)
+    clockSpeed = models.IntegerField()
+    dataHoraCriacao = models.DateTimeField(null = True)
+    utilizadorCriacao = models.CharField(null = True, max_length = 50)
+    dataHoraAlteracao = models.DateTimeField(null = True)
+    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+
+
+class Processor(models.Model):
+    type = models.CharField(max_length=100)
+    clockSpeed = models.IntegerField()
+    dataHoraCriacao = models.DateTimeField(null = True)
+    utilizadorCriacao = models.CharField(null = True, max_length = 50)
+    dataHoraAlteracao = models.DateTimeField(null = True)
+    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+
+
+class Interfaces(models.Model):
+    equipment = models.ForeignKey('Equipment')
+    hdmi = models.BooleanField(default=False)
     USBPorts = models.CharField(max_length=50)
     videoInput = models.CharField(max_length=50)
     videoOutputs = models.CharField(max_length=50)
@@ -58,6 +80,35 @@ class RasperryPI(Equipment):
     audioOutputs = models.CharField(max_length=50)
     storage = models.CharField(max_length=50)
     network = models.CharField(max_length=50)
+    jack = models.CharField(max_length=50)
+    digitalIOPins = models.IntegerField()
+    analogInputPins = models.IntegerField()
+
+
+class OperationSystem(models.Model):
+    name = models.CharField(max_length=100)
+    version = models.CharField(max_length=50)
+    dataHoraCriacao = models.DateTimeField(null = True)
+    utilizadorCriacao = models.CharField(null = True, max_length = 50)
+    dataHoraAlteracao = models.DateTimeField(null = True)
+    utilizadorAlteracao = models.CharField(null = True, max_length = 50)
+
+
+class Expansion(models.Model):
+    equipment = models.ForeignKey('Equipment')
     peripherals = models.CharField(max_length=50)
-    powerRatings = models.CharField(max_length=50)
-    powerSource = models.CharField(max_length=50)
+    GPIO = models.IntegerField()
+
+
+class Accessories(models.Model):
+    equipment = models.ForeignKey('Equipment')
+    type = models.CharField(max_length=100)
+
+
+class Memory(models.Model):
+    equipment = models.ForeignKey('Equipment')
+    RAM = models.IntegerField()
+    SRAM = models.IntegerField()
+    EEPROM = models.IntegerField()
+    flashMemory = models.IntegerField()
+

@@ -1,3 +1,9 @@
+#-*- coding: utf-8 -*-
+"""
+Nome Autor: Adriano Leal
+nº Aluno: 11951
+911911951@alunos.ipbeja.pt
+"""
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
@@ -33,7 +39,7 @@ def register(request):
 
 def register_success(request):
     return render_to_response(
-        'Iiot/login/registration/success.html',
+        'iot/login/registration/success.html',
     )
 
 
