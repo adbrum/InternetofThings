@@ -55,9 +55,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'internet_of_things',
+    #'internet_of_things',
     'login',
     'equipment',
+    'processor',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
 Nome Autor: Adriano Leal
@@ -11,10 +12,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from InternetofThings.internet_of_things.models import Equipment
-
-from forms import *
+from forms import AddEquipmentForm
 
 
 def listEquipment(request):
@@ -22,8 +22,8 @@ def listEquipment(request):
     """
     TITULO = _(u'Equipamentos')
 
-    equipments = Equipment.objects.all()
-    tamLista = len(equipments)
+    equipamentos = Equipment.objects.all()
+    tamLista = len(equipamentos)
     template = "equipment/index.html"
 
     return render_to_response(template,
@@ -49,6 +49,8 @@ def addEquipment(request):
             return HttpResponseRedirect(reverse('listEquipment'))
 
         if form.is_valid():
+
+            from InternetofThings.internet_of_things.models import Equipment
 
             tableEquipament = Equipment(
                 name=form.cleaned_data['name'],
