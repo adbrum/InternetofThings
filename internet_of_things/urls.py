@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
-                       url(r'^', include('login.urls')),
-                       url(r'^equipments/', include('equipment.urls')),
+                       url(r'^', include('iot.login.urls')),
+                       url(r'^equipments/', include('iot.equipment.urls')),
                        url(r'^admin/', include(admin.site.urls)),
                        )

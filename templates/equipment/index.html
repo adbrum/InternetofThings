@@ -1,0 +1,76 @@
+
+{% load i18n %}
+<div class = "breadcrumb_div">
+	<ol class="breadcrumb">
+	  <li><a href="#" id = "portaria_bread" >{%trans 'Equipamentos'%}</a></li>
+	  <li class="active">{{ TITULO }}</li>
+	</ol>
+	<input id= "criarPortaria" class="btn btn-primary" type="button" value="{%trans 'Criar'%}">
+	{%if tamLista != 0 %}
+		<div class="dropdown col-xs-offset-5">
+			<a href="#" data-toggle="dropdown" class="btn btn-default ">{% trans "Mais  " %}<b class="caret"></b></a>
+		  	<ul class="dropdown-menu more" role="menu" aria-labelledby="dLabel">
+		  		<li><a href="#" data-toggle="modal" data-target="#apagarModalPortaria" class="men_apagar">{% trans "Apagar" %}</a></li>
+		  	</ul>
+		</div>
+	{%endif%}
+</div>
+{%if tamLista == 0 %}
+	<div class="no_content">
+		<img src="/static/img/empty_arrow.png">
+		<p>Clique para criar um registo.</p>
+	</div>
+{%else%}
+
+<table cellpadding="0" cellspacing="0" border="0" class="display sumary_table " id="tabelaLista" width="100%">
+	<thead>
+		<tr>
+			<th width="38px;"><input type="checkbox" class="checkAll"></th>
+			<th>{%	trans "Nome" %}</th>
+			<th>{%	trans "Modelo" %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for equipment in equipments %}
+			<tr >
+				<td><input type="checkbox" value="{{ equipment.id }}" class="checkable" ></td>
+				<td><a href="#" class = "editEquipment" name = "{{equipment.id}}" >{{ equipment.name }}</a></td>
+				<td>{{ equipment.model }}</td>
+			</tr>
+		{% endfor %}
+{% endif %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+
+		</tr>
+	</tfoot>
+</table>
+
+
+{% block endJs %}
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#tabelaLista').dataTable({
+			"oLanguage": {
+	            "sUrl": "/static/dataTables/lang/pt-pt.txt"
+	        },
+	        "sScrollY": "610px",
+	        "bScrollCollapse": true,
+	        "bStateSave": true,
+	        "aoColumnDefs": [
+	                         { 'bSortable': false, 'aTargets': [ 0 ] }
+	                      ] 	
+		});
+		
+		$('.checkAll').click(function () {    
+		     $('input:checkbox.checkable').prop('checked', this.checked);    
+		 });
+		
+	
+	});
+	</script>
+{% endblock %}

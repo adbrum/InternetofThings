@@ -31,12 +31,12 @@ TEMPLATE_LOADERS = (
 #     os.path.join(os.path.dirname(__file__), 'templates'),
 # )
 
-# TEMPLATE_DIRS = (
-#     'templates',
-#     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-#     # Always use forward slashes, even on Windows.
-#     # Don't forget to use absolute paths, not relative paths.
-# )
+TEMPLATE_DIRS = (
+    'templates',
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -55,10 +55,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'internet_of_things',
-    'login',
-    'equipment',
-    'processor',
+    'iot',
+    #'processor',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+
 # -*- coding: utf-8 -*-
 """
 Nome Autor: Adriano Leal
@@ -7,14 +7,15 @@ nº Aluno: 11951
 """
 
 from django.core.urlresolvers import reverse
-from django.utils.datetime_safe import datetime
-from django.views.decorators.csrf import csrf_protect
-from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
-from InternetofThings.internet_of_things.models import Equipment
+from django.views.decorators.csrf import csrf_protect
+
 from forms import AddEquipmentForm
+from iot.models import Equipment
 
 
 def listEquipment(request):
@@ -25,7 +26,6 @@ def listEquipment(request):
     equipamentos = Equipment.objects.all()
     tamLista = len(equipamentos)
     template = "equipment/index.html"
-
     return render_to_response(template,
                               locals(),
                               context_instance=RequestContext(request)
@@ -50,7 +50,7 @@ def addEquipment(request):
 
         if form.is_valid():
 
-            from InternetofThings.internet_of_things.models import Equipment
+
 
             tableEquipament = Equipment(
                 name=form.cleaned_data['name'],

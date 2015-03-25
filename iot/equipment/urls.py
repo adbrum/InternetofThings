@@ -7,11 +7,9 @@ nº Aluno: 11951
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
-                       url(r'^listEquipment/$',
-                           'InternetofThings.equipment.views.listEquipment',
+                       url(r'^listEquipment/$', 'iot.equipment.views.listEquipment',
                            name="listEquipment"),
 
-                       url(r'^addEquipment/$',
-                           'InternetofThings.equipment.views.addEquipment',
+                       url(r'^addEquipment/$', 'iot.equipment.views.addEquipment',
                            name="addEquipment"),
                        )
