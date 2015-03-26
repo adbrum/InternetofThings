@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Nome Autor: Adriano Leal
-nº Aluno: 11951
-911911951@alunos.ipbeja.pt
+:Autor: Adriano Leal
+:Aluno: 11951
+:email l911911951@alunos.ipbeja.pt
 """
 from django.conf.urls import patterns, url
 

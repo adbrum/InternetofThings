@@ -1,7 +1,9 @@
+
 {% extends "base.html" %}
-{% block title %}Welcome to Django{% endblock %}
-{% block head %}Welcome to Django{% endblock %}
+{% block title %}Internet of Things{% endblock %}
+
+{% block head %}Internet of Things{% endblock %}
 {% block content %}
-    <p>Welcome {{ user.username }} !!!</p>
-    <a href="/logout/">Logout</a>
+    <p>Sessao: {{ user.username }} </p>
+    <a href="/equipments/listEquipment/">Equipamentos</a>
 {% endblock %}

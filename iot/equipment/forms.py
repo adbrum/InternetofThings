@@ -1,9 +1,8 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-Nome Autor: Adriano Leal
-nº Aluno: 11951
-911911951@alunos.ipbeja.pt
+:Autor: Adriano Leal
+:Aluno: 11951
+:email l911911951@alunos.ipbeja.pt
 """
 from django import forms
 from django.utils.translation import ugettext_lazy as _
