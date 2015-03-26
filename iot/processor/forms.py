@@ -1,25 +1,32 @@
-# -*- coding: ut-8 -*-
+# -*- coding: utf-8 -*-
 """
-Nome Autor: Adriano Leal
-nº Aluno: 11951
-911911951@alunos.ipbeja.pt
+:Autor Adriano Leal
+:Aluno 11951
+:email l911911951@alunos.ipbeja.pt
 """
-import re
 from django import forms
-from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+# Class para editar um tipo documento
+from iot.models import Equipment
 
 
-class AddEquipmentForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs=dict(required=True,
-                                                             max_length=100,
-                                                             render_value=False)),
-                           label=_("Nome"))
+class FichaPeocessorForm(forms.Form):
 
-    model = forms.CharField(widget=forms.TextInput(attrs=dict(required=True,
-                                                              max_length=100,
-                                                              render_value=False)),
-                            label=_("Modelo"))
+    type = forms.CharField(max_length=50, \
+                                label=_(u'Tipo'), \
+                                widget=forms.TextInput(attrs={'class':'form-control input-sm medio required_form', 'disabled':"disabled"}))
+
+    clockSpeed = forms.FloatField(
+                                label=_(u'Clock Speed'), \
+                                widget=forms.TextInput(attrs={'class':'form-control input-sm medio required_form', 'disabled':"disabled"}))
 
 
+class AddProcessorForm(forms.Form):
+    type = forms.CharField(max_length=50, \
+                                label=_(u'Tipo'), \
+                                widget=forms.TextInput(attrs={'class':'form-control input-sm medio required_form'}))
+
+    clockSpeed = forms.FloatField(
+                                label=_(u'Clock Speed'), \
+                                widget=forms.TextInput(attrs={'class':'form-control input-sm medio required_form'}))
 
