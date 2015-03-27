@@ -1,3 +1,4 @@
+from iot.models import Processor
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(Processor)

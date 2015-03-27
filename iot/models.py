@@ -4,34 +4,60 @@ Nome Autor: Adriano Leal
 nº Aluno: 11951
 911911951@alunos.ipbeja.pt
 """
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
+
+now = datetime.now()
+
 class Equipment(models.Model):
+    microComputador = models.ForeignKey('MicroComputador')
+    operationSystem = models.ForeignKey('OperationSystem')
+    Sensors = models.ForeignKey('Sensors')
+    expansion = models.ForeignKey('Expansion')
+    accessory = models.ForeignKey('Accessory')
+    name = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+    dateManufacture = models.DateField()
+    dateTimeCreation = now
+    userCreation = models.CharField(max_length=100)
+    dateTimeChange = now
+    userAmendment = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+class Sensors(models.Model):
+    name = models.CharField(max_length=100)
+
+
+class MicroComputador(models.Model):
     processor = models.ForeignKey('Processor')
     GPU = models.ForeignKey('GPU')
     operationSystem = models.ForeignKey('OperationSystem')
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     dateManufacture = models.DateField()
-    dateTimeCreation = models.DateTimeField(null=True)
-    userCreation = models.CharField(null=True, max_length=50)
-    dateTimeChange = models.DateTimeField(null=True)
-    userAmendment = models.CharField(null=True, max_length=50)
+    dateTimeCreation = now
+    userCreation = models.CharField(max_length=100)
+    dateTimeChange = now
+    userAmendment = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
 
 
 class PhysicalCharacteristics(models.Model):
-    equipment = models.ForeignKey('Equipment')
+    MicroComputador = models.ForeignKey('MicroComputador')
     length = models.FloatField()
     width = models.FloatField()
     weight = models.IntegerField()
 
 
 class Voltage(models.Model):
-    equipment = models.ForeignKey('Equipment')
+    MicroComputador = models.ForeignKey('MicroComputador')
     operatingVoltage = models.IntegerField()
     IOCurrentMax = models.IntegerField()
     inputVoltageRecommended = models.IntegerField()
@@ -44,24 +70,24 @@ class Voltage(models.Model):
 class GPU(models.Model):
     type = models.CharField(max_length=100)
     clockSpeed = models.IntegerField()
-    userCreation = models.CharField(null=True, max_length=50)
-    userAmendment = models.CharField(null=True, max_length=50)
-    dateTimeCreation = models.DateTimeField(null=True)
-    dateTimeChange = models.DateTimeField(null=True)
+    dateTimeCreation = now
+    userCreation = models.CharField(max_length=100)
+    dateTimeChange = now
+    userAmendment = models.CharField(max_length=100)
 
 
 class Processor(models.Model):
     type = models.CharField(max_length=100)
     clockSpeed = models.IntegerField()
-    dateTimeCreation = models.DateTimeField(null=True)
-    userCreation = models.CharField(null=True, max_length=50)
-    dateTimeChange = models.DateTimeField(null=True)
-    userAmendment = models.CharField(null=True, max_length=50)
+    dateTimeCreation = now
+    userCreation = models.CharField(max_length=100)
+    dateTimeChange = now
+    userAmendment = models.CharField(max_length=100)
 
 
 class Interfaces(models.Model):
-    equipment = models.ManyToManyField(Equipment)
-    hdmi = models.BooleanField(default=False)
+    MicroComputador = models.ForeignKey('MicroComputador')
+    hdmi = models.CharField(max_length=50)
     USBPorts = models.CharField(max_length=50)
     videoInput = models.CharField(max_length=50)
     videoOutputs = models.CharField(max_length=50)
@@ -77,26 +103,25 @@ class Interfaces(models.Model):
 class OperationSystem(models.Model):
     name = models.CharField(max_length=100)
     version = models.CharField(max_length=50)
-    dateTimeCreation = models.DateTimeField(null=True)
-    userCreation = models.CharField(null=True, max_length=50)
-    dateTimeChange = models.DateTimeField(null=True)
-    userAmendment = models.CharField(null=True, max_length=50)
+    dateTimeCreation = now
+    userCreation = models.CharField(max_length=100)
+    dateTimeChange = now
+    userAmendment = models.CharField(max_length=100)
 
 
 class Expansion(models.Model):
-    equipment = models.ManyToManyField(Equipment)
     type = models.CharField(max_length=100)
     peripherals = models.CharField(max_length=50)
     GPIO = models.IntegerField()
 
 
-class Accessories(models.Model):
-    equipment = models.ManyToManyField(Equipment)
+class Accessory(models.Model):
+    name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
 
 
 class Memory(models.Model):
-    equipment = models.ForeignKey('Equipment')
+    MicroComputador = models.ForeignKey('MicroComputador')
     RAM = models.IntegerField()
     SRAM = models.IntegerField()
     EEPROM = models.IntegerField()
