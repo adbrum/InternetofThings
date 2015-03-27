@@ -5,6 +5,7 @@
 :email l911911951@alunos.ipbeja.pt
 """
 
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -14,10 +15,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 
 from forms import FichaPeocessorForm, AddProcessorForm
-from iot.models import Equipment, PhysicalCharacteristics, Voltage, Memory
+from iot.models import Equipment, PhysicalCharacteristic, Voltage, Memory
+
+
 #from iot.processor.forms import AddProcessorForm, FichaPeocessorForm
-
-
 def listProcessor(request):
     """
     Lista todos os processadors registrados
@@ -38,7 +39,7 @@ def listProcessor(request):
 def addProcessor(request):
     """
     Adiciona um processador novo
-    """
+    """MicroComputer = models.ForeignKey('MicroComputer')
     
     TITULO = _(u'Processadores')
     NOME_BREAD = _(u'Novo')
@@ -70,12 +71,13 @@ def addProcessor(request):
            
             processor = tableEquipament.id,
             
-            tablePhysicalCharac = PhysicalCharacteristics(
+            tablePhysicalCharac = PhysicalCharacteristic(
                 processor=processor,
                 dateManufacture=form.cleaned_data['dateManufacture'],
                 length=form.cleaned_data['length'],
                 width=form.cleaned_data['width'],
                 weight=form.cleaned_data['weight'],
+
             )
             
             tablePhysicalCharac.save()

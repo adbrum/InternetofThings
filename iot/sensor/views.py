@@ -13,20 +13,20 @@ from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 
-from forms import AddEquipmentForm, FichaEquipmentForm
-from iot.models import Equipment, PhysicalCharacteristic, Voltage, Memory
+from forms import AddSensorForm, FichaSensorForm
+from iot.models import Sensor, PhysicalCharacteristic, Voltage, Memory
 
 
-def listEquipment(request):
+def listSensor(request):
     """
-    Lista todos os equipamentos registrados
+    Lista todos os sensores registrados
     """
     
-    TITULO = _(u'Equipamentos')
+    TITULO = _(u'Sensores')
 
-    equipamentos = Equipment.objects.all()
-    tamLista = len(equipamentos)
-    template = "equipment/index.html"
+    sensores = Sensor.objects.all()
+    tamLista = len(sensores)
+    template = "sensor/index.html"
     return render_to_response(template,
                               locals(),
                               context_instance=RequestContext(request)
@@ -34,28 +34,28 @@ def listEquipment(request):
 
 
 @csrf_protect
-def addEquipment(request):
+def addSensor(request):
     """
     Adiciona um equipamento novo
     """
     
-    TITULO = _(u'Equipamentos')
+    TITULO = _(u'Sensores')
     NOME_BREAD = _(u'Novo')
     TITULO_BOTAO = _(u'Guardar')
 
     saveNew = True
 
     if request.method == 'POST':
-        form = AddEquipmentForm(request.POST)
+        form = AddSensorForm(request.POST)
 
         # Caso Click em cancelar
         # Retorna para a listagem
-        if 'Cancelar' in request.POST or 'listEquipment' in request.POST:
-            return HttpResponseRedirect(reverse('listEquipment'))
+        if 'Cancelar' in request.POST or 'listSensor' in request.POST:
+            return HttpResponseRedirect(reverse('listSensor'))
 
         if form.is_valid():
 
-            tableEquipament = Equipment(
+            tableEquipament = Sensor(
                 name=form.cleaned_data['name'],
                 model=form.cleaned_data['model'],
                
@@ -67,10 +67,10 @@ def addEquipment(request):
             
             tableEquipament.save()
            
-            equipment = tableEquipament.id,
+            sensor = tableEquipament.id,
             
-            tablePhysicalCharac = PhysicalCharacteristics(
-                equipment=equipment,
+            tablePhysicalCharac = PhysicalCharacteristic(
+                sensor=sensor,
                 dateManufacture=form.cleaned_data['dateManufacture'],
                 length=form.cleaned_data['length'],
                 width=form.cleaned_data['width'],
@@ -81,7 +81,7 @@ def addEquipment(request):
             
             
             tableVoltage = Voltage(
-                equipment=equipment,
+                sensor=sensor,
                 operatingVoltage=form.cleaned_data['operatingVoltage'],
                 IOCurrentMax=form.cleaned_data['IOCurrentMax'],
                 inputVoltageRecommended=form.cleaned_data['inputVoltageRecommended'],
@@ -94,7 +94,7 @@ def addEquipment(request):
             tableVoltage.save()
             
             tableMemory = Memory(
-                equipment=equipment,
+                sensor=sensor,
                 RAM=form.cleaned_data['RAM'],
                 SRAM=form.cleaned_data['SRAM'],
                 EEPROM=form.cleaned_data['EEPROM'],
@@ -105,19 +105,19 @@ def addEquipment(request):
 
             
             if 'SaveAndNew' in request.POST:
-                form = AddEquipmentForm()
-                template = "equipment/add.html"
+                form = AddSensorForm()
+                template = "sensor/add.html"
 
             else:
-                return HttpResponseRedirect(reverse('listEquipment'))
+                return HttpResponseRedirect(reverse('listSensor'))
 
         else:
-            template = "equipment/add.html"
+            template = "sensor/add.html"
 
     else:
         # img =  "/static/img/placeholder.png"
-        form = AddEquipmentForm()
-        template = "equipment/add.html"
+        form = AddSensorForm()
+        template = "sensor/add.html"
 
     return render_to_response(template,
                               locals(),
