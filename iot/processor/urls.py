@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Nome Autor: Adriano Leal
-nº Aluno: 11951
-911911951@alunos.ipbeja.pt
+:Autor: Adriano Leal
+:Aluno: 11951
+:email l911911951@alunos.ipbeja.pt
 """
 from django.conf.urls import patterns, url
 
+
 urlpatterns = patterns('',
-                       url(r'^listProcessors/$',
-                           'InternetofThings.equipment.views.listProcessors',
+                       url(r'^listProcessors/$', 'iot.processor.views.listProcessor',
                            name="listProcessors"),
 
-                       url(r'^addProcessor/$',
-                           'InternetofThings.equipment.views.addProcessor',
-                           name="addProcessor"),
+                        url(r'^addProcessor/$', 'iot.processor.views.addProcessor',
+                            name="addProcessor"),
                        )

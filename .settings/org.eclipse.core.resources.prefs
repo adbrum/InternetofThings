@@ -4,3 +4,6 @@ encoding//iot/equipment/forms.py=utf-8
 encoding//iot/equipment/urls.py=utf-8
 encoding//iot/equipment/views.py=utf-8
 encoding//iot/models.py=utf-8
+encoding//iot/processor/forms.py=utf-8
+encoding//iot/processor/urls.py=utf-8
+encoding//iot/processor/views.py=utf-8

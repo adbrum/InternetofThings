@@ -1,9 +1,10 @@
-
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Internet of Things{% endblock %}
 
 {% block head %}Internet of Things{% endblock %}
 {% block content %}
     <p>Sessao: {{ user.username }} </p>
     <a href="/equipments/listEquipment/">Equipamentos</a>
+    <a href="/processors/listProcessors/">Processadores</a>
 {% endblock %}

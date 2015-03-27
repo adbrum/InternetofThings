@@ -1,4 +1,6 @@
-	
+{% extends "base.html" %}
+{% load i18n %}	
+{% block content %}	
 	{%if editar%}
 		<form method="post" action = "{%url 'editEquipment' idEquipment%}" class="form-horizontal" id="form2" style='visibility:visible;'>
 	{%else%}
@@ -43,7 +45,7 @@
 		{% endfor %}
 		</table>
 	</form>
-
+{% endblock %}
 
 	<script type="text/javascript">
 		$(document).ready(function() {

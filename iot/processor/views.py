@@ -13,21 +13,21 @@ from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 
-from forms import AddProcessor, FichaProcessor
+from forms import FichaPeocessorForm, AddProcessorForm
 from iot.models import Equipment, PhysicalCharacteristics, Voltage, Memory
+#from iot.processor.forms import AddProcessorForm, FichaPeocessorForm
 
 
-
-def listEquipment(request):
+def listProcessor(request):
     """
-    Lista todos os equipamentos registrados
+    Lista todos os processadors registrados
     """
     
-    TITULO = _(u'Equipamentos')
+    TITULO = _(u'Processadores')
 
-    equipamentos = Equipment.objects.all()
-    tamLista = len(equipamentos)
-    template = "equipment/index.html"
+    processadors = Equipment.objects.all()
+    tamLista = len(processadors)
+    template = "processor/index.html"
     return render_to_response(template,
                               locals(),
                               context_instance=RequestContext(request)
@@ -35,19 +35,19 @@ def listEquipment(request):
 
 
 @csrf_protect
-def addEquipment(request):
+def addProcessor(request):
     """
-    Adiciona um equipamento novo
+    Adiciona um processador novo
     """
     
-    TITULO = _(u'Equipamentos')
+    TITULO = _(u'Processadores')
     NOME_BREAD = _(u'Novo')
     TITULO_BOTAO = _(u'Guardar')
 
     saveNew = True
 
     if request.method == 'POST':
-        form = AddEquipmentForm(request.POST)
+        form = AddProcessorForm(request.POST)
 
         # Caso Click em cancelar
         # Retorna para a listagem
@@ -68,10 +68,10 @@ def addEquipment(request):
             
             tableEquipament.save()
            
-            equipment = tableEquipament.id,
+            processor = tableEquipament.id,
             
             tablePhysicalCharac = PhysicalCharacteristics(
-                equipment=equipment,
+                processor=processor,
                 dateManufacture=form.cleaned_data['dateManufacture'],
                 length=form.cleaned_data['length'],
                 width=form.cleaned_data['width'],
@@ -82,7 +82,7 @@ def addEquipment(request):
             
             
             tableVoltage = Voltage(
-                equipment=equipment,
+                processor=processor,
                 operatingVoltage=form.cleaned_data['operatingVoltage'],
                 IOCurrentMax=form.cleaned_data['IOCurrentMax'],
                 inputVoltageRecommended=form.cleaned_data['inputVoltageRecommended'],
@@ -95,7 +95,7 @@ def addEquipment(request):
             tableVoltage.save()
             
             tableMemory = Memory(
-                equipment=equipment,
+                processor=processor,
                 RAM=form.cleaned_data['RAM'],
                 SRAM=form.cleaned_data['SRAM'],
                 EEPROM=form.cleaned_data['EEPROM'],
@@ -106,19 +106,19 @@ def addEquipment(request):
 
             
             if 'SaveAndNew' in request.POST:
-                form = AddEquipmentForm()
-                template = "equipment/add.html"
+                form = AddProcessorForm()
+                template = "processor/add.html"
 
             else:
                 return HttpResponseRedirect(reverse('listEquipment'))
 
         else:
-            template = "equipment/add.html"
+            template = "processor/add.html"
 
     else:
         # img =  "/static/img/placeholder.png"
-        form = AddEquipmentForm()
-        template = "equipment/add.html"
+        form = AddProcessorForm()
+        template = "processor/add.html"
 
     return render_to_response(template,
                               locals(),

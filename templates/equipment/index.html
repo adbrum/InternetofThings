@@ -1,5 +1,6 @@
-
+{% extends "base.html" %}
 {% load i18n %}
+{% block content %}
 <div class = "breadcrumb_div">
 	<ol class="breadcrumb">
 	  <li><a href="#" id = "portaria_bread" >{%trans 'Equipamentos'%}</a></li>
@@ -50,7 +51,7 @@
 	</tfoot>
 </table>
 
-
+{% endblock %}
 {% block endJs %}
 	<script type="text/javascript">
 	$(document).ready(function() {
