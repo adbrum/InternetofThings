@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf import global_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -26,6 +27,14 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
     #'django.template.loaders.eggs.Loader',
 )
+
+# For Sidebar Menu (List of apps and models) (RECOMMENDED)
+
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
+
 
 # TEMPLATE_DIRS = (
 #     os.path.join(os.path.dirname(__file__), 'templates'),
@@ -49,6 +58,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'bootstrap_admin', # always before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -170,3 +180,5 @@ LOGGING = {
 
 
 LOGIN_REDIRECT_URL = '/'
+
+

@@ -5,6 +5,7 @@ nº Aluno: 11951
 911911951@alunos.ipbeja.pt
 """
 from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -13,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 class MicroComputer(models.Model):
     processor = models.ForeignKey('Processor', verbose_name=_('processor'))
     GPU = models.ForeignKey('GPU')
-    operationSystem = models.ForeignKey('OperationSystem')
+    operatingSystems = models.ForeignKey('OperatingSystem')
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     dateManufacture = models.DateField()
@@ -24,7 +25,7 @@ class MicroComputer(models.Model):
     
     class Meta:
         verbose_name = 'Micro Computador'
-        verbose_name_plural = 'Micro Computador'
+        verbose_name_plural = 'Micros Computadores'
 
     def __unicode__(self):
         return self.name
@@ -32,13 +33,11 @@ class MicroComputer(models.Model):
 
 class Equipment(models.Model):
     microComputer = models.ForeignKey('microComputer')
-    operationSystem = models.ForeignKey('OperationSystem')
     sensor = models.ForeignKey('Sensor')
     expansion = models.ForeignKey('Expansion')
     accessory = models.ForeignKey('Accessory')
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
-    dateManufacture = models.DateField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     userCreation = models.CharField(max_length=100)
     dateTimeChange = models.DateTimeField(auto_now=True)
@@ -46,13 +45,17 @@ class Equipment(models.Model):
     
     class Meta:
         verbose_name = 'Equipamento'
-        verbose_name_plural = 'Equipamento'
+        verbose_name_plural = 'Equipamentos'
 
     def __unicode__(self):
         return self.name
 
 class Sensor(models.Model):
     name = models.CharField(max_length=100)
+    
+    class Meta:
+        verbose_name = 'Sensor'
+        verbose_name_plural = 'Sensores'
 
 
 
@@ -64,7 +67,7 @@ class PhysicalCharacteristic(models.Model):
     
     class Meta:
         verbose_name = 'Característica Física'
-        verbose_name_plural = 'Característica Física'
+        verbose_name_plural = 'Características Físicas'
 
 
 class Voltage(models.Model):
@@ -72,14 +75,14 @@ class Voltage(models.Model):
     operatingVoltage = models.IntegerField()
     IOCurrentMax = models.IntegerField()
     inputVoltageRecommended = models.IntegerField()
-    DCCurrentperIOPin = models.IntegerField()
-    DCCurrentfor3_3VPin = models.IntegerField()
-    powerRatings = models.CharField(max_length=50)
-    powerSource = models.CharField(max_length=50)
+    DCCurrentperIOPin = models.IntegerField(blank=True)
+    DCCurrentfor3_3VPin = models.IntegerField(blank=True)
+    powerRatings = models.CharField(blank=True, max_length=50)
+    powerSource = models.CharField(blank=True, max_length=50)
     
     class Meta:
         verbose_name = 'Voltagem'
-        verbose_name_plural = 'Voltagem'
+        verbose_name_plural = 'Voltagens'
 
 
 class GPU(models.Model):
@@ -92,7 +95,7 @@ class GPU(models.Model):
     
     class Meta:
         verbose_name = 'GPU'
-        verbose_name_plural = 'GPU'
+        verbose_name_plural = 'GPUs'
 
 
 class Processor(models.Model):
@@ -103,37 +106,44 @@ class Processor(models.Model):
     dateTimeChange = models.DateTimeField(auto_now=True)
     userAmendment = models.CharField(max_length=100)
     
+    def __unicode__(self):
+        return self.type
+    
     class Meta:
         verbose_name = 'Processador'
-        verbose_name_plural = 'Processador'
+        verbose_name_plural = 'Processadores'
 
 
 class Interface(models.Model):
     microComputer = models.ForeignKey('microComputer')
-    hdmi = models.CharField(max_length=50)
-    USBPorts = models.CharField(max_length=50)
-    videoInput = models.CharField(max_length=50)
-    videoOutputs = models.CharField(max_length=50)
-    audioInputs = models.CharField(max_length=50)
-    audioOutputs = models.CharField(max_length=50)
-    storage = models.CharField(max_length=50)
-    network = models.CharField(max_length=50)
-    jack = models.CharField(max_length=50)
-    digitalIOPins = models.IntegerField()
-    analogInputPins = models.IntegerField()
+    hdmi = models.CharField(blank=True, max_length=50)
+    USBPorts = models.CharField(blank=True, max_length=50)
+    videoInput = models.CharField(blank=True, max_length=50)
+    videoOutputs = models.CharField(blank=True, max_length=50)
+    audioInputs = models.CharField(blank=True, max_length=50)
+    audioOutputs = models.CharField(blank=True, max_length=50)
+    storage = models.CharField(blank=True, max_length=50)
+    network = models.CharField(blank=True, max_length=50)
+    jack = models.CharField(blank=True, max_length=50)
+    digitalIOPins = models.IntegerField(blank=True)
+    analogInputPins = models.IntegerField(blank=True)
     
     class Meta:
         verbose_name = 'Interface'
-        verbose_name_plural = 'Interface'
+        verbose_name_plural = 'Interfaces'
 
 
-class OperationSystem(models.Model):
+class OperatingSystem(models.Model):
     name = models.CharField(max_length=100)
     version = models.CharField(max_length=50)
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     userCreation = models.CharField(max_length=100)
     dateTimeChange = models.DateTimeField(auto_now=True)
     userAmendment = models.CharField(max_length=100)
+    
+    class Meta:
+        verbose_name = 'Sistema Operativo'
+        verbose_name_plural = 'Sistemas Operativos'
 
 
 class Expansion(models.Model):
@@ -143,7 +153,7 @@ class Expansion(models.Model):
     
     class Meta:
         verbose_name = 'Expansão'
-        verbose_name_plural = 'Expansão'
+        verbose_name_plural = 'Expansões'
 
 
 class Accessory(models.Model):
@@ -152,17 +162,17 @@ class Accessory(models.Model):
     
     class Meta:
         verbose_name = 'Acessório'
-        verbose_name_plural = 'Acessório'
+        verbose_name_plural = 'Acessórios'
 
 
 class Memory(models.Model):
     microComputer = models.ForeignKey('microComputer')
-    RAM = models.IntegerField()
-    SRAM = models.IntegerField()
-    EEPROM = models.IntegerField()
-    flashMemory = models.IntegerField()
+    RAM = models.IntegerField(blank=True)
+    SRAM = models.IntegerField(blank=True)
+    EEPROM = models.IntegerField(blank=True)
+    flashMemory = models.IntegerField(blank=True)
     
     class Meta:
         verbose_name = 'Memória'
-        verbose_name_plural = 'Memória'
+        verbose_name_plural = 'Memórias'
 

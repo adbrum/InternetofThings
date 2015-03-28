@@ -10,9 +10,19 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
                        url(r'^', include('iot.login.urls')),
-                       url(r'^equipments/', include('iot.equipment.urls')),
-                       url(r'^processors/', include('iot.processor.urls')),
-                       url(r'^microComputers/', include('iot.microComputer.urls')),
-                       url(r'^sensors/', include('iot.sensor.urls')),
+                       url(r'^login/', include('iot.login.urls')),
+                       url(r'^home/', include('iot.home.urls')),
+                       #========================================================
+                       # url(r'^equipments/', include('iot.equipment.urls')),
+                       # url(r'^processors/', include('iot.processor.urls')),
+                       # url(r'^microComputers/', include('iot.microComputer.urls')),
+                       # url(r'^sensors/', include('iot.sensor.urls')),
+                       # url(r'^gpus/', include('iot.gpu.urls')),
+                       # url(r'^interfaces/', include('iot.interface.urls')),
+                       # url(r'^operatingSystems/', include('iot.operatingSystem.urls')),
+                       # url(r'^expansions/', include('iot.expansion.urls')),
+                       # url(r'^accessories/', include('iot.accessory.urls')),
+                       # url(r'^memories/', include('iot.memory.urls')),
+                       #========================================================
                        url(r'^admin/', include(admin.site.urls)),
                        )
