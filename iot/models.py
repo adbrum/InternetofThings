@@ -15,13 +15,13 @@ class MicroComputer(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
     processor = models.ForeignKey('Processor', verbose_name='Processador')
-    GPU = models.ForeignKey('GPU')
+    GPU = models.ForeignKey('GPU', blank=True)
     operatingSystems = models.ForeignKey('OperatingSystem', verbose_name='Sistema Operativo')
     dateManufacture = models.DateField(verbose_name='Data de Fabrico')
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     userCreation = models.CharField(max_length=100, verbose_name='Criado por')
     dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(max_length=100, verbose_name='Alterado por')
+    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     class Meta:
         verbose_name = 'Micro Computador'
@@ -41,7 +41,7 @@ class Equipment(models.Model):
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     userCreation = models.CharField(max_length=100, verbose_name='Criado por')
     dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(max_length=100, verbose_name='Alterado por')
+    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     class Meta:
         verbose_name = 'Equipamento'
@@ -51,11 +51,14 @@ class Equipment(models.Model):
         return self.name
 
 class Sensor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(blank=True,max_length=100)
     
     class Meta:
         verbose_name = 'Sensor'
         verbose_name_plural = 'Sensores'
+        
+    def __unicode__(self):
+        return self.name
 
 
 
@@ -86,25 +89,28 @@ class Voltage(models.Model):
 
 
 class GPU(models.Model):
-    type = models.CharField(max_length=100, verbose_name='Tipo')
-    clockSpeed = models.IntegerField(verbose_name='Clock Speed')
-    dateTimeCreation = models.DateTimeField(auto_now_add=True)
-    userCreation = models.CharField(max_length=100, verbose_name='Criado por')
-    dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(max_length=100, verbose_name='Alterado por')
+    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    clockSpeed = models.IntegerField(blank=True, verbose_name='Clock Speed')
+    dateTimeCreation = models.DateTimeField(blank=True, auto_now_add=True)
+    userCreation = models.CharField(blank=True, max_length=100, verbose_name='Criado por')
+    dateTimeChange = models.DateTimeField(blank=True, auto_now=True)
+    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     class Meta:
         verbose_name = 'GPU'
         verbose_name_plural = 'GPUs'
+        
+    def __unicode__(self):
+        return self.type
 
 
 class Processor(models.Model):
     type = models.CharField(max_length=100, verbose_name='Processador')
     clockSpeed = models.IntegerField(verbose_name='Clock Speed')
-    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    dateTimeCreation = models.DateTimeField(blank=True, auto_now_add=True)
     userCreation = models.CharField(max_length=100, verbose_name='Criado por')
     dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(max_length=100, verbose_name='Alterado por')
+    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     def __unicode__(self):
         return self.type
@@ -131,7 +137,7 @@ class Interface(models.Model):
     class Meta:
         verbose_name = 'Interface'
         verbose_name_plural = 'Interfaces'
-
+        
 
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
@@ -139,30 +145,39 @@ class OperatingSystem(models.Model):
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     userCreation = models.CharField(max_length=100, verbose_name='Criado por')
     dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(max_length=100, verbose_name='Alterado por')
+    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     class Meta:
         verbose_name = 'Sistema Operativo'
         verbose_name_plural = 'Sistemas Operativos'
+        
+    def __unicode__(self):
+        return self.name
 
 
 class Expansion(models.Model):
-    type = models.CharField(max_length=100, verbose_name='Tipo')
-    peripherals = models.CharField(max_length=50, verbose_name='Periféricos')
+    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    peripherals = models.CharField(blank=True, max_length=50, verbose_name='Periféricos')
     GPIO = models.IntegerField()
     
     class Meta:
         verbose_name = 'Expansão'
         verbose_name_plural = 'Expansões'
+        
+    def __unicode__(self):
+        return self.type
 
 
 class Accessory(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nome')
-    type = models.CharField(max_length=100, verbose_name='Tipo')
+    name = models.CharField(blank=True, max_length=100, verbose_name='Nome')
+    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
     
     class Meta:
         verbose_name = 'Acessório'
         verbose_name_plural = 'Acessórios'
+        
+    def __unicode__(self):
+        return self.name
 
 
 class Memory(models.Model):
