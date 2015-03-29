@@ -18,7 +18,7 @@ from django.views.decorators.csrf import csrf_protect
 @login_required
 def index(request):
     """
-    Lista todos os acessorios registrados
+    Página principal do utilizador
     """
 
     TITULO = _(u'Internete das Coisas')

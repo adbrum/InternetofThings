@@ -14,4 +14,3 @@ admin.site.register(Expansion)
 admin.site.register(Accessory)
 admin.site.register(Memory)
 admin.site.register(Sensor)
-
