@@ -9,10 +9,12 @@ from django.contrib import admin
 
 
 urlpatterns = patterns('',
-                       url(r'^', include('iot.login.urls')),
-                       url(r'^login/', include('iot.login.urls')),
-                       url(r'^home/', include('iot.home.urls')),
-                       url(r'^equipments/', include('iot.equipment.urls')),
+                       #url(r'^', include('iot.login.urls')),
+                       url(r'^$', 'django.contrib.auth.views.login'),
+                       url(r'^admin/', include(admin.site.urls)),
+                       #url(r'^login/', include('iot.login.urls')),
+                       #url(r'^home/', include('iot.home.urls')),
+                       #url(r'^equipments/', include('iot.equipment.urls')),
                        #========================================================
                        # url(r'^equipments/', include('iot.equipment.urls')),
                        # url(r'^processors/', include('iot.processor.urls')),
@@ -25,5 +27,5 @@ urlpatterns = patterns('',
                        # url(r'^accessories/', include('iot.accessory.urls')),
                        # url(r'^memories/', include('iot.memory.urls')),
                        #========================================================
-                       url(r'^admin/', include(admin.site.urls)),
+                       
                        )

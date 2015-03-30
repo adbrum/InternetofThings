@@ -14,6 +14,7 @@ from django.conf import global_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+USE_I18N = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/

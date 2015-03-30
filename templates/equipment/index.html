@@ -1,6 +1,15 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{# {% block breadcrumbs %}{% endblock %} #}
 {% block content %}
+
 <div class = "breadcrumb_div">
 	<ol class="breadcrumb">
 	  <li><a href="#" id = "portaria_bread" >{%trans 'Equipamentos'%}</a></li>
@@ -11,7 +20,7 @@
 		<div class="dropdown col-xs-offset-5">
 			<a href="#" data-toggle="dropdown" class="btn btn-default ">{% trans "Mais  " %}<b class="caret"></b></a>
 		  	<ul class="dropdown-menu more" role="menu" aria-labelledby="dLabel">
-		  		<li><a href="#" data-toggle="modal" data-target="#apagarModalPortaria" class="men_apagar">{% trans "Apagar" %}</a></li>
+		  		<li><a href="/equipments/addEquipment/" data-toggle="modal" data-target="#apagarModalEquipment" class="men_apagar">{% trans "Apagar" %}</a></li>
 		  	</ul>
 		</div>
 	{%endif%}

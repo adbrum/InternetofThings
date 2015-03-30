@@ -5,11 +5,11 @@ nº Aluno: 11951
 911911951@alunos.ipbeja.pt
 """
 from datetime import datetime
+
+from audit_log.models.fields import CreatingUserField, LastUserField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
-from audit_log.models.fields import CreatingUserField, LastUserField
 
 
 class MicroComputer(models.Model):
@@ -19,10 +19,10 @@ class MicroComputer(models.Model):
     GPU = models.ForeignKey('GPU', blank=True)
     operatingSystems = models.ForeignKey('OperatingSystem', verbose_name='Sistema Operativo')
     dateManufacture = models.DateField(verbose_name='Data de Fabrico')
+    userCreation = CreatingUserField(related_name="created_microcomputer")
+    userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
-    userCreation = models.CharField(blank=True, max_length=100, verbose_name='Criado por')
     dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     class Meta:
         verbose_name = 'Micro Computador'
@@ -39,10 +39,10 @@ class Equipment(models.Model):
     sensor = models.ForeignKey('Sensor', verbose_name='Sensor')
     expansion = models.ForeignKey('Expansion', verbose_name='Expansão')
     accessory = models.ForeignKey('Accessory', verbose_name='Acessório')
+    userCreation = CreatingUserField(related_name="created_equipments")
+    userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
-    userCreation = models.CharField(max_length=100, verbose_name='Criado por')
-    dateTimeChange = models.DateTimeField(blank=True, auto_now=True)
-    userAmendment = models.CharField(max_length=100, verbose_name='Alterado por')
+    dateTimeChange = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'Equipamento'
@@ -52,7 +52,7 @@ class Equipment(models.Model):
         return self.name
 
 class Sensor(models.Model):
-    name = models.CharField(blank=True,max_length=100)
+    name = models.CharField(blank=True, max_length=100)
     
     class Meta:
         verbose_name = 'Sensor'
@@ -92,10 +92,10 @@ class Voltage(models.Model):
 class GPU(models.Model):
     type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
     clockSpeed = models.IntegerField(blank=True, verbose_name='Clock Speed')
-    dateTimeCreation = models.DateTimeField(blank=True, auto_now_add=True)
-    userCreation = models.CharField(blank=True, max_length=100, verbose_name='Criado por')
-    dateTimeChange = models.DateTimeField(blank=True, auto_now=True)
-    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
+    userCreation = CreatingUserField(related_name="created_gpus")
+    userAmendment = LastUserField()
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    dateTimeChange = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'GPU'
@@ -108,14 +108,11 @@ class GPU(models.Model):
 class Processor(models.Model):
     type = models.CharField(max_length=100, verbose_name='Processador')
     clockSpeed = models.IntegerField(verbose_name='Clock Speed')
-    dateTimeCreation = models.DateTimeField(blank=True, auto_now_add=True)
-    userCreation = CreatingUserField(related_name = "created_processors")
+    userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
-    #userCreation = models.CharField(null=True, blank=True, max_length=100, verbose_name='Criado por')
-    #userCreation = models.ForeignKey(User, null=True, blank=True)
-    #added_by = models.ForeignKey(User, related_name='entries', null=True, blank=True, verbose_name='Criado por')
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
     dateTimeChange = models.DateTimeField(auto_now=True)
-    #last_modified_by = models.ForeignKey(User, related_name='entry_modifiers', verbose_name='Alterado por',  blank=True)
+    
     
     def __unicode__(self):
         return self.type
@@ -147,10 +144,10 @@ class Interface(models.Model):
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     version = models.CharField(max_length=50, verbose_name='Versão')
+    userCreation = CreatingUserField(related_name="created_operationsystems")
+    userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
-    userCreation = models.CharField(max_length=100, verbose_name='Criado por')
     dateTimeChange = models.DateTimeField(auto_now=True)
-    userAmendment = models.CharField(blank=True, max_length=100, verbose_name='Alterado por')
     
     class Meta:
         verbose_name = 'Sistema Operativo'
@@ -164,6 +161,10 @@ class Expansion(models.Model):
     type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
     peripherals = models.CharField(blank=True, max_length=50, verbose_name='Periféricos')
     GPIO = models.IntegerField()
+    userCreation = CreatingUserField(related_name="created_expansions")
+    userAmendment = LastUserField()
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    dateTimeChange = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'Expansão'
@@ -176,6 +177,10 @@ class Expansion(models.Model):
 class Accessory(models.Model):
     name = models.CharField(blank=True, max_length=100, verbose_name='Nome')
     type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    userCreation = CreatingUserField(related_name="created_accessories")
+    userAmendment = LastUserField()
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    dateTimeChange = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'Acessório'
