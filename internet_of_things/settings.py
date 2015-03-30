@@ -77,6 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'audit_log.middleware.UserLoggingMiddleware',
 )
 
 ROOT_URLCONF = 'internet_of_things.urls'
@@ -93,6 +94,7 @@ DATABASES = {
     }
 }
 
+#===============================================================================
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -103,6 +105,20 @@ DATABASES = {
 #         'PORT': '',
 #     }
 # }
+#===============================================================================
+
+#===============================================================================
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'iot',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',  # Or an IP Address that your DB is hosted on
+#         'PORT': '',
+#     }
+# }
+#===============================================================================
 
 # ESQUEMA DE LOGIN
 AUTH_PROFILE_MODULE = 'InternetofThings.login'

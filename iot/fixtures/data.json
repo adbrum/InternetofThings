@@ -1,0 +1,18 @@
+[
+  {
+    "model": "iot.Equipment",
+    "pk": 1,
+    "fields": {
+    "name" : "Teste json",
+    "model" : "json",
+    "microComputer" : 1,
+    "sensor" : 1,
+    "expansion" : 1,
+    "accessory" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "userCreation" : "admin",
+    "dateTimeChange" : "2015-03-01 00:00:00",
+    "userAmendment" : "admin"
+    }
+  }
+]
