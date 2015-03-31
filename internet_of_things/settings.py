@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'audit_log.middleware.UserLoggingMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'internet_of_things.urls'
@@ -128,7 +129,17 @@ LOGIN_URL = '/InternetofThings/login'
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'pt-PT'
+LANGUAGE_CODE = 'pt_PT'
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+LANGUAGES = (
+    ('pt_PT', u'Portugues'),
+    #('en', u'Ingles'),
+)
+
 
 TIME_ZONE = 'UTC'
 

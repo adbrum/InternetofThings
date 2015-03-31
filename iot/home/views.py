@@ -21,7 +21,7 @@ def index(request):
     Página principal do utilizador
     """
 
-    TITULO = _(u'Internete das Coisas')
+    TITULO = _(u'Internet das Coisas')
 
     #===========================================================================
     # acessorios = Accessory.objects.all()
