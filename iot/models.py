@@ -17,8 +17,8 @@ class MicroComputer(models.Model):
     model = models.CharField(max_length=100, verbose_name='Modelo')
     processor = models.ForeignKey('Processor', verbose_name='Processador')
     GPU = models.ForeignKey('GPU', blank=True)
-    operatingSystems = models.ForeignKey('OperatingSystem', verbose_name='Sistema Operativo')
-    dateManufacture = models.DateField(verbose_name='Data de Fabrico')
+    operatingSystems = models.ForeignKey('OperatingSystem', blank=True, verbose_name='Sistema Operativo')
+    dateManufacture = models.DateField(blank=True, verbose_name='Data de Fabrico')
     userCreation = CreatingUserField(related_name="created_microcomputer")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -29,7 +29,7 @@ class MicroComputer(models.Model):
         verbose_name_plural = 'Micros Computadores'
 
     def __unicode__(self):
-        return self.name
+        return self.model
 
 
 class Equipment(models.Model):
@@ -65,9 +65,9 @@ class Sensor(models.Model):
 
 class PhysicalCharacteristic(models.Model):
     microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
-    length = models.FloatField(verbose_name='Comprimento')
-    width = models.FloatField(verbose_name='Largura')
-    weight = models.IntegerField(verbose_name='Peso')
+    length = models.CharField(blank=True, max_length=10, verbose_name='Comprimento')
+    width = models.CharField(blank=True, max_length=10, verbose_name='Largura')
+    weight = models.CharField(blank=True, max_length=10, verbose_name='Peso')
     
     class Meta:
         verbose_name = 'Característica Física'
@@ -91,7 +91,7 @@ class Voltage(models.Model):
 
 class GPU(models.Model):
     type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
-    clockSpeed = models.IntegerField(blank=True, verbose_name='Clock Speed')
+    clockSpeed = models.CharField(max_length=10, blank=True, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_gpus")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -107,7 +107,7 @@ class GPU(models.Model):
 
 class Processor(models.Model):
     type = models.CharField(max_length=100, verbose_name='Processador')
-    clockSpeed = models.IntegerField(verbose_name='Clock Speed')
+    clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,34 @@
+[
+  {
+    "model": "iot.MicroComputer",
+    "pk": 1,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Uno",
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 2,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Leonardo",
+    "processor" : 2,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+  	}
+  }
+]
