@@ -107,7 +107,7 @@ class GPU(models.Model):
 
 class Processor(models.Model):
     type = models.CharField(max_length=100, verbose_name='Processador')
-    clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
+    clockSpeed = models.CharField(blank=True, max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
