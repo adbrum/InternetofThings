@@ -13,11 +13,30 @@
     "model": "iot.PhysicalCharacteristic",
     "pk": 2,
     "fields": {
-    "fields": {
     "microComputer" : 2,
     "length" : "68.6 mm",
     "width" : "53.3 mm",
     "weight" : "20 g"
+  	}
+  },
+  {
+    "model": "iot.PhysicalCharacteristic",
+    "pk": 3,
+    "fields": {
+    "microComputer" : 3,
+    "length" : "101.52 mm",
+    "width" : "53.3 mm",
+    "weight" : "36 g"
+  	}
+  },
+  {
+    "model": "iot.PhysicalCharacteristic",
+    "pk": 4,
+    "fields": {
+    "microComputer" : 4,
+    "length" : "73 mm",
+    "width" : "53 mm",
+    "weight" : "32 g"
   	}
   }
 ]

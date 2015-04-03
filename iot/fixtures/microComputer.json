@@ -5,6 +5,7 @@
     "fields": {
     "name" : "Arduino",
     "model" : "Arduino Uno",
+    "microcontroller" : 2,
     "processor" : 1,
     "GPU" : 1,
     "operatingSystems" : 1,
@@ -21,7 +22,8 @@
     "fields": {
     "name" : "Arduino",
     "model" : "Arduino Leonardo",
-    "processor" : 2,
+    "microcontroller" : 3,
+    "processor" : 1,
     "GPU" : 1,
     "operatingSystems" : 1,
     "dateManufacture" : "2015-03-01",
@@ -30,5 +32,294 @@
     "dateTimeCreation" : "2015-03-01 00:00:00",
     "dateTimeChange" : "2015-03-01 00:00:00"
   	}
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 3,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Due",
+    "microcontroller" : 10,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 4,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Yún",
+    "microcontroller" : 3,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 5,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Tre",
+    "microcontroller" : 3,
+    "processor" : 2,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 6,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Zero",
+    "microcontroller" : 1,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 7,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Micro",
+    "microcontroller" : 3,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 8,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Esplora",
+    "microcontroller" : 3,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 9,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino MEGA ADK",
+    "microcontroller" : 6,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 10,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Ethernet",
+    "microcontroller" : 2,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 11,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Mega 2560",
+    "microcontroller" : 6,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 12,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Robot",
+    "microcontroller" : 3,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 13,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "LilyPad Arduino Simple",
+    "microcontroller" : 7,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 14,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "LilyPad Arduino SimpleSnap",
+    "microcontroller" : 7,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 15,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "LilyPad Arduino",
+    "microcontroller" : 11,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 16,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "LilyPad Arduino USB",
+    "microcontroller" : 4,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 17,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Pro Mini",
+    "microcontroller" : 7,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 18,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Fio",
+    "microcontroller" : 9,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
+  },
+  {
+    "model": "iot.MicroComputer",
+    "pk": 19,
+    "fields": {
+    "name" : "Arduino",
+    "model" : "Arduino Pro",
+    "microcontroller" : 8,
+    "processor" : 1,
+    "GPU" : 1,
+    "operatingSystems" : 1,
+    "dateManufacture" : "2015-03-01",
+    "userCreation" : 1,
+    "userAmendment" : 1,
+    "dateTimeCreation" : "2015-03-01 00:00:00",
+    "dateTimeChange" : "2015-03-01 00:00:00"
+    }
   }
 ]

@@ -15,7 +15,8 @@ from django.utils.translation import ugettext_lazy as _
 class MicroComputer(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
-    processor = models.ForeignKey('Processor', verbose_name='Processador')
+    processor = models.ForeignKey('Processor', blank=True, verbose_name='Processador')
+    microcontroller = models.ForeignKey('Microcontroller', blank=True, verbose_name='Microcontrolador')
     GPU = models.ForeignKey('GPU', blank=True)
     operatingSystems = models.ForeignKey('OperatingSystem', blank=True, verbose_name='Sistema Operativo')
     dateManufacture = models.DateField(blank=True, verbose_name='Data de Fabrico')
@@ -120,6 +121,23 @@ class Processor(models.Model):
     class Meta:
         verbose_name = 'Processador'
         verbose_name_plural = 'Processadores'
+
+
+class Microcontroller(models.Model):
+    type = models.CharField(max_length=100, verbose_name='Microcontrolador')
+    clockSpeed = models.CharField(blank=True, max_length=10, verbose_name='Clock Speed')
+    userCreation = CreatingUserField(related_name="created_microcontroller")
+    userAmendment = LastUserField()
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    dateTimeChange = models.DateTimeField(auto_now=True)
+    
+    
+    def __unicode__(self):
+        return self.type
+
+    class Meta:
+        verbose_name = 'Microcontrolador'
+        verbose_name_plural = 'Microcontroladores'
 
 
 class Interface(models.Model):
