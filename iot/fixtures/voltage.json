@@ -1,0 +1,17 @@
+[
+  {
+    "model": "iot.Voltage",
+    "pk": 1,
+    "fields": {
+    "microComputer" : ,
+    "operatingVoltage" : ,
+    "IOCurrentMax" : "",
+    "inputVoltageRecommended" : "",
+    "DCCurrentperIOPin" : "",
+    "DCCurrentfor3_3VPin" : ""
+    "powerRatings" : "",
+    "powerSource" :  
+    }
+  }
+]
+

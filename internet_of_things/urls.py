@@ -11,6 +11,7 @@ from django.contrib import admin
 urlpatterns = patterns('',
                        #url(r'^', include('iot.login.urls')),
                        url(r'^$', 'django.contrib.auth.views.login'),
+                       url(r'^baseDados/', include('iot.baseDados.urls')),
                        url(r'^admin/', include(admin.site.urls)),
                        #url(r'^login/', include('iot.login.urls')),
                        #url(r'^home/', include('iot.home.urls')),

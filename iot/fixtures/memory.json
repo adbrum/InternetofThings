@@ -1,0 +1,14 @@
+[
+  {
+    "model": "iot.Voltage",
+    "pk": 1,
+    "fields": {
+    "microComputer" : ,
+    "RAM" : ,
+    "SRAM" : ,
+    "EEPROM" : "",
+    "flashMemory" : ""
+    }
+  }
+]
+

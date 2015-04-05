@@ -66,13 +66,18 @@ class Sensor(models.Model):
 
 class PhysicalCharacteristic(models.Model):
     microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
-    length = models.CharField(blank=True, max_length=10, verbose_name='Comprimento')
-    width = models.CharField(blank=True, max_length=10, verbose_name='Largura')
-    weight = models.CharField(blank=True, max_length=10, verbose_name='Peso')
+    length = models.FloatField(blank=True, verbose_name='Comprimento (mm)')
+    width = models.FloatField(blank=True, verbose_name='Largura (mm)')
+    weight = models.IntegerField(blank=True, verbose_name='Peso (g)')
     
     class Meta:
         verbose_name = 'Característica Física'
         verbose_name_plural = 'Características Físicas'
+        
+    #===========================================================================
+    # def __unicode__(self):
+    #     return self.microComputer
+    #===========================================================================
 
 
 class Voltage(models.Model):
