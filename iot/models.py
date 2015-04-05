@@ -26,8 +26,8 @@ class MicroComputer(models.Model):
     dateTimeChange = models.DateTimeField(auto_now=True)
     
     class Meta:
-        verbose_name = 'Micro Computador'
-        verbose_name_plural = 'Micros Computadores'
+        verbose_name = 'Microcomputador'
+        verbose_name_plural = 'Microcomputadores'
 
     def __unicode__(self):
         return self.model
@@ -36,7 +36,7 @@ class MicroComputer(models.Model):
 class Equipment(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
-    microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
+    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
     sensor = models.ForeignKey('Sensor', verbose_name='Sensor')
     expansion = models.ForeignKey('Expansion', verbose_name='Expansão')
     accessory = models.ForeignKey('Accessory', verbose_name='Acessório')
@@ -65,34 +65,18 @@ class Sensor(models.Model):
 
 
 class PhysicalCharacteristic(models.Model):
-    microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
-    length = models.FloatField(blank=True, verbose_name='Comprimento (mm)')
-    width = models.FloatField(blank=True, verbose_name='Largura (mm)')
-    weight = models.IntegerField(blank=True, verbose_name='Peso (g)')
+    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    length = models.FloatField(default=0, blank=False, verbose_name='Comprimento (mm)')
+    width = models.FloatField(default=0, blank=False, verbose_name='Largura (mm)')
+    weight = models.FloatField(default=0, blank=False, verbose_name='Peso (g)')
     
     class Meta:
         verbose_name = 'Característica Física'
         verbose_name_plural = 'Características Físicas'
         
-    #===========================================================================
-    # def __unicode__(self):
-    #     return self.microComputer
-    #===========================================================================
+    def __unicode__(self):
+        return self.microComputer.model
 
-
-class Voltage(models.Model):
-    microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
-    operatingVoltage = models.IntegerField(verbose_name='Voltagem Operacional')
-    IOCurrentMax = models.IntegerField(verbose_name='I/O Corrente máxima')
-    inputVoltageRecommended = models.IntegerField(verbose_name='Voltagem recomendada')
-    DCCurrentperIOPin = models.IntegerField(blank=True, verbose_name='DC Corrente por pino')
-    DCCurrentfor3_3VPin = models.IntegerField(blank=True, verbose_name='DC Corrente por 3.3 pino')
-    powerRatings = models.CharField(blank=True, max_length=50, verbose_name='Classificações de energia')
-    powerSource = models.CharField(blank=True, max_length=50, verbose_name='Fonte de energia')
-    
-    class Meta:
-        verbose_name = 'Voltagem'
-        verbose_name_plural = 'Voltagens'
 
 
 class GPU(models.Model):
@@ -113,7 +97,7 @@ class GPU(models.Model):
 
 class Processor(models.Model):
     type = models.CharField(max_length=100, verbose_name='Processador')
-    clockSpeed = models.CharField(blank=True, max_length=10, verbose_name='Clock Speed')
+    clockSpeed = models.CharField(blank=False, max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -130,23 +114,22 @@ class Processor(models.Model):
 
 class Microcontroller(models.Model):
     type = models.CharField(max_length=100, verbose_name='Microcontrolador')
-    clockSpeed = models.CharField(blank=True, max_length=10, verbose_name='Clock Speed')
+    clockSpeed = models.CharField(blank=False, max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_microcontroller")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     dateTimeChange = models.DateTimeField(auto_now=True)
-    
-    
-    def __unicode__(self):
-        return self.type
 
     class Meta:
         verbose_name = 'Microcontrolador'
         verbose_name_plural = 'Microcontroladores'
 
+    def __unicode__(self):
+        return self.type
+
 
 class Interface(models.Model):
-    microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
+    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
     hdmi = models.CharField(blank=True, max_length=50)
     USBPorts = models.CharField(blank=True, max_length=50, verbose_name='Porta USB')
     videoInput = models.CharField(blank=True, max_length=50, verbose_name='Entrada de vídeo')
@@ -156,12 +139,15 @@ class Interface(models.Model):
     storage = models.CharField(blank=True, max_length=50, verbose_name='Armazenamento')
     network = models.CharField(blank=True, max_length=50, verbose_name='Rede')
     jack = models.CharField(blank=True, max_length=50)
-    digitalIOPins = models.IntegerField(blank=True, verbose_name='Pinos I/O digital')
-    analogInputPins = models.IntegerField(blank=True, verbose_name='Pinos de entrada analógica')
+    digitalIOPins = models.IntegerField(default=0, blank=False, verbose_name='Pinos I/O digital')
+    analogInputPins = models.IntegerField(default=0, blank=False, verbose_name='Pinos de entrada analógica')
     
     class Meta:
         verbose_name = 'Interface'
         verbose_name_plural = 'Interfaces'
+        
+    def __unicode__(self):
+        return self.microComputer.model
         
 
 class OperatingSystem(models.Model):
@@ -183,7 +169,7 @@ class OperatingSystem(models.Model):
 class Expansion(models.Model):
     type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
     peripherals = models.CharField(blank=True, max_length=50, verbose_name='Periféricos')
-    GPIO = models.IntegerField()
+    GPIO = models.IntegerField(default=0)
     userCreation = CreatingUserField(related_name="created_expansions")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -198,8 +184,8 @@ class Expansion(models.Model):
 
 
 class Accessory(models.Model):
-    name = models.CharField(blank=True, max_length=100, verbose_name='Nome')
-    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    name = models.CharField(blank=False, max_length=100, verbose_name='Nome')
+    type = models.CharField(blank=False, max_length=100, verbose_name='Tipo')
     userCreation = CreatingUserField(related_name="created_accessories")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -214,13 +200,53 @@ class Accessory(models.Model):
 
 
 class Memory(models.Model):
-    microComputer = models.ForeignKey('microComputer', verbose_name='Micro Computador')
-    RAM = models.IntegerField(blank=True)
-    SRAM = models.IntegerField(blank=True)
-    EEPROM = models.IntegerField(blank=True)
-    flashMemory = models.IntegerField(blank=True, verbose_name='Memória Flash')
+    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
     
-    class Meta:
+    MEGABIT = 'MG'
+    KBIT = 'KB'
+    MEMORIA = (
+        (MEGABIT, 'MG'),
+        (KBIT, 'KB'),
+        
+    )
+    #===========================================================================
+    # qtRAM = models.CharField(max_length=2, verbose_name='Quantidade em',
+    #                                   choices=MEMORIA,
+    #                                   default=KBIT)
+    #===========================================================================
+    
+    RAM = models.FloatField(default=0, blank=False, verbose_name='RAM KB')
+    SRAM = models.FloatField(default=0, blank=False, verbose_name='SRAM KB')
+    EEPROM = models.FloatField(default=0, blank=False, verbose_name='EEPROM KB')
+    
+    #===========================================================================
+    # qtFlashMemory = models.CharField(max_length=2, verbose_name='Quantidade em',
+    #                                   choices=MEMORIA,
+    #                                   default=KBIT)
+    #===========================================================================
+    
+    flashMemory = models.FloatField(default=0, blank=False, verbose_name='Memória Flash KB')
+    
+    class Meta: 
         verbose_name = 'Memória'
         verbose_name_plural = 'Memórias'
+        
+    def __unicode__(self):
+        return self.microComputer.model
 
+class Voltage(models.Model):
+    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    operatingVoltage = models.IntegerField(default=0, verbose_name='Voltagem Operacional')
+    IOCurrentMax = models.IntegerField(default=0, verbose_name='I/O Corrente máxima')
+    inputVoltageRecommended = models.IntegerField(default=0, verbose_name='Voltagem recomendada')
+    DCCurrentperIOPin = models.IntegerField(default=0, blank=False, verbose_name='DC Corrente por pino')
+    DCCurrentfor3_3VPin = models.IntegerField(default=0, blank=False, verbose_name='DC Corrente por 3.3 pino')
+    powerRatings = models.CharField(blank=True, max_length=50, verbose_name='Classificações de energia')
+    powerSource = models.CharField(blank=True, max_length=50, verbose_name='Fonte de energia')
+    
+    class Meta:
+        verbose_name = 'Voltagem'
+        verbose_name_plural = 'Voltagens'
+        
+    def __unicode__(self):
+        return self.microComputer.model
