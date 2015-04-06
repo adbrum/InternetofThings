@@ -1,0 +1,66 @@
+[
+	{
+		"model": "iot.Interface",
+		"pk": "1",
+		"fields": {
+		"hdmi" : "",
+		"videoInput" : "",
+		"videoOutputs" : "",
+		"audioInputs" : "",
+		"audioOutputs" : "",
+		"storage" : "",
+		"network" : "",
+		"jack" : "",
+		"digitalIOPins" : 14,
+		"analogInputPins" : 6
+	}
+},
+	{
+		"model": "iot.Interface",
+		"pk": "2",
+		"fields": {
+		"hdmi" : "",
+		"videoInput" : "",
+		"videoOutputs" : "",
+		"audioInputs" : "",
+		"audioOutputs" : "",
+		"storage" : "",
+		"network" : "",
+		"jack" : "",
+		"digitalIOPins" : 20,
+		"analogInputPins" : 12
+	}
+},
+	{
+		"model": "iot.Interface",
+		"pk": "3",
+		"fields": {
+		"hdmi" : "",
+		"videoInput" : "",
+		"videoOutputs" : "",
+		"audioInputs" : "",
+		"audioOutputs" : "",
+		"storage" : "",
+		"network" : "",
+		"jack" : "",
+		"digitalIOPins" : 12,
+		"analogInputPins" : 2
+	}
+},
+	{
+		"model": "iot.Interface",
+		"pk": "4",
+		"fields": {
+		"hdmi" : "",
+		"videoInput" : "",
+		"videoOutputs" : "",
+		"audioInputs" : "",
+		"audioOutputs" : "",
+		"storage" : "",
+		"network" : "",
+		"jack" : "",
+		"digitalIOPins" : 20,
+		"analogInputPins" : 12
+	}
+}
+]
