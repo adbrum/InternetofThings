@@ -211,7 +211,7 @@ class Memory(models.Model):
     )
     
     RAM = models.FloatField(default=0, blank=False, verbose_name='RAM')
-    quantidadeRAM = models.CharField(max_length=2, verbose_name='Quantidade em',
+    quantidadeRAM = models.CharField(null=False, max_length=2, verbose_name='Quantidade em',
                                       choices=MEMORIA,
                                       default=KBIT)
     
@@ -219,7 +219,7 @@ class Memory(models.Model):
     EEPROM = models.FloatField(default=0, blank=False, verbose_name='EEPROM KB')
     
     flashMemory = models.FloatField(default=0, blank=False, verbose_name='Memória Flash')
-    quantidadeFlashMemory = models.CharField(max_length=2, verbose_name='Quantidade em',
+    quantidadeFlashMemory = models.CharField(null=False, max_length=2, verbose_name='Quantidade em',
                                       choices=MEMORIA,
                                       default=KBIT)
     
