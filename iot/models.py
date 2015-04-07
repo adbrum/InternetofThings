@@ -209,23 +209,19 @@ class Memory(models.Model):
         (KBIT, 'KB'),
         
     )
-    #===========================================================================
-    # qtRAM = models.CharField(max_length=2, verbose_name='Quantidade em',
-    #                                   choices=MEMORIA,
-    #                                   default=KBIT)
-    #===========================================================================
     
-    RAM = models.FloatField(default=0, blank=False, verbose_name='RAM KB')
+    RAM = models.FloatField(default=0, blank=False, verbose_name='RAM')
+    quantidadeRAM = models.CharField(max_length=2, verbose_name='Quantidade em',
+                                      choices=MEMORIA,
+                                      default=KBIT)
+    
     SRAM = models.FloatField(default=0, blank=False, verbose_name='SRAM KB')
     EEPROM = models.FloatField(default=0, blank=False, verbose_name='EEPROM KB')
     
-    #===========================================================================
-    # qtFlashMemory = models.CharField(max_length=2, verbose_name='Quantidade em',
-    #                                   choices=MEMORIA,
-    #                                   default=KBIT)
-    #===========================================================================
-    
-    flashMemory = models.FloatField(default=0, blank=False, verbose_name='Memória Flash KB')
+    flashMemory = models.FloatField(default=0, blank=False, verbose_name='Memória Flash')
+    quantidadeFlashMemory = models.CharField(max_length=2, verbose_name='Quantidade em',
+                                      choices=MEMORIA,
+                                      default=KBIT)
     
     class Meta: 
         verbose_name = 'Memória'
