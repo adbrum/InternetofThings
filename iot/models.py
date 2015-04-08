@@ -15,11 +15,11 @@ from audit_log.models.fields import CreatingUserField, LastUserField
 class MicroComputer(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
-    processor = models.ForeignKey('Processor', blank=True, verbose_name='Processador')
-    microcontroller = models.ForeignKey('Microcontroller', blank=True, verbose_name='Microcontrolador')
+    processor = models.ForeignKey('Processor',  verbose_name='Processador')
+    microcontroller = models.ForeignKey('Microcontroller',  verbose_name='Microcontrolador')
     GPU = models.ForeignKey('GPU', blank=True)
-    operatingSystems = models.ForeignKey('OperatingSystem', blank=True, verbose_name='Sistema Operativo')
-    dateManufacture = models.DateField(blank=True, verbose_name='Data de Fabrico')
+    operatingSystems = models.ForeignKey('OperatingSystem',  verbose_name='Sistema Operativo')
+    dateManufacture = models.DateField( verbose_name='Data de Fabrico')
     userCreation = CreatingUserField(related_name="created_microcomputer")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -34,7 +34,7 @@ class MicroComputer(models.Model):
 
 
 class Sensor(models.Model):
-    name = models.CharField(blank=True, max_length=100)
+    name = models.CharField(max_length=100)
     
     class Meta:
         verbose_name = 'Sensor'
@@ -48,9 +48,9 @@ class Sensor(models.Model):
 
 class PhysicalCharacteristic(models.Model):
     microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
-    length = models.FloatField(default=0, blank=False, verbose_name='Comprimento (mm)')
-    width = models.FloatField(default=0, blank=False, verbose_name='Largura (mm)')
-    weight = models.FloatField(default=0, blank=False, verbose_name='Peso (g)')
+    length = models.FloatField(default=0, verbose_name='Comprimento (mm)')
+    width = models.FloatField(default=0, verbose_name='Largura (mm)')
+    weight = models.FloatField(default=0, verbose_name='Peso (g)')
     
     class Meta:
         verbose_name = 'Característica Física'
@@ -62,7 +62,7 @@ class PhysicalCharacteristic(models.Model):
 
 
 class GPU(models.Model):
-    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    type = models.CharField(max_length=100, verbose_name='Tipo')
     clockSpeed = models.CharField(max_length=10, blank=True, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_gpus")
     userAmendment = LastUserField()
@@ -79,7 +79,7 @@ class GPU(models.Model):
 
 class Processor(models.Model):
     type = models.CharField(max_length=100, verbose_name='Processador')
-    clockSpeed = models.CharField(blank=False, max_length=10, verbose_name='Clock Speed')
+    clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -96,7 +96,7 @@ class Processor(models.Model):
 
 class Microcontroller(models.Model):
     type = models.CharField(max_length=100, verbose_name='Microcontrolador')
-    clockSpeed = models.CharField(blank=False, max_length=10, verbose_name='Clock Speed')
+    clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_microcontroller")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -121,8 +121,8 @@ class Interface(models.Model):
     storage = models.CharField(blank=True, max_length=50, verbose_name='Armazenamento')
     network = models.CharField(blank=True, max_length=50, verbose_name='Rede')
     jack = models.CharField(blank=True, max_length=50)
-    digitalIOPins = models.IntegerField(default=0, blank=False, verbose_name='Pinos I/O digital')
-    analogInputPins = models.IntegerField(default=0, blank=False, verbose_name='Pinos de entrada analógica')
+    digitalIOPins = models.IntegerField(default=0, verbose_name='Pinos I/O digital')
+    analogInputPins = models.IntegerField(default=0, verbose_name='Pinos de entrada analógica')
     
     class Meta:
         verbose_name = 'Interface'
@@ -134,7 +134,7 @@ class Interface(models.Model):
 
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    version = models.CharField(max_length=50, verbose_name='Versão')
+    version = models.CharField(blank=True, max_length=50, verbose_name='Versão')
     userCreation = CreatingUserField(related_name="created_operationsystems")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -149,7 +149,7 @@ class OperatingSystem(models.Model):
 
 
 class Expansion(models.Model):
-    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    type = models.CharField(max_length=100, verbose_name='Tipo')
     peripherals = models.CharField(blank=True, max_length=50, verbose_name='Periféricos')
     GPIO = models.IntegerField(default=0)
     userCreation = CreatingUserField(related_name="created_expansions")
@@ -166,7 +166,7 @@ class Expansion(models.Model):
 
 
 class Accessory(models.Model):
-    name = models.CharField(blank=True, max_length=100, verbose_name='Nome')
+    name = models.CharField(max_length=100, verbose_name='Nome')
     type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
     userCreation = CreatingUserField(related_name="created_accessory")
     userAmendment = LastUserField()
@@ -192,15 +192,15 @@ class Memory(models.Model):
         
     )
     
-    RAM = models.FloatField(default=0, blank=False, verbose_name='RAM')
+    RAM = models.FloatField(default=0, verbose_name='RAM')
     quantidadeRAM = models.CharField(null=False, max_length=2, verbose_name='Quantidade em',
                                       choices=MEMORIA,
                                       default=KBIT)
     
-    SRAM = models.FloatField(default=0, blank=False, verbose_name='SRAM KB')
-    EEPROM = models.FloatField(default=0, blank=False, verbose_name='EEPROM KB')
+    SRAM = models.FloatField(default=0, verbose_name='SRAM KB')
+    EEPROM = models.FloatField(default=0, verbose_name='EEPROM KB')
     
-    flashMemory = models.FloatField(default=0, blank=False, verbose_name='Memória Flash')
+    flashMemory = models.FloatField(default=0, verbose_name='Memória Flash')
     quantidadeFlashMemory = models.CharField(null=False, max_length=2, verbose_name='Quantidade em',
                                       choices=MEMORIA,
                                       default=KBIT)
@@ -217,8 +217,8 @@ class Voltage(models.Model):
     operatingVoltage = models.IntegerField(default=0, verbose_name='Voltagem Operacional')
     IOCurrentMax = models.IntegerField(default=0, verbose_name='I/O Corrente máxima')
     inputVoltageRecommended = models.IntegerField(default=0, verbose_name='Voltagem recomendada')
-    DCCurrentperIOPin = models.IntegerField(default=0, blank=False, verbose_name='DC Corrente por pino')
-    DCCurrentfor3_3VPin = models.IntegerField(default=0, blank=False, verbose_name='DC Corrente por 3.3 pino')
+    DCCurrentperIOPin = models.IntegerField(default=0, verbose_name='DC Corrente por pino')
+    DCCurrentfor3_3VPin = models.IntegerField(default=0, verbose_name='DC Corrente por 3.3 pino')
     powerRatings = models.CharField(blank=True, max_length=50, verbose_name='Classificações de energia')
     powerSource = models.CharField(blank=True, max_length=50, verbose_name='Fonte de energia')
     
@@ -231,14 +231,11 @@ class Voltage(models.Model):
 
 class Equipment(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    model = models.CharField(max_length=100, verbose_name='Modelo')
+    model = models.CharField(blank=True, max_length=100, verbose_name='Modelo')
     microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
-    #sensor = models.ForeignKey('Sensor', verbose_name='Sensor')
-    #expansion = models.ForeignKey('Expansion', verbose_name='Expansão')
-    sensor = models.ManyToManyField('Sensor', verbose_name = 'Sensor')
-    expansion = models.ManyToManyField('Expansion', verbose_name = 'Expansão')
-    accessory = models.ManyToManyField('Accessory', verbose_name = 'Acessório')
-    #accessory = models.ForeignKey('Accessory', verbose_name='Acessório')
+    sensor = models.ManyToManyField('Sensor', blank=True, verbose_name = 'Sensor')
+    expansion = models.ManyToManyField('Expansion', blank=True, verbose_name = 'Expansão')
+    accessory = models.ManyToManyField('Accessory', blank=True, verbose_name = 'Acessório')
     userCreation = CreatingUserField(related_name="created_equipments")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
