@@ -5,11 +5,11 @@ nº Aluno: 11951
 911911951@alunos.ipbeja.pt
 """
 from datetime import datetime
-
-from audit_log.models.fields import CreatingUserField, LastUserField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from audit_log.models.fields import CreatingUserField, LastUserField
 
 
 class MicroComputer(models.Model):
@@ -33,25 +33,6 @@ class MicroComputer(models.Model):
         return self.model
 
 
-class Equipment(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nome')
-    model = models.CharField(max_length=100, verbose_name='Modelo')
-    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
-    sensor = models.ForeignKey('Sensor', verbose_name='Sensor')
-    expansion = models.ForeignKey('Expansion', verbose_name='Expansão')
-    accessory = models.ForeignKey('Accessory', verbose_name='Acessório')
-    userCreation = CreatingUserField(related_name="created_equipments")
-    userAmendment = LastUserField()
-    dateTimeCreation = models.DateTimeField(auto_now_add=True)
-    dateTimeChange = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        verbose_name = 'Equipamento'
-        verbose_name_plural = 'Equipamentos'
-
-    def __unicode__(self):
-        return self.name
-
 class Sensor(models.Model):
     name = models.CharField(blank=True, max_length=100)
     
@@ -63,6 +44,7 @@ class Sensor(models.Model):
         return self.name
 
 
+   
 
 class PhysicalCharacteristic(models.Model):
     microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
@@ -184,9 +166,9 @@ class Expansion(models.Model):
 
 
 class Accessory(models.Model):
-    name = models.CharField(blank=False, max_length=100, verbose_name='Nome')
-    type = models.CharField(blank=False, max_length=100, verbose_name='Tipo')
-    userCreation = CreatingUserField(related_name="created_accessories")
+    name = models.CharField(blank=True, max_length=100, verbose_name='Nome')
+    type = models.CharField(blank=True, max_length=100, verbose_name='Tipo')
+    userCreation = CreatingUserField(related_name="created_accessory")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
     dateTimeChange = models.DateTimeField(auto_now=True)
@@ -246,3 +228,25 @@ class Voltage(models.Model):
         
     def __unicode__(self):
         return self.microComputer.model
+
+class Equipment(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nome')
+    model = models.CharField(max_length=100, verbose_name='Modelo')
+    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    #sensor = models.ForeignKey('Sensor', verbose_name='Sensor')
+    #expansion = models.ForeignKey('Expansion', verbose_name='Expansão')
+    sensor = models.ManyToManyField('Sensor', verbose_name = 'Sensor')
+    expansion = models.ManyToManyField('Expansion', verbose_name = 'Expansão')
+    accessory = models.ManyToManyField('Accessory', verbose_name = 'Acessório')
+    #accessory = models.ForeignKey('Accessory', verbose_name='Acessório')
+    userCreation = CreatingUserField(related_name="created_equipments")
+    userAmendment = LastUserField()
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    dateTimeChange = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Equipamento'
+        verbose_name_plural = 'Equipamentos'
+
+    def __unicode__(self):
+        return self.name
