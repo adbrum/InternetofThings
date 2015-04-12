@@ -1,16 +1,16 @@
 from django.contrib import admin
 
-from iot.models import Processor, MicroComputer, PhysicalCharacteristic, Voltage, \
+from iot.models import Processor, Microcomputer, PhysicalCharacteristic, Voltage, \
 GPU, OperatingSystem, Interface, Expansion, Accessory, Memory, Equipment, Sensor, Microcontroller
 
 
 admin.site.register(Equipment)
 admin.site.register(Processor)
 
-class MicroComputerAdmin(admin.ModelAdmin):
+class MicrocomputerAdmin(admin.ModelAdmin):
     list_display = ('model', 'name')
 
-admin.site.register(MicroComputer, MicroComputerAdmin)
+admin.site.register(Microcomputer, MicrocomputerAdmin)
 
 class MicrocontrollerAdmin(admin.ModelAdmin):
     list_display = ('type', 'clockSpeed')

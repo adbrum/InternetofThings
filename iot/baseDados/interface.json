@@ -1,22 +1,6 @@
 [
 	{
 		"model": "iot.Interface",
-		"pk": "1",
-		"fields": {
-		"hdmi" : "",
-		"videoInput" : "",
-		"videoOutputs" : "",
-		"audioInputs" : "",
-		"audioOutputs" : "",
-		"storage" : "",
-		"network" : "",
-		"jack" : "",
-		"digitalIOPins" : 14,
-		"analogInputPins" : 6
-	}
-},
-	{
-		"model": "iot.Interface",
 		"pk": "2",
 		"fields": {
 		"hdmi" : "",
@@ -26,9 +10,10 @@
 		"audioOutputs" : "",
 		"storage" : "",
 		"network" : "",
+		"wifi" : "",
 		"jack" : "",
-		"digitalIOPins" : 20,
-		"analogInputPins" : 12
+		"digitalIOPins" : 14,
+		"analogInputPins" : 6
 	}
 },
 	{
@@ -42,9 +27,10 @@
 		"audioOutputs" : "",
 		"storage" : "",
 		"network" : "",
+		"wifi" : "",
 		"jack" : "",
-		"digitalIOPins" : 12,
-		"analogInputPins" : 2
+		"digitalIOPins" : 20,
+		"analogInputPins" : 12
 	}
 },
 	{
@@ -58,6 +44,24 @@
 		"audioOutputs" : "",
 		"storage" : "",
 		"network" : "",
+		"wifi" : "",
+		"jack" : "",
+		"digitalIOPins" : 54,
+		"analogInputPins" : 2
+	}
+},
+	{
+		"model": "iot.Interface",
+		"pk": "5",
+		"fields": {
+		"hdmi" : "",
+		"videoInput" : "",
+		"videoOutputs" : "",
+		"audioInputs" : "",
+		"audioOutputs" : "",
+		"storage" : "Card Reader - Micro-SD",
+		"network" : "IEEE 802.3 10/100Mbit/s",
+		"wifi" : "IEEE 802.11b/g/n",
 		"jack" : "",
 		"digitalIOPins" : 20,
 		"analogInputPins" : 12

@@ -1,6 +1,6 @@
 [
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "1",
 		"fields": {
 		"name" : "Arduino",
@@ -17,7 +17,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "2",
 		"fields": {
 		"name" : "Arduino",
@@ -34,7 +34,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "3",
 		"fields": {
 		"name" : "Arduino",
@@ -51,7 +51,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "4",
 		"fields": {
 		"name" : "Arduino",
@@ -68,7 +68,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "5",
 		"fields": {
 		"name" : "Arduino",
@@ -85,7 +85,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "6",
 		"fields": {
 		"name" : "Arduino",
@@ -102,7 +102,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "7",
 		"fields": {
 		"name" : "Arduino",
@@ -119,7 +119,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "8",
 		"fields": {
 		"name" : "Arduino",
@@ -136,7 +136,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "9",
 		"fields": {
 		"name" : "Arduino",
@@ -153,7 +153,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "10",
 		"fields": {
 		"name" : "Arduino",
@@ -170,7 +170,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "11",
 		"fields": {
 		"name" : "Arduino",
@@ -187,7 +187,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "12",
 		"fields": {
 		"name" : "Arduino",
@@ -204,7 +204,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "13",
 		"fields": {
 		"name" : "Arduino",
@@ -221,7 +221,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "14",
 		"fields": {
 		"name" : "Arduino",
@@ -238,7 +238,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "15",
 		"fields": {
 		"name" : "Arduino",
@@ -255,7 +255,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "16",
 		"fields": {
 		"name" : "Arduino",
@@ -272,7 +272,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "17",
 		"fields": {
 		"name" : "Arduino",
@@ -289,7 +289,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "18",
 		"fields": {
 		"name" : "Arduino",
@@ -306,7 +306,7 @@
 	}
 },
 	{
-		"model": "iot.MicroComputer",
+		"model": "iot.Microcomputer",
 		"pk": "19",
 		"fields": {
 		"name" : "Arduino",

@@ -11,7 +11,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from iot.models import Equipment, PhysicalCharacteristic, Voltage, Memory, \
-    Microcontroller, MicroComputer, GPU, Interface, Processor
+    Microcontroller, Microcomputer, GPU, Interface, Processor
 
 
 def criar(request):
@@ -20,7 +20,7 @@ def criar(request):
     """
     microcontrolador = Microcontroller.objects.filter()
      
-    file_microcontroller = open("microcontroller.json", "w\n")
+    file_microcontroller = open("iot/fixtures/microcontroller.json", "w")
     file_microcontroller.write("[\n")
     qt = len(microcontrolador)
     for item in microcontrolador:
@@ -29,7 +29,7 @@ def criar(request):
         file_microcontroller.write("\t\t\"pk\": \"" + str(item.id) + "\",\n")
         file_microcontroller.write("\t\t\"fields\": {\n")
         file_microcontroller.write("\t\t\"type\" : \"" + (item.type).encode("utf-8\n") + "\",\n")
-        file_microcontroller.write("\t\t\"clockSpeed\" : \"" + item.clockSpeed + "\",\n")
+        file_microcontroller.write("\t\t\"clockSpeed\" : " + str(item.clockSpeed) + ",\n")
         file_microcontroller.write("\t\t\"userCreation\" : " + str(item.userCreation_id) + ",\n")
         file_microcontroller.write("\t\t\"userAmendment\" : " + str(item.userAmendment_id) + ",\n")
         file_microcontroller.write("\t\t\"dateTimeCreation\" : \"" + str(item.dateTimeCreation) + "\",\n")
@@ -44,14 +44,14 @@ def criar(request):
     file_microcontroller.close()
     
     
-    microComputer = MicroComputer.objects.filter()
+    microComputer = Microcomputer.objects.filter()
     
-    file_microComputer = open("microComputer.json", "w\n")
+    file_microComputer = open("iot/fixtures/microComputer.json", "w")
     file_microComputer.write("[\n")
     qt = len(microComputer)
     for item in microComputer:
         file_microComputer.write("\t{\n")
-        file_microComputer.write("\t\t\"model\": \"iot.MicroComputer\",\n")
+        file_microComputer.write("\t\t\"model\": \"iot.Microcomputer\",\n")
         file_microComputer.write("\t\t\"pk\": \"" + str(item.id) + "\",\n")
         file_microComputer.write("\t\t\"fields\": {\n")
         file_microComputer.write("\t\t\"name\" : \"" + (item.name).encode("utf-8\n") + "\",\n")
@@ -77,7 +77,7 @@ def criar(request):
     
     caracteristica = PhysicalCharacteristic.objects.filter()
     
-    file_caracteristica = open("physicalCharacteristic.json", "w\n")
+    file_caracteristica = open("iot/fixtures/physicalCharacteristic.json", "w")
     file_caracteristica.write("[\n")
     qt = len(caracteristica)
 
@@ -102,7 +102,7 @@ def criar(request):
     
     gpu = GPU.objects.filter()
     
-    file_gpu = open("gpu.json", "w\n")
+    file_gpu = open("iot/fixtures/gpu.json", "w")
     file_gpu.write("[\n")
     qt = len(gpu)
     for item in gpu:
@@ -111,7 +111,7 @@ def criar(request):
         file_gpu.write("\t\t\"pk\": " + str(item.id) + ",\n")
         file_gpu.write("\t\t\"fields\": {\n")
         file_gpu.write("\t\t\"type\" : \"" + (item.type).encode("utf-8\n") + "\",\n")
-        file_gpu.write("\t\t\"clockSpeed\" : \"" + item.clockSpeed + "\",\n")
+        file_gpu.write("\t\t\"clockSpeed\" : " + str(item.clockSpeed) + ",\n")
         file_gpu.write("\t\t\"userCreation\" : " + str(item.userCreation_id) + ",\n")
         file_gpu.write("\t\t\"userAmendment\" : " + str(item.userAmendment_id) + ",\n")
         file_gpu.write("\t\t\"dateTimeCreation\" : \"" + str(item.dateTimeCreation) + "\",\n")
@@ -128,7 +128,7 @@ def criar(request):
     
     memory = Memory.objects.filter()
     
-    file_memory = open("memory.json", "w\n")
+    file_memory = open("iot/fixtures/memory.json", "w")
     file_memory.write("[\n")
     qt = len(memory)
 
@@ -156,7 +156,7 @@ def criar(request):
     
     voltage = Voltage.objects.filter()
     
-    file_voltage = open("voltage.json", "w\n")
+    file_voltage = open("iot/fixtures/voltage.json", "w")
     file_voltage.write("[\n")
     qt = len(voltage)
 
@@ -188,7 +188,7 @@ def criar(request):
     
     interface = Interface.objects.filter()
     
-    file_interface = open("interface.json", "w\n")
+    file_interface = open("iot/fixtures/interface.json", "w")
     file_interface.write("[\n")
     qt = len(interface)
     for item in interface:
@@ -203,6 +203,7 @@ def criar(request):
         file_interface.write("\t\t\"audioOutputs\" : \"" + (item.audioOutputs).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"storage\" : \"" + (item.storage).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"network\" : \"" + (item.network).encode("utf-8\n") + "\",\n")
+        file_interface.write("\t\t\"wifi\" : \"" + (item.wifi).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"jack\" : \"" + (item.jack).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"digitalIOPins\" : " + str(item.digitalIOPins) + ",\n")
         file_interface.write("\t\t\"analogInputPins\" : " + str(item.analogInputPins) + "\n")
@@ -218,7 +219,7 @@ def criar(request):
     
     processor = Processor.objects.filter()
     
-    file_processor = open("processor.json", "w\n")
+    file_processor = open("iot/fixtures/processor.json", "w")
     file_processor.write("[\n")
     qt = len(processor)
     for item in processor:
@@ -227,7 +228,7 @@ def criar(request):
         file_processor.write("\t\t\"pk\": " + str(item.id) + ",\n")
         file_processor.write("\t\t\"fields\": {\n")
         file_processor.write("\t\t\"type\" : \"" + (item.type).encode("utf-8\n") + "\",\n")
-        file_processor.write("\t\t\"clockSpeed\" : \"" + item.clockSpeed + "\",\n")
+        file_processor.write("\t\t\"clockSpeed\" : " + str(item.clockSpeed) + ",\n")
         file_processor.write("\t\t\"userCreation\" : " + str(item.userCreation_id) + ",\n")
         file_processor.write("\t\t\"userAmendment\" : " + str(item.userAmendment_id) + ",\n")
         file_processor.write("\t\t\"dateTimeCreation\" : \"" + str(item.dateTimeCreation) + "\",\n")

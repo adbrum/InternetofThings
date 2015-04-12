@@ -4,7 +4,7 @@
 		"pk": 1,
 		"fields": {
 		"type" : "Não possui",
-		"clockSpeed" : "16 MHz",
+		"clockSpeed" : 16 MHz,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -16,7 +16,7 @@
 		"pk": 2,
 		"fields": {
 		"type" : "Texas Instrument Sitara AM3359AZCZ100 (ARM Cortex-A8)",
-		"clockSpeed" : "1 GHz",
+		"clockSpeed" : 1 GHz,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",

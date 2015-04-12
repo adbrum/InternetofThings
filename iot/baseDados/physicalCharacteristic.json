@@ -6,7 +6,7 @@
 		"microComputer" : 1,
 		"length" : 68.6,
 		"width" : 53.4,
-		"weight" : 25
+		"weight" : 25.0
 	}
 },
 	{
@@ -16,7 +16,7 @@
 		"microComputer" : 2,
 		"length" : 68.6,
 		"width" : 53.3,
-		"weight" : 20
+		"weight" : 20.0
 	}
 },
 	{
@@ -26,7 +26,17 @@
 		"microComputer" : 3,
 		"length" : 101.52,
 		"width" : 53.3,
-		"weight" : 36
+		"weight" : 36.0
+	}
+},
+	{
+		"model": "iot.PhysicalCharacteristic",
+		"pk": 4,
+		"fields": {
+		"microComputer" : 4,
+		"length" : 73.0,
+		"width" : 53.0,
+		"weight" : 32.0
 	}
 }
 ]

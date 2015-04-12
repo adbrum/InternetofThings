@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from audit_log.models.fields import CreatingUserField, LastUserField
 
 
-class MicroComputer(models.Model):
+class Microcomputer(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
     processor = models.ForeignKey('Processor',  verbose_name='Processador')
@@ -47,7 +47,7 @@ class Sensor(models.Model):
    
 
 class PhysicalCharacteristic(models.Model):
-    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
     length = models.FloatField(default=0, verbose_name='Comprimento (mm)')
     width = models.FloatField(default=0, verbose_name='Largura (mm)')
     weight = models.FloatField(default=0, verbose_name='Peso (g)')
@@ -96,7 +96,7 @@ class Processor(models.Model):
 
 class Microcontroller(models.Model):
     type = models.CharField(max_length=100, verbose_name='Microcontrolador')
-    clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
+    clockSpeed = models.IntegerField(verbose_name='Clock Speed MHz')
     userCreation = CreatingUserField(related_name="created_microcontroller")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -111,7 +111,7 @@ class Microcontroller(models.Model):
 
 
 class Interface(models.Model):
-    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
     hdmi = models.CharField(blank=True, max_length=50)
     USBPorts = models.CharField(blank=True, max_length=50, verbose_name='Porta USB')
     videoInput = models.CharField(blank=True, max_length=50, verbose_name='Entrada de vídeo')
@@ -120,6 +120,7 @@ class Interface(models.Model):
     audioOutputs = models.CharField(blank=True, max_length=50, verbose_name='Saida de audio')
     storage = models.CharField(blank=True, max_length=50, verbose_name='Armazenamento')
     network = models.CharField(blank=True, max_length=50, verbose_name='Rede')
+    wifi = models.CharField(blank=True, max_length=50, verbose_name='WiFi')
     jack = models.CharField(blank=True, max_length=50)
     digitalIOPins = models.IntegerField(default=0, verbose_name='Pinos I/O digital')
     analogInputPins = models.IntegerField(default=0, verbose_name='Pinos de entrada analógica')
@@ -182,20 +183,22 @@ class Accessory(models.Model):
 
 
 class Memory(models.Model):
-    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
     
-    MEGABIT = 'MG'
-    KBIT = 'KB'
+    KILOBYTE = 'KB'
+    MEGABYTE = 'MG'
+    GIGABYTE = 'GB'
     MEMORIA = (
-        (MEGABIT, 'MG'),
-        (KBIT, 'KB'),
+        (KILOBYTE, 'KB'),
+        (MEGABYTE, 'MG'),
+        (GIGABYTE, 'GB')
         
     )
     
     RAM = models.FloatField(default=0, verbose_name='RAM')
     quantidadeRAM = models.CharField(null=False, max_length=2, verbose_name='Quantidade em',
                                       choices=MEMORIA,
-                                      default=KBIT)
+                                      default=KILOBYTE)
     
     SRAM = models.FloatField(default=0, verbose_name='SRAM KB')
     EEPROM = models.FloatField(default=0, verbose_name='EEPROM KB')
@@ -203,7 +206,7 @@ class Memory(models.Model):
     flashMemory = models.FloatField(default=0, verbose_name='Memória Flash')
     quantidadeFlashMemory = models.CharField(null=False, max_length=2, verbose_name='Quantidade em',
                                       choices=MEMORIA,
-                                      default=KBIT)
+                                      default=KILOBYTE)
     
     class Meta: 
         verbose_name = 'Memória'
@@ -213,12 +216,12 @@ class Memory(models.Model):
         return self.microComputer.model
 
 class Voltage(models.Model):
-    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
-    operatingVoltage = models.IntegerField(default=0, verbose_name='Voltagem Operacional')
-    IOCurrentMax = models.IntegerField(default=0, verbose_name='I/O Corrente máxima')
-    inputVoltageRecommended = models.IntegerField(default=0, verbose_name='Voltagem recomendada')
-    DCCurrentperIOPin = models.IntegerField(default=0, verbose_name='DC Corrente por pino')
-    DCCurrentfor3_3VPin = models.IntegerField(default=0, verbose_name='DC Corrente por 3.3 pino')
+    microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
+    operatingVoltage = models.FloatField(default=0, verbose_name='Voltagem Operacional V')
+    inputVoltageRecommended = models.CharField(max_length=10, default=0, verbose_name='Voltagem recomendada V')
+    IOCurrentMax = models.CharField(max_length=10, default=0, verbose_name='I/O Corrente limites V')
+    DCCurrentperIOPin = models.IntegerField(default=0, verbose_name='DC Corrente por pino mA')
+    DCCurrentfor3_3VPin = models.IntegerField(default=0, verbose_name='DC Corrente por 3.3 pino mA')
     powerRatings = models.CharField(blank=True, max_length=50, verbose_name='Classificações de energia')
     powerSource = models.CharField(blank=True, max_length=50, verbose_name='Fonte de energia')
     
@@ -232,7 +235,7 @@ class Voltage(models.Model):
 class Equipment(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(blank=True, max_length=100, verbose_name='Modelo')
-    microComputer = models.ForeignKey('MicroComputer', verbose_name='Micro Computador')
+    microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
     sensor = models.ManyToManyField('Sensor', blank=True, verbose_name = 'Sensor')
     expansion = models.ManyToManyField('Expansion', blank=True, verbose_name = 'Expansão')
     accessory = models.ManyToManyField('Accessory', blank=True, verbose_name = 'Acessório')

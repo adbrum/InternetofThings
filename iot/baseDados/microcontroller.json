@@ -4,7 +4,7 @@
 		"pk": "1",
 		"fields": {
 		"type" : "Não possui",
-		"clockSpeed" : "",
+		"clockSpeed" : 0,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -16,7 +16,7 @@
 		"pk": "2",
 		"fields": {
 		"type" : "ATmega328",
-		"clockSpeed" : "16 MHz",
+		"clockSpeed" : 16,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -28,7 +28,7 @@
 		"pk": "3",
 		"fields": {
 		"type" : "ATmega32u4",
-		"clockSpeed" : "16 MHz",
+		"clockSpeed" : 16,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -39,8 +39,8 @@
 		"model": "iot.Microcontroller",
 		"pk": "4",
 		"fields": {
-		"type" : "ATmega32u4/8 MHz",
-		"clockSpeed" : "8 MHz",
+		"type" : "ATmega32u4/8",
+		"clockSpeed" : 8,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -52,7 +52,7 @@
 		"pk": "5",
 		"fields": {
 		"type" : "ATSAMD21G18, 48pins LQFP",
-		"clockSpeed" : "48 MHz",
+		"clockSpeed" : 48,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -64,7 +64,7 @@
 		"pk": "6",
 		"fields": {
 		"type" : "ATmega2560",
-		"clockSpeed" : "16 MHz",
+		"clockSpeed" : 16,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -76,7 +76,7 @@
 		"pk": "7",
 		"fields": {
 		"type" : "ATmega328/8MHz",
-		"clockSpeed" : "8 MHz",
+		"clockSpeed" : 8,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -88,7 +88,7 @@
 		"pk": "8",
 		"fields": {
 		"type" : "ATmega168",
-		"clockSpeed" : "8 MHz",
+		"clockSpeed" : 8,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -100,7 +100,7 @@
 		"pk": "9",
 		"fields": {
 		"type" : "ATmega328P",
-		"clockSpeed" : "8 MHz",
+		"clockSpeed" : 8,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -112,7 +112,7 @@
 		"pk": "10",
 		"fields": {
 		"type" : "AT91SAM3X8E",
-		"clockSpeed" : "84 MHz",
+		"clockSpeed" : 84,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -124,7 +124,7 @@
 		"pk": "11",
 		"fields": {
 		"type" : "ATmega168V ",
-		"clockSpeed" : "8 MHz",
+		"clockSpeed" : 8,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
@@ -136,7 +136,7 @@
 		"pk": "12",
 		"fields": {
 		"type" : "ATmega328V ",
-		"clockSpeed" : "8 MHz",
+		"clockSpeed" : 8,
 		"userCreation" : 1,
 		"userAmendment" : 1,
 		"dateTimeCreation" : "2015-03-01 00:00:00+00:00",
