@@ -62,7 +62,7 @@ class PhysicalCharacteristic(models.Model):
 
 
 class GPU(models.Model):
-    type = models.CharField(max_length=100, verbose_name='Tipo')
+    type = models.CharField(default = 'Não possui', max_length=100, verbose_name='Tipo')
     clockSpeed = models.CharField(max_length=10, blank=True, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_gpus")
     userAmendment = LastUserField()
@@ -78,7 +78,7 @@ class GPU(models.Model):
 
 
 class Processor(models.Model):
-    type = models.CharField(max_length=100, verbose_name='Processador')
+    type = models.CharField(default = 'Não possui', max_length=100, verbose_name='Processador')
     clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
     userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
@@ -95,7 +95,7 @@ class Processor(models.Model):
 
 
 class Microcontroller(models.Model):
-    type = models.CharField(max_length=100, verbose_name='Microcontrolador')
+    type = models.CharField(default = 'Não possui', max_length=100, verbose_name='Microcontrolador')
     clockSpeed = models.IntegerField(verbose_name='Clock Speed MHz')
     userCreation = CreatingUserField(related_name="created_microcontroller")
     userAmendment = LastUserField()
@@ -134,7 +134,7 @@ class Interface(models.Model):
         
 
 class OperatingSystem(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nome')
+    name = models.CharField(default = 'Não possui', max_length=100, verbose_name='Nome')
     version = models.CharField(blank=True, max_length=50, verbose_name='Versão')
     userCreation = CreatingUserField(related_name="created_operationsystems")
     userAmendment = LastUserField()
