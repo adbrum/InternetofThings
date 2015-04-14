@@ -5,10 +5,9 @@
 		"fields": {
 		"microComputer" : 1,
 		"operatingVoltage" : 5.0,
-		"IOCurrentMax" : 6-20,
-		"inputVoltageRecommended" : 7-12,
+		"IOCurrentMax" : "6-20",
+		"inputVoltageRecommended" : "7-12",
 		"DCCurrentfor3_3VPin" : 50,
-		"IOCurrentMax" : 6-20,
 		"powerRatings" : "",
 		"powerSource" : ""
 	}
@@ -19,10 +18,9 @@
 		"fields": {
 		"microComputer" : 2,
 		"operatingVoltage" : 5.0,
-		"IOCurrentMax" : 6-20,
-		"inputVoltageRecommended" : 7-12,
+		"IOCurrentMax" : "6-20",
+		"inputVoltageRecommended" : "7-12",
 		"DCCurrentfor3_3VPin" : 50,
-		"IOCurrentMax" : 6-20,
 		"powerRatings" : "",
 		"powerSource" : ""
 	}
@@ -33,10 +31,9 @@
 		"fields": {
 		"microComputer" : 3,
 		"operatingVoltage" : 3.3,
-		"IOCurrentMax" : 6-16,
-		"inputVoltageRecommended" : 7-12,
+		"IOCurrentMax" : "6-16",
+		"inputVoltageRecommended" : "7-12",
 		"DCCurrentfor3_3VPin" : 800,
-		"IOCurrentMax" : 6-16,
 		"powerRatings" : "",
 		"powerSource" : ""
 	}
@@ -47,10 +44,9 @@
 		"fields": {
 		"microComputer" : 4,
 		"operatingVoltage" : 5.0,
-		"IOCurrentMax" : 0,
-		"inputVoltageRecommended" : 5,
+		"IOCurrentMax" : "0",
+		"inputVoltageRecommended" : "5",
 		"DCCurrentfor3_3VPin" : 50,
-		"IOCurrentMax" : 0,
 		"powerRatings" : "",
 		"powerSource" : ""
 	}

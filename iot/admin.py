@@ -15,6 +15,7 @@ admin.site.register(Microcomputer, MicrocomputerAdmin)
 class MicrocontrollerAdmin(admin.ModelAdmin):
     list_display = ('type', 'clockSpeed')
     
+    
 admin.site.register(Microcontroller, MicrocontrollerAdmin)
 
 admin.site.register(PhysicalCharacteristic)

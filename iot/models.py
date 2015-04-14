@@ -15,10 +15,10 @@ from audit_log.models.fields import CreatingUserField, LastUserField
 class Microcomputer(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
-    processor = models.ForeignKey('Processor',  verbose_name='Processador')
-    microcontroller = models.ForeignKey('Microcontroller',  verbose_name='Microcontrolador')
-    GPU = models.ForeignKey('GPU', blank=True)
-    operatingSystems = models.ForeignKey('OperatingSystem',  verbose_name='Sistema Operativo')
+    processor = models.ForeignKey('Processor', null=True, verbose_name='Processador')
+    microcontroller = models.ForeignKey('Microcontroller', null=True,   verbose_name='Microcontrolador')
+    GPU = models.ForeignKey('GPU', null=True)
+    operatingSystems = models.ForeignKey('OperatingSystem', null=True, verbose_name='Sistema Operativo')
     dateManufacture = models.DateField( verbose_name='Data de Fabrico')
     userCreation = CreatingUserField(related_name="created_microcomputer")
     userAmendment = LastUserField()
@@ -62,8 +62,8 @@ class PhysicalCharacteristic(models.Model):
 
 
 class GPU(models.Model):
-    type = models.CharField(default = 'Não possui', max_length=100, verbose_name='Tipo')
-    clockSpeed = models.CharField(max_length=10, blank=True, verbose_name='Clock Speed')
+    type = models.CharField(max_length=100, verbose_name='Tipo')
+    clockSpeed = models.IntegerField(verbose_name='Clock Speed MHz')
     userCreation = CreatingUserField(related_name="created_gpus")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -78,8 +78,8 @@ class GPU(models.Model):
 
 
 class Processor(models.Model):
-    type = models.CharField(default = 'Não possui', max_length=100, verbose_name='Processador')
-    clockSpeed = models.CharField(max_length=10, verbose_name='Clock Speed')
+    type = models.CharField(max_length=100, verbose_name='Processador')
+    clockSpeed = models.IntegerField(verbose_name='Clock Speed MHz')
     userCreation = CreatingUserField(related_name="created_processor")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -95,7 +95,7 @@ class Processor(models.Model):
 
 
 class Microcontroller(models.Model):
-    type = models.CharField(default = 'Não possui', max_length=100, verbose_name='Microcontrolador')
+    type = models.CharField(max_length=100, verbose_name='Microcontrolador')
     clockSpeed = models.IntegerField(verbose_name='Clock Speed MHz')
     userCreation = CreatingUserField(related_name="created_microcontroller")
     userAmendment = LastUserField()
@@ -103,6 +103,7 @@ class Microcontroller(models.Model):
     dateTimeChange = models.DateTimeField(auto_now=True)
 
     class Meta:
+        #ordering = ['pk']
         verbose_name = 'Microcontrolador'
         verbose_name_plural = 'Microcontroladores'
 
@@ -134,7 +135,7 @@ class Interface(models.Model):
         
 
 class OperatingSystem(models.Model):
-    name = models.CharField(default = 'Não possui', max_length=100, verbose_name='Nome')
+    name = models.CharField(max_length=100, verbose_name='Nome')
     version = models.CharField(blank=True, max_length=50, verbose_name='Versão')
     userCreation = CreatingUserField(related_name="created_operationsystems")
     userAmendment = LastUserField()
@@ -217,11 +218,11 @@ class Memory(models.Model):
 
 class Voltage(models.Model):
     microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
-    operatingVoltage = models.FloatField(default=0, verbose_name='Voltagem Operacional V')
-    inputVoltageRecommended = models.CharField(max_length=10, default=0, verbose_name='Voltagem recomendada V')
-    IOCurrentMax = models.CharField(max_length=10, default=0, verbose_name='I/O Corrente limites V')
-    DCCurrentperIOPin = models.IntegerField(default=0, verbose_name='DC Corrente por pino mA')
-    DCCurrentfor3_3VPin = models.IntegerField(default=0, verbose_name='DC Corrente por 3.3 pino mA')
+    operatingVoltage = models.FloatField(default=0, verbose_name='Voltagem Operacional (V)')
+    inputVoltageRecommended = models.CharField(max_length=10, default=0, verbose_name='Voltagem recomendada (V)')
+    IOCurrentMax = models.CharField(max_length=10, default=0, verbose_name='I/O Corrente limites (V)')
+    DCCurrentperIOPin = models.IntegerField(default=0, verbose_name='DC Corrente por pino (mA)')
+    DCCurrentfor3_3VPin = models.IntegerField(default=0, verbose_name='DC Corrente por 3.3 pino (mA)')
     powerRatings = models.CharField(blank=True, max_length=50, verbose_name='Classificações de energia')
     powerSource = models.CharField(blank=True, max_length=50, verbose_name='Fonte de energia')
     

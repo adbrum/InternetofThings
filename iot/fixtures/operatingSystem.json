@@ -1,14 +1,2 @@
 [
-  {
-    "model": "iot.OperatingSystem",
-    "pk": 1,
-    "fields": {
-    "name" : "Não possui",
-    "version" : "",
-    "userCreation" : 1,
-    "userAmendment" : 1,
-    "dateTimeCreation" : "2015-03-01 00:00:00",
-    "dateTimeChange" : "2015-03-01 00:00:00"
-    }
-  }
 ]
