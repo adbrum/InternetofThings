@@ -37,10 +37,10 @@
 		"pk": 4,
 		"fields": {
 		"microComputer" : 4,
-		"RAM" : "0.0",
+		"RAM" : "64.0",
 		"SRAM" : "2.5",
 		"EEPROM" : "1.0",
-		"flashMemory" : "32.0"
+		"flashMemory" : "16.0"
 	}
 }
 ]

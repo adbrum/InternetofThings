@@ -168,7 +168,7 @@ def criar(request):
         file_voltage.write("\t\t\"microComputer\" : " + str(item.microComputer_id) + ",\n")
         file_voltage.write("\t\t\"operatingVoltage\" : " + str(item.operatingVoltage) + ",\n")
         file_voltage.write("\t\t\"inputVoltageRecommended\" : \"" + str(item.inputVoltageRecommended) + ",\n")
-        file_voltage.write("\t\t\"IOCurrentMax\" : \"" + + str(item.IOCurrentMax) + "\",\n")
+        file_voltage.write("\t\t\"IOCurrentMax\" : \"" + str(item.IOCurrentMax) + "\",\n")
         file_voltage.write("\t\t\"DCCurrentfor3_3VPin\" : " + str(item.DCCurrentfor3_3VPin) + "\",\n")
         file_voltage.write("\t\t\"powerRatings\" : \"" + str(item.powerRatings) + "\",\n")
         file_voltage.write("\t\t\"powerSource\" : \"" + str(item.powerSource) + "\"\n")

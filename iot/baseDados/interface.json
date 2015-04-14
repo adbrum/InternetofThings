@@ -3,6 +3,7 @@
 		"model": "iot.Interface",
 		"pk": "2",
 		"fields": {
+		"microComputer" : 1,
 		"hdmi" : "",
 		"videoInput" : "",
 		"videoOutputs" : "",
@@ -20,6 +21,7 @@
 		"model": "iot.Interface",
 		"pk": "3",
 		"fields": {
+		"microComputer" : 2,
 		"hdmi" : "",
 		"videoInput" : "",
 		"videoOutputs" : "",
@@ -37,6 +39,7 @@
 		"model": "iot.Interface",
 		"pk": "4",
 		"fields": {
+		"microComputer" : 3,
 		"hdmi" : "",
 		"videoInput" : "",
 		"videoOutputs" : "",
@@ -54,6 +57,7 @@
 		"model": "iot.Interface",
 		"pk": "5",
 		"fields": {
+		"microComputer" : 4,
 		"hdmi" : "",
 		"videoInput" : "",
 		"videoOutputs" : "",
