@@ -237,6 +237,7 @@ class Equipment(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(blank=True, max_length=100, verbose_name='Modelo')
     microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
+    serialNumber = models.CharField(max_length=50, verbose_name='Número de Série')
     sensor = models.ManyToManyField('Sensor', blank=True, verbose_name = 'Sensor')
     expansion = models.ManyToManyField('Expansion', blank=True, verbose_name = 'Expansão')
     accessory = models.ManyToManyField('Accessory', blank=True, verbose_name = 'Acessório')
