@@ -13,6 +13,7 @@ from django.template import RequestContext
 from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
+from iot.models import Equipment, Sensor
 
 
 @login_required
@@ -23,10 +24,17 @@ def index(request):
 
     TITULO = _(u'Internet das Coisas')
 
-    #===========================================================================
-    # acessorios = Accessory.objects.all()
-    # tamLista = len(acessorios)
-    #===========================================================================
+    equipamentos = Equipment.objects.all()
+    
+    for i in equipamentos:
+        
+        for z in i.sensor.all():
+            print z
+
+    
+    
+    tamLista = len(equipamentos)
+    
     template = "home/index.html"
     return render_to_response(template,
                               locals(),

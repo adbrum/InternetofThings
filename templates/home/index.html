@@ -1,5 +1,100 @@
-{% extends "base.html" %} 
-{% load i18n %} 
-{% block content %}
+{% extends "base.html" %} {% load i18n %} {% block content %}
 
+<style>
+#Equipamento {
+	width: 100px;
+	height: 100px;
+	padding: 0.5em;
+	float: left;
+	margin: 0 10px 10px 0;
+	/*left: 400px;
+	top: 150px;*/
+}
+
+#Sensor1, #Sensor2 {
+	width: 50px;
+	height: 50px;
+	padding: 0.5em;
+	float: left;
+	margin: 0 10px 10px 0;
+}
+
+#containment-wrapper {
+	width: 80%;
+	height: 500px;
+	border: 2px solid #ccc;
+	padding: 10px;
+}
+
+#containment-equipamento {
+	width: 35%;
+	height: 40%;
+	border: 2px solid #ccc;
+	padding: 10px;
+}
+</style>
+
+<button id="button1" type="button">Click Me!</button>
+
+<div id="containment-wrapper">
+	{% for equipamento in equipamentos %}
+	
+	<div id="containment-equipamento" class="draggable ui-widget-content">
+		<div id="Equipamento" class="draggable ui-widget-content">
+			<p>{{ equipamento.name }}</p>
+		</div>
+		{% for sensor in equipamento.sensor.all %}
+		<div id="Sensor1" class="draggable ui-widget-content">
+			<p>{{ sensor.name }}</p>
+		</div>
+		{% endfor %}
+
+		<div style="height: 5000px; width: 1px;"></div>
+	</div>
+
+	{% endfor %}
+
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(function() {
+			var counter = 1;
+
+			/*$("#button1").click(function(){
+				$("#containment-equipamento".draggable({
+					containment : "#containment-wrapper",
+					scroll : false
+				});*/
+				$("#containment-equipamento"/*+ (counter++)*/).draggable({
+					containment : "#containment-wrapper",
+					scroll : false
+				});
+				$("#Equipamento").draggable({
+					containment : "#containment-equipamento",
+					scroll : false
+				});
+				
+				$("#Sensor1").draggable({
+					containment : "#containment-equipamento",
+					scroll : false
+				});
+				$("#Sensor2").draggable({
+					containment : "#containment-equipamento",
+					scroll : false
+				}).resizable().draggable()
+			      .appendTo("body");
+				
+				
+				 /* });*/
+
+
+
+		});
+	});
+</script>
 {% endblock %}
+
+
+

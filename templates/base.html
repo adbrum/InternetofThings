@@ -1,4 +1,7 @@
-{% load admin_static bootstrap_admin_template_tags %}{% load firstof from future %}{% display_sidebar_menu cl.has_filters as is_displaying_menu %}<!DOCTYPE html>
+{% load admin_static bootstrap_admin_template_tags %}
+{% load firstof from future %}
+{% display_sidebar_menu cl.has_filters as is_displaying_menu %}
+<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"pt-pt" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +19,18 @@
 {% if LANGUAGE_BIDI %}
   {# PUT HERE YOUR CUSTOM RTL STYLESHEET #}
   {% comment %}
-  <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />
+  <link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}" />
+
   {% endcomment %}
 {% endif %}
 
 {% block jquery %}
-  <script type="text/javascript" src="{% static "admin/js/jquery.js" %}"></script>
-  <script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
+  <script type="text/javascript" src="{% static 'admin/js/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'jquery/jquery-ui.css' %}">
+  <script type="text/javascript" src="{% static 'jquery/external/jquery/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'jquery/jquery-ui.js' %}"></script>  
+ 
 {% endblock jquery %}
   <script>
     (function ($) {
@@ -66,7 +74,7 @@
               {% block branding %}
                 <a href="{% url 'home' %}" class="django-admin-logo">
                   <!-- Django Administration -->
-                  <img src="{% static "bootstrap_admin/img/logo-160x96.png" %}" alt="{{ site_header|default:_('Internet of Things administration') }}">
+                  <img src="{% static 'bootstrap_admin/img/logo-160x96.png' %}" alt="{{ site_header|default:_('Internet of Things administration') }}">
                 </a>
               {% endblock branding %}
               {% block filters %}{% endblock filters %}
@@ -163,10 +171,9 @@
                 {% endfor %}
             {% endif %}
           {% endblock messages %}
-
+			
           {% block content %}
-            {% block object-tools %}{% endblock %}
-            {{ content }}
+            
           {% endblock %}
         </div>
       {% endblock content_container %}
