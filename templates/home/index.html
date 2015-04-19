@@ -33,19 +33,26 @@
 	padding: 10px;
 }
 </style>
-
-<button id="button1" type="button">Click Me!</button>
+<table id="contatos">
+	<thead>
+		<tr>
+			<th>Nome</th>
+		</tr>
+	</thead>
+	<tbody id="corpoTabela">
+	</tbody>
+</table>
+<input type="button" id="btnEquip" value="Listar Equipamentos">
 
 <div id="containment-wrapper">
-	{% for equipamento in equipamentos %}
-	
+	{% for equipamento in equipamentos %} {% cycle rowvalue1 rowvalue2 %}
 	<div id="containment-equipamento" class="draggable ui-widget-content">
-		<div id="Equipamento" class="draggable ui-widget-content">
+		<div id="{{ equipamento.name }}" class="draggable ui-widget-content">
 			<p>{{ equipamento.name }}</p>
 		</div>
 		{% for sensor in equipamento.sensor.all %}
-		<div id="Sensor1" class="draggable ui-widget-content">
-			<p>{{ sensor.name }}</p>
+		<div id="{{ sensor.name }}" class="draggable ui-widget-content">
+			<p>sensor: {{ sensor.name }}</p>
 		</div>
 		{% endfor %}
 
@@ -58,20 +65,55 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$(function() {
-			var counter = 1;
+	$(document).ready(
+			function() {
+				//$(function() {
+				dados = {
+					'name' : name
+				};
 
-			/*$("#button1").click(function(){
-				$("#containment-equipamento".draggable({
-					containment : "#containment-wrapper",
-					scroll : false
-				});*/
-				$("#containment-equipamento"/*+ (counter++)*/).draggable({
+				$("#btnEquip").click(
+						function() {
+
+							console.log('#someButton was clicked');
+							$.ajax({
+								type : "GET",
+								url : "/home/",
+								dataType : "json",
+								data : name,
+								success : function(retorno) {
+									$("#" + objHtmlReturn).empty();
+									$.each(retorno, function(i, item) {
+										//$("containment-wrapper"+objHtmlReturn).append('<option value="'+item.pk+'">'+item.fields[fieldreturn]+'</option>');
+										$("#corpoTabela").append(
+												'<tr>' + '<td>'
+														+ item.fields['name']
+														+ '</td>' + '</tr>');
+									});
+								},
+								error : function(erro) {
+									alert('Erro. Sem retorno da requisicao.');
+								}
+							});
+						});
+
+				//$.each( [ "Monitor de Temperatura" ], function( i, l ){
+				//alert(  l );
+
+				/*jQuery.each( lista_equipamento, function( i, val ) {
+					  $( "#" + val ).text( "Mine is " + val + "." );
+					  console.log("equipment:" val);
+					  // Will stop running after "three"
+					  return ( val !== "three" );
+					});
+				
+				/*$("#button1").click(function(){*/
+				/*$("#containment-equipamento").draggable({
 					containment : "#containment-wrapper",
 					scroll : false
 				});
-				$("#Equipamento").draggable({
+				
+				$(l).draggable({
 					containment : "#containment-equipamento",
 					scroll : false
 				});
@@ -83,16 +125,14 @@
 				$("#Sensor2").draggable({
 					containment : "#containment-equipamento",
 					scroll : false
-				}).resizable().draggable()
-			      .appendTo("body");
+				});
 				
-				
-				 /* });*/
+				/* });*/
 
+				/*});*/
 
-
-		});
-	});
+				//});
+			});
 </script>
 {% endblock %}
 
