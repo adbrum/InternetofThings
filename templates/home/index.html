@@ -2,8 +2,14 @@
 
 <style>
 
-#1 { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 0 10px 10px 0; }
-  
+/*.draggable {
+	width: 90px;
+	height: 90px
+	padding: 0.5em;
+	 float: left;
+	  margin: 0 10px 10px 0;
+}
+  */
 #Equipamento {
 	width: 100px;
 	height: 100px;
@@ -37,9 +43,9 @@
 }
 </style>
 
-<input type="button" id="btnEquip" value="Listar Equipamentos">
-
-
+<input type="button" class="btn btn-default" id="btnEquip" value="Listar Equipamentos">
+</br>
+</br>
 
 <div id="containment-wrapper">
 
@@ -67,133 +73,62 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-				$("#btnEquip").click(
-						function() {
-							console.log('#someButton was clicked');
-							$.ajax({
-								type : "POST",
-								url : "/home/equipamentos",
-								//dataType : "json",
-								//data: {};
-								success : function(retorno) {
-									
-									console.log(retorno);
-									
-									
-									$.each(retorno, function(i, item_equip) {
-										
-										
-										$("#containment-wrapper").append(
-												 "<div style='width: 35%; height: 40%; border: 2px solid #ccc; padding: 10px;'"
-												 + "id="+ item_equip.equipamento_id + " class='draggable ui-widget-content'>"
-													
-														+ "<div id=" + item_equip.nomeEquipamento + " class='draggable ui-widget-content'>"
-												    		+ "<p>"+ item_equip.nomeEquipamento +"</p>"
-												    	+ "</div>"
-											);
-										
-												$.each(item_equip.sensores, function(j, item_sensor) {
-													//console.log(item_sensor.sensor_id);
-													console.log("#"+ item_equip.equipamento_id);
-													$("#"+ item_equip.equipamento_id).append(
-																	"<div id=" + item_sensor.nome_sensor + " class='draggable ui-widget-content'>"
-															    	+ "<p>Sensor: "+ item_sensor.nome_sensor +"</p>"
-															    	+ "</div>"
-												+ "</div>"
+		$("#btnEquip").click(
+				function() {
+					console.log('#someButton was clicked');
+					$.ajax({
+						type : "POST",
+						url : "/home/equipamentos",
+						//dataType : "json",
+						//data: {};
+						success : function(retorno) {
+							
+							console.log(retorno);
+							
+							
+							$.each(retorno, function(i, item_equip) {
+								
+								
+								$("#containment-wrapper").append(
+										 "<div style='width: 35%; height: 40%; border: 2px solid #ccc; padding: 10px;'"
+										 + "id="+ item_equip.equipamento_id + " class='draggable ui-widget-content'>"
 											
-												);
-											});
-
-										
-										$("#containment-wrapper").append(
-												+ "</div>"
+												+ "<div id=" + item_equip.nomeEquipamento + " class='draggable ui-widget-content'>"
+										    		+ "<p>"+ item_equip.nomeEquipamento +"</p>"
+										    	+ "</div>"
+									);
+								
+										$.each(item_equip.sensores, function(j, item_sensor) {
+											//console.log(item_sensor.sensor_id);
+											console.log("#"+ item_equip.equipamento_id);
+											$("#"+ item_equip.equipamento_id).append(
+															"<div id=" + item_sensor.nome_sensor + " class='draggable ui-widget-content'>"
+													    	+ "<p>Sensor: "+ item_sensor.nome_sensor +"</p>"
+													    	+ "</div>"
+										+ "</div>"
+									
 										);
-										
-										$("#"+ item_equip.equipamento_id).draggable({
-											
-											containment : "#containment-wrapper",
-											scroll : false
-										});
-										
 									});
+
+								
+								$("#containment-wrapper").append(
+										+ "</div>"
+								);
+								
+								$("#"+ item_equip.equipamento_id).draggable({
 									
-									
-								},
+									containment : "#containment-wrapper",
+									scroll : false
+								});
 								
 							});
 							
-						});
-				
-
-				//$.each( [ "Monitor de Temperatura" ], function( i, l ){
-				//alert(  l );
-
-				/*jQuery.each( lista_equipamento, function( i, val ) {
-					  $( "#" + val ).text( "Mine is " + val + "." );
-					  console.log("equipment:" val);
-					  // Will stop running after "three"
-					  return ( val !== "three" );
+							
+						},
+						
 					});
-				
-				/*$("#button1").click(function(){*/
-				/*$("#containment-equipamento").draggable({
-					containment : "#containment-wrapper",
-					scroll : false
-				});
-				1
-				$(l).draggable({
-					containment : "#containment-equipamento",
-					scroll : false
-				});
-				
-				$("#Sensor1").draggable({
-					containment : "#containment-equipamento",
-					scroll : false
-				});
-				$("#Sensor2").draggable({
-					containment : "#containment-equipamento",
-					scroll : false
-				});
-				
-				/* });*/
-
-				/*});*/
-
-				//)};
-				
-				1
-				
 					
-									
-									
-									/*$.each(retorno, function(i, item_equip) {
-
-										//console.log(item_equip.equipamento_id);
-										console.log(item_equip.sensores);
-										$.each(item_equip.sensores, function(j, item_sensor) {
-											//console.log(item_sensor.sensor_id);
-											console.log(item_sensor.nome_sensor);
-										
-										
-										$("#containment-wrapper").append(
-												"<div id='containment-equipamento' class='draggable ui-widget-content'>"
-													
-														+ "<div id=" + item_equip.nomeEquipamento + "class='draggable ui-widget-content'>"
-												    		+ "<p>"+ item_equip.nomeEquipamento +"</p>"
-												    	+ "</div>"
-									
-												    	
-												    	+ "<div id=" + item_sensor.nome_sensor + "class='draggable ui-widget-content'>"
-												    	+ "<p>"+ item_sensor.nome_sensor +"</p>"
-												    	+ "</div>"
-														
-															
-															+	"<div style='height: 5000px; width: 1px;'></div>"
-								  	
-												+ "</div>");
-										});						
-									});*/
-				
+				});
 			});
 </script>
 {% endblock %}
