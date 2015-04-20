@@ -10,5 +10,6 @@ from iot import *
 
 urlpatterns = patterns('',
                        url(r'^$', 'iot.home.views.index', name="home"),
+                       url(r'^equipamentos', 'iot.home.views.equipamentos', name="equipamentos"),
                        )
 

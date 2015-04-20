@@ -1,6 +1,9 @@
 {% extends "base.html" %} {% load i18n %} {% block content %}
 
 <style>
+
+#1 { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 0 10px 10px 0; }
+  
 #Equipamento {
 	width: 100px;
 	height: 100px;
@@ -21,7 +24,7 @@
 
 #containment-wrapper {
 	width: 80%;
-	height: 500px;
+	height: 80%;
 	border: 2px solid #ccc;
 	padding: 10px;
 }
@@ -33,18 +36,15 @@
 	padding: 10px;
 }
 </style>
-<table id="contatos">
-	<thead>
-		<tr>
-			<th>Nome</th>
-		</tr>
-	</thead>
-	<tbody id="corpoTabela">
-	</tbody>
-</table>
+
 <input type="button" id="btnEquip" value="Listar Equipamentos">
 
+
+
 <div id="containment-wrapper">
+
+
+<!-- 
 	{% for equipamento in equipamentos %} {% cycle rowvalue1 rowvalue2 %}
 	<div id="containment-equipamento" class="draggable ui-widget-content">
 		<div id="{{ equipamento.name }}" class="draggable ui-widget-content">
@@ -60,42 +60,70 @@
 	</div>
 
 	{% endfor %}
-
+ -->
 </div>
 
 
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				//$(function() {
-				dados = {
-					'name' : name
-				};
+	$(document).ready(function() {
 
 				$("#btnEquip").click(
 						function() {
-
 							console.log('#someButton was clicked');
 							$.ajax({
-								type : "GET",
-								url : "/home/",
-								dataType : "json",
-								data : name,
+								type : "POST",
+								url : "/home/equipamentos",
+								//dataType : "json",
+								//data: {};
 								success : function(retorno) {
-									$("#" + objHtmlReturn).empty();
-									$.each(retorno, function(i, item) {
-										//$("containment-wrapper"+objHtmlReturn).append('<option value="'+item.pk+'">'+item.fields[fieldreturn]+'</option>');
-										$("#corpoTabela").append(
-												'<tr>' + '<td>'
-														+ item.fields['name']
-														+ '</td>' + '</tr>');
+									
+									console.log(retorno);
+									
+									
+									$.each(retorno, function(i, item_equip) {
+										
+										
+										$("#containment-wrapper").append(
+												 "<div style='width: 35%; height: 40%; border: 2px solid #ccc; padding: 10px;'"
+												 + "id="+ item_equip.equipamento_id + " class='draggable ui-widget-content'>"
+													
+														+ "<div id=" + item_equip.nomeEquipamento + " class='draggable ui-widget-content'>"
+												    		+ "<p>"+ item_equip.nomeEquipamento +"</p>"
+												    	+ "</div>"
+											);
+										
+												$.each(item_equip.sensores, function(j, item_sensor) {
+													//console.log(item_sensor.sensor_id);
+													console.log("#"+ item_equip.equipamento_id);
+													$("#"+ item_equip.equipamento_id).append(
+																	"<div id=" + item_sensor.nome_sensor + " class='draggable ui-widget-content'>"
+															    	+ "<p>Sensor: "+ item_sensor.nome_sensor +"</p>"
+															    	+ "</div>"
+												+ "</div>"
+											
+												);
+											});
+
+										
+										$("#containment-wrapper").append(
+												+ "</div>"
+										);
+										
+										$("#"+ item_equip.equipamento_id).draggable({
+											
+											containment : "#containment-wrapper",
+											scroll : false
+										});
+										
 									});
+									
+									
 								},
-								error : function(erro) {
-									alert('Erro. Sem retorno da requisicao.');
-								}
+								
 							});
+							
 						});
+				
 
 				//$.each( [ "Monitor de Temperatura" ], function( i, l ){
 				//alert(  l );
@@ -112,7 +140,7 @@
 					containment : "#containment-wrapper",
 					scroll : false
 				});
-				
+				1
 				$(l).draggable({
 					containment : "#containment-equipamento",
 					scroll : false
@@ -131,7 +159,41 @@
 
 				/*});*/
 
-				//});
+				//)};
+				
+				1
+				
+					
+									
+									
+									/*$.each(retorno, function(i, item_equip) {
+
+										//console.log(item_equip.equipamento_id);
+										console.log(item_equip.sensores);
+										$.each(item_equip.sensores, function(j, item_sensor) {
+											//console.log(item_sensor.sensor_id);
+											console.log(item_sensor.nome_sensor);
+										
+										
+										$("#containment-wrapper").append(
+												"<div id='containment-equipamento' class='draggable ui-widget-content'>"
+													
+														+ "<div id=" + item_equip.nomeEquipamento + "class='draggable ui-widget-content'>"
+												    		+ "<p>"+ item_equip.nomeEquipamento +"</p>"
+												    	+ "</div>"
+									
+												    	
+												    	+ "<div id=" + item_sensor.nome_sensor + "class='draggable ui-widget-content'>"
+												    	+ "<p>"+ item_sensor.nome_sensor +"</p>"
+												    	+ "</div>"
+														
+															
+															+	"<div style='height: 5000px; width: 1px;'></div>"
+								  	
+												+ "</div>");
+										});						
+									});*/
+				
 			});
 </script>
 {% endblock %}
