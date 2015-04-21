@@ -34,7 +34,9 @@ class Microcomputer(models.Model):
 
 
 class Sensor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Nome')
+    model = models.CharField(max_length=100, verbose_name='Modelo')
+    function = models.CharField(max_length=100, null=True, verbose_name='Função')
     
     class Meta:
         verbose_name = 'Sensor'
