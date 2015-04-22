@@ -30,9 +30,11 @@
 
 #containment-wrapper {
 	width: 80%;
-	height: 80%;
+	height: 600px;
 	border: 2px solid #ccc;
 	padding: 10px;
+	background-image: url(/static/img/planta_casa.jpg);
+    background-repeat: no-repeat;
 }
 
 #containment-equipamento {
@@ -41,11 +43,18 @@
 	border: 2px solid #ccc;
 	padding: 10px;
 }
+
+
 </style>
 
+<html>
+
+<boddy>
+<div id="teste">
 <input type="button" class="btn btn-default" id="btnEquip" value="Listar Equipamentos">
 </br>
 </br>
+
 
 <div id="containment-wrapper">
 
@@ -69,13 +78,16 @@
  -->
 </div>
 
-
+</div>
+</boddy>
+</html>
 <script type="text/javascript">
 	$(document).ready(function() {
 
 		$("#btnEquip").click(
 				
 				function() {
+					$( "#btnEquip" ).hide();
 					console.log('#someButton was clicked');
 					$.ajax({
 						type : "POST",
@@ -92,7 +104,7 @@
 								$("#containment-wrapper").append(
 										
 										
-										"<div style='width: 25%; height: 40%; border: 2px solid #ccc; padding: 10px;'"
+										"<div data-toggle='tooltip' data-placement='top' title='"+ item_equip.nomeEquipamento + "' style='width: 25%; height: 40%; border: 2px solid #ccc; padding: 10px;'"
 										
 										 + "id="+ item_equip.equipamento_id + " class='draggable ui-widget-content'>"
 											+"<img id='theImg' src='/static/img/hardware.png' />"
