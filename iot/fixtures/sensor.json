@@ -6,7 +6,7 @@
 		"name" : "Temperatura",
 		"serialNumber" : "0",
 		"model" : "XPRTO",
-		"function" : Medir temperatura,
+		"function" : "Medir temperatura"
 	}
 },
 	{
@@ -16,7 +16,7 @@
 		"name" : "Movimento",
 		"serialNumber" : "0",
 		"model" : "0123",
-		"function" : Detetar movimento,
+		"function" : "Detetar movimento"
 	}
 }
 ]

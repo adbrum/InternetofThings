@@ -56,10 +56,22 @@ def criar(request):
         file_microComputer.write("\t\t\"fields\": {\n")
         file_microComputer.write("\t\t\"name\" : \"" + (item.name).encode("utf-8\n") + "\",\n")
         file_microComputer.write("\t\t\"model\" : \"" + (item.model).encode("utf-8\n") + "\",\n")
-        file_microComputer.write("\t\t\"processor\" : " + str(item.processor_id) + ",\n")
-        file_microComputer.write("\t\t\"microcontroller\" : " + str(item.microcontroller_id) + ",\n")
-        file_microComputer.write("\t\t\"GPU\" : " + str(item.GPU_id) + ",\n")
-        file_microComputer.write("\t\t\"operatingSystems\" : " + str(item.operatingSystems_id) + ",\n")
+        if item.processor_id==None:
+            file_microComputer.write("\t\t\"processor\" : null,\n")
+        else:
+            file_microComputer.write("\t\t\"processor\" : " + str(item.processor_id) + ",\n")
+        if item.microcontroller_id==None:
+            file_microComputer.write("\t\t\"microcontroller\" : null,\n")
+        else:
+            file_microComputer.write("\t\t\"microcontroller\" : " + str(item.microcontroller_id) + ",\n")
+        if item.GPU_id==None:
+            file_microComputer.write("\t\t\"GPU\" : null,\n")
+        else:
+            file_microComputer.write("\t\t\"GPU\" : " + str(item.GPU_id) + ",\n")
+        if item.operatingSystems_id==None:   
+            file_microComputer.write("\t\t\"operatingSystems\" : null,\n") 
+        else:
+            file_microComputer.write("\t\t\"operatingSystems\" : " + str(item.operatingSystems_id) + ",\n")
         file_microComputer.write("\t\t\"dateManufacture\" : \"" + str(item.dateManufacture) + "\",\n")
         file_microComputer.write("\t\t\"userCreation\" : " + str(item.userCreation_id) + ",\n")
         file_microComputer.write("\t\t\"userAmendment\" : " + str(item.userAmendment_id) + ",\n")
@@ -256,7 +268,7 @@ def criar(request):
         file_sensor.write("\t\t\"name\" : \"" + (item.name).encode("utf-8\n") + "\",\n")
         file_sensor.write("\t\t\"serialNumber\" : \"" + (item.serialNumber).encode("utf-8\n") + "\",\n")
         file_sensor.write("\t\t\"model\" : \"" + (item.model).encode("utf-8\n") + "\",\n")
-        file_sensor.write("\t\t\"function\" : " + str(item.function) + ",\n")
+        file_sensor.write("\t\t\"function\" : \"" + (item.function).encode("utf-8\n") + "\"\n")
         file_sensor.write("\t}\n")
         if qt > 1:
             file_sensor.write("},\n")
