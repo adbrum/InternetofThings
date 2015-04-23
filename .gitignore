@@ -1,8 +1,10 @@
 /.project
 *.py[co]
+*.pyc
 *.egg*
 *.swp
 *~
 *.log
 .idea
 migrations
+/__init__.py
