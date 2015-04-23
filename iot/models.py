@@ -35,7 +35,8 @@ class Microcomputer(models.Model):
 
 class Sensor(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    model = models.CharField(max_length=100, verbose_name='Modelo')
+    serialNumber = models.CharField(max_length=50, verbose_name='Número de Série')
+    model = models.CharField(max_length=100, null=True, verbose_name='Modelo')
     function = models.CharField(max_length=100, null=True, verbose_name='Função')
     
     class Meta:
