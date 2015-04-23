@@ -11,7 +11,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from iot.models import Equipment, PhysicalCharacteristic, Voltage, Memory, \
-    Microcontroller, Microcomputer, GPU, Interface, Processor
+    Microcontroller, Microcomputer, GPU, Interface, Processor, Sensor
 
 
 def criar(request):
@@ -241,6 +241,31 @@ def criar(request):
         qt -= 1    
     file_processor.write("]\n")    
     file_processor.close()
+    
+    
+    sensor = Sensor.objects.filter()
+    
+    file_sensor = open("iot/fixtures/sensor.json", "w")
+    file_sensor.write("[\n")
+    qt = len(sensor)
+    for item in sensor:
+        file_sensor.write("\t{\n")
+        file_sensor.write("\t\t\"model\": \"iot.Sensor\",\n")
+        file_sensor.write("\t\t\"pk\": " + str(item.id) + ",\n")
+        file_sensor.write("\t\t\"fields\": {\n")
+        file_sensor.write("\t\t\"name\" : \"" + (item.name).encode("utf-8\n") + "\",\n")
+        file_sensor.write("\t\t\"serialNumber\" : \"" + (item.serialNumber).encode("utf-8\n") + "\",\n")
+        file_sensor.write("\t\t\"model\" : \"" + (item.model).encode("utf-8\n") + "\",\n")
+        file_sensor.write("\t\t\"function\" : " + str(item.function) + ",\n")
+        file_sensor.write("\t}\n")
+        if qt > 1:
+            file_sensor.write("},\n")
+        else:
+            file_sensor.write("}\n")
+        qt -= 1    
+    file_sensor.write("]\n")    
+    file_sensor.close()
+    
     
         
     return HttpResponse("Ficheiros gerados com sucesso!\n")
