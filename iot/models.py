@@ -15,11 +15,11 @@ from audit_log.models.fields import CreatingUserField, LastUserField
 class Microcomputer(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(max_length=100, verbose_name='Modelo')
-    processor = models.ForeignKey('Processor', null=True, verbose_name='Processador')
-    microcontroller = models.ForeignKey('Microcontroller', null=True,   verbose_name='Microcontrolador')
-    GPU = models.ForeignKey('GPU', null=True)
-    operatingSystems = models.ForeignKey('OperatingSystem', null=True, verbose_name='Sistema Operativo')
-    dateManufacture = models.DateField( verbose_name='Data de Fabrico')
+    processor = models.ForeignKey('Processor',blank=True, null=True, verbose_name='Processador')
+    microcontroller = models.ForeignKey('Microcontroller',blank=True, null=True,   verbose_name='Microcontrolador')
+    GPU = models.ForeignKey('GPU',blank=True, null=True)
+    operatingSystems = models.ForeignKey('OperatingSystem',blank=True, null=True, verbose_name='Sistema Operativo')
+    dateManufacture = models.DateField(verbose_name='Data de Fabrico')
     userCreation = CreatingUserField(related_name="created_microcomputer")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -35,7 +35,7 @@ class Microcomputer(models.Model):
 
 class Sensor(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    serialNumber = models.CharField(max_length=50, verbose_name='Número de Série')
+    serialNumber = models.CharField(max_length=100, verbose_name='Número de Série')
     model = models.CharField(max_length=100, null=True, verbose_name='Modelo')
     function = models.CharField(max_length=100, null=True, verbose_name='Função')
     
@@ -116,16 +116,17 @@ class Microcontroller(models.Model):
 
 class Interface(models.Model):
     microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
-    hdmi = models.CharField(blank=True, max_length=50)
-    USBPorts = models.CharField(blank=True, max_length=50, verbose_name='Porta USB')
-    videoInput = models.CharField(blank=True, max_length=50, verbose_name='Entrada de vídeo')
-    videoOutputs = models.CharField(blank=True, max_length=50, verbose_name='Saida de vídeo')
-    audioInputs = models.CharField(blank=True, max_length=50, verbose_name='Entrada de audio')
-    audioOutputs = models.CharField(blank=True, max_length=50, verbose_name='Saida de audio')
-    storage = models.CharField(blank=True, max_length=50, verbose_name='Armazenamento')
-    network = models.CharField(blank=True, max_length=50, verbose_name='Rede')
-    wifi = models.CharField(blank=True, max_length=50, verbose_name='WiFi')
-    jack = models.CharField(blank=True, max_length=50)
+    hdmi = models.CharField(blank=True, max_length=100)
+    USBPorts = models.CharField(blank=True, max_length=100, verbose_name='Porta USB')
+    videoInput = models.CharField(blank=True, max_length=100, verbose_name='Entrada de vídeo')
+    videoOutputs = models.CharField(blank=True, max_length=100, verbose_name='Saida de vídeo')
+    audioInputs = models.CharField(blank=True, max_length=100, verbose_name='Entrada de audio')
+    audioOutputs = models.CharField(blank=True, max_length=100, verbose_name='Saida de audio')
+    storage = models.CharField(blank=True, max_length=100, verbose_name='Armazenamento')
+    network = models.CharField(blank=True, max_length=100, verbose_name='Rede')
+    wifi = models.CharField(blank=True, max_length=100, verbose_name='WiFi')
+    jack = models.CharField(blank=True, max_length=100)
+    GPIO = models.CharField(blank=True, max_length=100)
     digitalIOPins = models.IntegerField(default=0, verbose_name='Pinos I/O digital')
     analogInputPins = models.IntegerField(default=0, verbose_name='Pinos de entrada analógica')
     
@@ -139,7 +140,7 @@ class Interface(models.Model):
 
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    version = models.CharField(blank=True, max_length=50, verbose_name='Versão')
+    version = models.CharField(blank=True, max_length=100, verbose_name='Versão')
     userCreation = CreatingUserField(related_name="created_operationsystems")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -155,8 +156,7 @@ class OperatingSystem(models.Model):
 
 class Expansion(models.Model):
     type = models.CharField(max_length=100, verbose_name='Tipo')
-    peripherals = models.CharField(blank=True, max_length=50, verbose_name='Periféricos')
-    GPIO = models.IntegerField(default=0)
+    peripherals = models.CharField(blank=True, max_length=100, verbose_name='Periféricos')
     userCreation = CreatingUserField(related_name="created_expansions")
     userAmendment = LastUserField()
     dateTimeCreation = models.DateTimeField(auto_now_add=True)
@@ -190,11 +190,11 @@ class Memory(models.Model):
     microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
     
     KILOBYTE = 'KB'
-    MEGABYTE = 'MG'
+    MEGABYTE = 'MB'
     GIGABYTE = 'GB'
     MEMORIA = (
         (KILOBYTE, 'KB'),
-        (MEGABYTE, 'MG'),
+        (MEGABYTE, 'MB'),
         (GIGABYTE, 'GB')
         
     )
@@ -226,8 +226,8 @@ class Voltage(models.Model):
     IOCurrentMax = models.CharField(max_length=10, default=0, verbose_name='I/O Corrente limites (V)')
     DCCurrentperIOPin = models.IntegerField(default=0, verbose_name='DC Corrente por pino (mA)')
     DCCurrentfor3_3VPin = models.IntegerField(default=0, verbose_name='DC Corrente por 3.3 pino (mA)')
-    powerRatings = models.CharField(blank=True, max_length=50, verbose_name='Classificações de energia')
-    powerSource = models.CharField(blank=True, max_length=50, verbose_name='Fonte de energia')
+    powerRatings = models.CharField(blank=True, max_length=100, verbose_name='Classificações de energia')
+    powerSource = models.CharField(blank=True, max_length=100, verbose_name='Fonte de energia')
     
     class Meta:
         verbose_name = 'Voltagem'
@@ -240,7 +240,7 @@ class Equipment(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     model = models.CharField(blank=True, max_length=100, verbose_name='Modelo')
     microComputer = models.ForeignKey('Microcomputer', verbose_name='Microcomputador')
-    serialNumber = models.CharField(max_length=50, verbose_name='Número de Série')
+    serialNumber = models.CharField(max_length=100, verbose_name='Número de Série')
     sensor = models.ManyToManyField('Sensor', blank=True, verbose_name = 'Sensor')
     expansion = models.ManyToManyField('Expansion', blank=True, verbose_name = 'Expansão')
     accessory = models.ManyToManyField('Accessory', blank=True, verbose_name = 'Acessório')

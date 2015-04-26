@@ -217,6 +217,7 @@ def criar(request):
         file_interface.write("\t\t\"network\" : \"" + (item.network).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"wifi\" : \"" + (item.wifi).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"jack\" : \"" + (item.jack).encode("utf-8\n") + "\",\n")
+        file_interface.write("\t\t\"GPIO\" : \"" + (item.GPIO).encode("utf-8\n") + "\",\n")
         file_interface.write("\t\t\"digitalIOPins\" : " + str(item.digitalIOPins) + ",\n")
         file_interface.write("\t\t\"analogInputPins\" : " + str(item.analogInputPins) + "\n")
         file_interface.write("\t}\n")

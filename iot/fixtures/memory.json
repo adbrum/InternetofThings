@@ -42,5 +42,16 @@
 		"EEPROM" : "1.0",
 		"flashMemory" : "32.0"
 	}
+},
+	{
+		"model": "iot.Memory",
+		"pk": 5,
+		"fields": {
+		"microComputer" : 21,
+		"RAM" : "512.0",
+		"SRAM" : "0.0",
+		"EEPROM" : "0.0",
+		"flashMemory" : "0.0"
+	}
 }
 ]

@@ -13,6 +13,7 @@
 		"network" : "",
 		"wifi" : "",
 		"jack" : "",
+		"GPIO" : "",
 		"digitalIOPins" : 14,
 		"analogInputPins" : 6
 	}
@@ -31,6 +32,7 @@
 		"network" : "",
 		"wifi" : "",
 		"jack" : "",
+		"GPIO" : "",
 		"digitalIOPins" : 20,
 		"analogInputPins" : 12
 	}
@@ -49,6 +51,7 @@
 		"network" : "",
 		"wifi" : "",
 		"jack" : "",
+		"GPIO" : "",
 		"digitalIOPins" : 54,
 		"analogInputPins" : 2
 	}
@@ -67,8 +70,28 @@
 		"network" : "IEEE 802.3 10/100Mbit/s",
 		"wifi" : "IEEE 802.11b/g/n",
 		"jack" : "",
+		"GPIO" : "",
 		"digitalIOPins" : 20,
 		"analogInputPins" : 12
+	}
+},
+	{
+		"model": "iot.Interface",
+		"pk": "5",
+		"fields": {
+		"microComputer" : 21,
+		"hdmi" : "HDMI (rev 1.3 & 1.4)",
+		"videoInput" : "15-pin MIPI camera interface (CSI) connector, used with the Raspberry Pi camera or Raspberry Pi NoIR",
+		"videoOutputs" : "Composite (PAL e NTSC), HDMI ou Raw LCD (DSI)",
+		"audioInputs" : "As of revision 2 boards",
+		"audioOutputs" : "Conector de 3,5mm ou Audio sobre HDMI",
+		"storage" : "MicroSD",
+		"network" : "10/100 Mbit/s Ethernet (8P8C) USB adapter on the third/fifth port of the USB hub (SMSC lan9514-jzx)",
+		"wifi" : "",
+		"jack" : "",
+		"GPIO" : "40",
+		"digitalIOPins" : 0,
+		"analogInputPins" : 0
 	}
 }
 ]
