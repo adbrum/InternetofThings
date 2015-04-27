@@ -20,7 +20,7 @@ import json
 from iot.models import Equipment, Sensor
 
 
-@login_required
+@login_required(login_url='/admin/login/')
 def index(request):
     """
     Página principal do utilizador

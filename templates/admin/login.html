@@ -19,7 +19,7 @@
   <div id="content-main">
     <div class="login-container">
       <form action="{{ app_path }}" method="post" id="login-form" class="form form-horizontal" role="form">{% csrf_token %}
-        <a href="{% url 'home:index' %}">
+        <a href="{% url 'admin:index' %}">
           <img alt="{{ site_header|default:_('Internet of Things administration') }}" src="{% static "bootstrap_admin/img/logo-160x96.png" %}" class="logo-admin">
         </a>
         <fieldset>
