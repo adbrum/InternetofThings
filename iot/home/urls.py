@@ -11,5 +11,7 @@ from iot import *
 urlpatterns = patterns('',
                        url(r'^$', 'iot.home.views.index', name="home"),
                        url(r'^equipamentos', 'iot.home.views.equipamentos', name="equipamentos"),
+                       url(r'^getTemplate', 'iot.home.views.getTemplate', name="getTemplate"),
+                       url(r'^addTemplate', 'iot.home.views.addTemplate', name="addTemplate"),
                        )
 

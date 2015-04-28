@@ -10,6 +10,7 @@
   {% endblock bootstrap_admin_css %}
 
   <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}" />
+  <link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
 
 {% block extrastyle %}{% endblock %}
 
@@ -138,7 +139,7 @@
           {% block breadcrumbs %}
             <ol class="breadcrumb">
               <li class="home">
-                <a href="{% url 'admin:index' %}" title="{% trans 'Home' %}"><span class="glyphicon glyphicon-home"></span></a>
+                <a href="{% url 'home' %}" title="{% trans 'Home' %}"><span class="glyphicon glyphicon-home"></span></a>
               </li>
               <li class="active">{% if title %}{{ title }}{% endif %}</li>
             </ol>

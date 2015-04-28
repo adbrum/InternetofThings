@@ -52,6 +52,12 @@
 <boddy>
 <div id="teste">
 <input type="button" class="btn btn-default" id="btnEquip" value="Listar Equipamentos">
+<form method="post" class="form-horizontal" id="formAddTemplate" style='visibility:visible;'>
+{% csrf_token %}
+	<input type="button" id="save" name="Save" value="{% trans 'Guardar' %}" class="btn btn-primary" style="float:left;"/>
+	<div class="cancel"><span class="text_small">{% trans "ou" %}</span>
+		<a href="#"  class="btn_cancelar">{% trans "Cancelar" %}</a>
+	</div>
 </br>
 </br>
 
@@ -142,6 +148,71 @@
 					});
 					
 				});
+		
+	
+			
+			$("#save").click(function(e) {
+				var dados = {};
+				$('#containment-wrapper').children().each(function () {
+					var jsonData = {};
+					position = $(this).position()
+				    var columnName = $(this).attr("id");
+				    jsonData[columnName] = {"y":position.top , "x":parseInt(position.left)};
+				    $.extend(dados, jsonData);
+				});
+				jsonDados = JSON.stringify(dados);
+
+				$.ajax({
+					  type: "POST",
+					  url: "{% url 'addTemplate' %}",
+					  traditional: true,
+					  data: {"dados":jsonDados},
+					  
+					  success: function(data){
+						  console.log(data)
+					  }
+				});
+			
+
+			});
+			
+			
+		/*	data = {{jsonData|safe}};
+			$.each(data, function(key, value){
+			 	element = "#"+key;
+			 	$(element).css({ top: value.y, left: value.x});
+			});*/
+			
+			
+			/*$(function(){
+				//csrftoken = getCookie('csrftoken');
+				$.ajax({
+					  type: "POST",
+					  url: "{% url 'getTemplate' %}",
+					  traditional: true,
+					  data: {id:"{{eventos.0.id}}"},
+					  beforeSend: function( xhr ) {xhr.setRequestHeader("X-CSRFToken", csrftoken);},
+					  success: function(data){
+						  $("#template").css({"background-image":"url("+data.fundo+")"});
+						  $("#publicidade").attr("src",data.publicidade);
+						  $("#visitado").children("img").attr("src",data.visitado);
+						  $("#visitante").children("img").attr("src",data.visitante);
+						  $("#competicao").attr("src",data.competicao);
+						  $("#local").html(data.instalacao);
+					  }
+				});
+			});*/
+
+			
+			$(document).on("draggable ui-widget-content", function( event, ui ) {
+				$("#ylocal").html(ui.position.top);
+				$("#xlocal").html(ui.position.left);
+			});
+			
+			
+		
+		   
+		
 			});
 </script>
 {% endblock %}

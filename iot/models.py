@@ -255,3 +255,10 @@ class Equipment(models.Model):
 
     def __unicode__(self):
         return self.name
+    
+class RelativePosition(models.Model):
+    nameElement = models.CharField(max_length=100)
+    leftX = models.FloatField(default=0.0)
+    topY = models.FloatField(default=0.0)
+    
+    
