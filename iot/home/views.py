@@ -53,7 +53,6 @@ def index(request):
 #@login_required
 @csrf_exempt
 def equipamentos(request):
-    print "equipamentosXXXXXXXXXXXXXXXXXXXXXXXXXXXX" 
     """
     Página principal do utilizador
     """
@@ -119,26 +118,19 @@ def equipamentos(request):
     #return HttpResponse(retorno, mimetype="text/javascript")
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
-
+@csrf_exempt
 def getTemplate(request):
-    id = request.POST["id"]
-    try:
-        response_data = RelativePosition.objects.get(id = id).templateJson
-    except TemplatesDac.DoesNotExist:
-        print "a criar template"
-        jsonData = '{"local":{"y":27,"x":41},"temperatura":{"y":73,"x":86},"tempo":{"y":11,"x":174},"publicidade":{"y":209,"x":209},"visitado":{"y":444,"x":95},"competicao":{"y":444,"x":339},"visitante":{"y":444,"x":479},"data":{"y":705,"x":210},"hora":{"y":677,"x":208}}'
-        firstTemplate = TemplatesDac(id = 1,
-                      descricao = "default",
-                      templateJson = jsonData,
-                      dataHoraCriacao = dateTime_actual(),
-                      utilizadorCriacao = request.user,
-                      ativo = True,
-                      apagado = False
-                )
-        firstTemplate.save()
-        return redirect('/gestacess/templateDac')
-    print response_data, "<---------"
-    return HttpResponse(response_data, content_type = "application/json")
+    print'TEMPLATEXXXXXXXXXXXXXXXXXXXXXXXXXXXxx'
+    posicao = RelativePosition.objects.all()
+    
+    pos=[]
+    
+    for item in posicao:
+        print'POSICAO VIEW ', item.nameElement
+        pos.append(item)
+    
+
+    return HttpResponse(json.dump(pos), content_type = "application/json")
 
 @csrf_exempt
 def addTemplate(request):
@@ -156,41 +148,5 @@ def addTemplate(request):
                                         )
     
     return HttpResponse(content_type = "application/json")
-    #===========================================================================
-    # listaInfo = selectDB(request)
-    # if request.method == 'POST':
-    #     form = AddFormTemplateDac(request.POST)
-    #     if form.is_valid():
-    #         newTemplate = TemplatesDac(
-    #             descricao = form.cleaned_data['descricao'],
-    #             code = form.cleaned_data['code'],
-    #             templateJson = form.cleaned_data['templateJson'],
-    #             dataHoraCriacao = dateTime_actual(),
-    #             utilizadorCriacao = request.user,
-    #             ativo = form.cleaned_data['ativo'],
-    #             apagado = False
-    #             )
-    #         newTemplate.save()
-    #         # updateInterface(form.cleaned_data['templateJson'])
-    #         
-    #         if 'SaveAndNew' in request.POST:
-    #             return redirect('addTemplateDac')
-    #         else:
-    #             return redirect('listaTemplates')
-    #     else:
-    #         print "form nao é valida"
-    #         print request.POST
-    #         jsonData = request.POST["templateJson"]
-    #         template = "gestacess/templateDac/defineTemplate.html"
-    # else:
-    #     jsonData = """{"local":{"y":27,"x":41},"publicidade":{"y":69,"x":209},"visitado":{"y":444,"x":95},"competicao":{"y":444,"x":339},"visitante":{"y":444,"x":479},"data":{"y":705,"x":210},"hora":{"y":677,"x":208}}"""
-    #     form = AddFormTemplateDac()
-    #     template = "gestacess/templateDac/defineTemplate.html"
-    # eventos = Evento.objects.filter(ativo = 1, apagado = 0)
-    # return render_to_response(template,
-    #         locals(),
-    #         context_instance = RequestContext(request),
-    #         )
-    #===========================================================================
 
 

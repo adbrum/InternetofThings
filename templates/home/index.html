@@ -93,6 +93,9 @@
 		$("#btnEquip").click(
 				
 				function() {
+					
+					
+					
 					$( "#btnEquip" ).hide();
 					console.log('#someButton was clicked');
 					$.ajax({
@@ -147,6 +150,19 @@
 						
 					});
 					
+					$.ajax({
+					  	  type: "POST",
+					  	  url: "{% url 'getTemplate' %}",
+					  	  data: {},
+					  	  success: function(posicao){
+					  		  $.each(posicao, function(i, item){
+					  			alert(item);
+					  			console.log("Posição: "+item.nameElement);
+					  		  });
+					  		
+					  	  }
+					 });
+
 				});
 		
 	
@@ -204,10 +220,10 @@
 			});*/
 
 			
-			$(document).on("draggable ui-widget-content", function( event, ui ) {
+			/*$(document).on("draggable ui-widget-content", function( event, ui ) {
 				$("#ylocal").html(ui.position.top);
 				$("#xlocal").html(ui.position.left);
-			});
+			});*/
 			
 			
 		
