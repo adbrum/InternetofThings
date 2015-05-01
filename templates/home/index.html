@@ -149,20 +149,30 @@
 						},
 						
 					});
+					////
+					//$(".cancel").click(
+				
+				//function() {
 					
 					$.ajax({
 					  	  type: "POST",
 					  	  url: "{% url 'getTemplate' %}",
 					  	  data: {},
 					  	  success: function(posicao){
+					  		console.log(posicao);
 					  		  $.each(posicao, function(i, item){
-					  			alert(item);
-					  			console.log("Posição: "+item.nameElement);
+					  			console.log("#"+item.nome);
+					  			
+					  			$("#" + item.nome).css({"top": item.Y +"px", "left": item.X +"px", position:'absolute'})
+					  	      .addClass("selecionado");
+					  			
 					  		  });
 					  		
 					  	  }
 					 });
-
+					////
+					
+				//});
 				});
 		
 	

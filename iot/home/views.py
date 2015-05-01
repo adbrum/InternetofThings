@@ -122,15 +122,20 @@ def equipamentos(request):
 def getTemplate(request):
     print'TEMPLATEXXXXXXXXXXXXXXXXXXXXXXXXXXXxx'
     posicao = RelativePosition.objects.all()
-    
-    pos=[]
+   
+    response_data = []
     
     for item in posicao:
         print'POSICAO VIEW ', item.nameElement
-        pos.append(item)
+        
+        #dictEquip =                                
+                              
+        response_data.append({"nome":item.nameElement,
+                              "X":item.leftX,
+                              "Y":item.topY})
     
-
-    return HttpResponse(json.dump(pos), content_type = "application/json")
+    
+    return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
 @csrf_exempt
 def addTemplate(request):

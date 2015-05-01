@@ -1,22 +1,2 @@
 [
-	{
-		"model": "iot.Sensor",
-		"pk": 2,
-		"fields": {
-		"name" : "Temperatura",
-		"serialNumber" : "0",
-		"model" : "XPRTO",
-		"function" : "Medir temperatura"
-	}
-},
-	{
-		"model": "iot.Sensor",
-		"pk": 1,
-		"fields": {
-		"name" : "Movimento",
-		"serialNumber" : "0",
-		"model" : "0123",
-		"function" : "Detetar movimento"
-	}
-}
 ]
