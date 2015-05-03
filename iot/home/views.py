@@ -5,6 +5,8 @@
 :email l911911951@alunos.ipbeja.pt
 """
 
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.urlresolvers import reverse
@@ -15,9 +17,7 @@ from django.template import RequestContext
 from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-import json
-
-from iot.models import Equipment, Sensor, RelativePosition
+from iot.models import Equipment, Sensor, RelativePosition, Template
 
 
 @login_required(login_url='/admin/login/')
@@ -119,7 +119,7 @@ def equipamentos(request):
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
 @csrf_exempt
-def getTemplate(request):
+def getEquipmentPosition(request):
     print'TEMPLATEXXXXXXXXXXXXXXXXXXXXXXXXXXXxx'
     posicao = RelativePosition.objects.all()
    
@@ -138,7 +138,7 @@ def getTemplate(request):
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
 @csrf_exempt
-def addTemplate(request):
+def addEquipmentPosition(request):
     #print'RQUEST XXXXXXXXXXXXXXXXXXXXXXXXX',request.POST
     
     #Recebe a string pelo POST e a transforma em objeto.
@@ -153,5 +153,22 @@ def addTemplate(request):
                                         )
     
     return HttpResponse(content_type = "application/json")
+
+@csrf_exempt
+def getTemplate(request):
+    template = Template.objects.all()
+   
+    response_data = []
+    
+    for item in template:
+        print'CAMINHO: ', item.name
+        
+        #dictEquip =                                
+                              
+        response_data.append({"nome":item.name,
+                              "caminhoImagem":item.imagePath})
+    
+    
+    return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
 

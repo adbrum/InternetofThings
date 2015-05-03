@@ -261,4 +261,6 @@ class RelativePosition(models.Model):
     leftX = models.FloatField(default=0.0)
     topY = models.FloatField(default=0.0)
     
-    
+class Template(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nome do Template')
+    imagePath = models.CharField(max_length=200, verbose_name='Imagem')
