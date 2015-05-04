@@ -17,16 +17,23 @@
 
 <boddy>
 <div id="teste">
-<input type="button" class="btn btn-default" id="btnEquip" value="Listar Equipamentos">
+<!-- <input type="button" class="btn btn-default" id="btnEquip" value="Listar Equipamentos"> -->
 <form method="post" class="form-horizontal" id="formAddTemplate" style='visibility:visible;'>
 {% csrf_token %}
 	<input type="button" id="save" name="Save" value="{% trans 'Guardar' %}" class="btn btn-primary" style="float:left;"/>
 	<div class="cancel"><span class="text_small">{% trans "ou" %}</span>
 		<a href="#"  class="btn_cancelar">{% trans "Cancelar" %}</a>
 	</div>
-	
+	<div class="col-sm-2">
 	<label for="template">Template:</label>
-      <select name="template" id="template"></select>
+	</div >
+	<div class="col-sm-4">
+      <select class="form-control" name="template" id="template">
+		  <option value="volvo">----</option>
+	  </select>
+	  
+	 </div>
+	  
 </br>
 </br>
 
@@ -58,122 +65,158 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		var img = new Image();
+	
+	      $.ajax({
+	         type: "POST",
+	         url: "{% url 'getTemplate' %}",
+	         data: {},
+	         dataType: "json",
+	         success: function(json){
+	        	 console.log(json);
+	            var options = "";
+	            
+	            options = '<option value="">----</option>';
+	            
+	            $.each(json, function(key, value){
+	               options += '<option value="' + value.id + '">' + value.nome + '</option>';
+	               
+	               img.src = ""+ value.caminhoImagem +"";
+	            });
+	            
+	            $("#template").html(options);
+	
+	         }
+	      });
+	      
+	      var img = new Image();
+	      var selectAnterior = "";
+			
+			$('select').on('change', function() {
+				
+				  if(this.value && this.value != selectAnterior){
+					  selectAnterior = this.value;
+					  //alert(this.value)
+					  selecionar(this.value);  
+				  }else {
+					  alert("NOne");
+					  $("#containment-wrapper").css({"background-image":"none"});
+					  //alert("Vazia "+this.velue)
+				  }
+				  
+				});
+			
+	
+		/*
+		$("#btnEquip").click(function() {
+			
+			var value = $( "#template" ).val();
+			if(value == ""){
+				alert("Nenhum template selecionado.");
+				
+			}else{
+				selecionar(value);
+			}
+			
+			
+			
+		});
+		*/
 		
-		      $.ajax({
-		         type: "POST",
-		         url: "{% url 'getTemplate' %}",
-		         data: {},
-		         dataType: "json",
-		         success: function(json){
-		            var options = "";
-		            $.each(json, function(key, value){
-		               options += '<option value="' + key + '">' + value.nome + '</option>';
-		               
-		               img.src = ""+ value.caminhoImagem +"";
-		            });
-		            
-		            $("#template").html(options);
-		         }
-		      });
+		function selecionar(id_template){
+			
+			//var id_template = id;
+			
+			$( "#btnEquip" ).hide();
+			console.log('#someButton was clicked');
+			$.ajax({
+				type : "POST",
+				url : "/home/equipamentos/" + id_template + "/",
+				//dataType : "json",
+				//data: {};
+				success : function(retorno) {
+					console.log(retorno);
+					
+					$.each(retorno, function(i, item_equip) {
+						console.log("Nome - equipamento "+ item_equip.nomeEquipamento);
+						$("#containment-wrapper").append(
+								
+								"<div data-toggle='tooltip' data-placement='top' title='"+ item_equip.nomeEquipamento +"' style='width: 74px; height: 74px; border: 2px solid #ccc; '"
+								
+								 + "id=" +"equip_" + item_equip.equipamento_id + " class='draggable ui-widget-content'>"
+								 	+"<img src='/static/img/equipamento.png' />"
+								 + "</div>"
+						);
+					
+							$.each(item_equip.sensores, function(j, item_sensor) {
+								console.log("Sensor: "+ item_sensor.sensor_id + " do Equipamento: " + item_equip.nomeEquipamento);
 
-
-		$("#btnEquip").click(
-				
-				function() {
-				
-					$( "#btnEquip" ).hide();
-					console.log('#someButton was clicked');
-					$.ajax({
-						type : "POST",
-						url : "/home/equipamentos",
-						//dataType : "json",
-						//data: {};
-						success : function(retorno) {
-							console.log(retorno);
-							
-							$.each(retorno, function(i, item_equip) {
-								console.log("Nome - equipamento "+ item_equip.nomeEquipamento);
 								$("#containment-wrapper").append(
+										"<div data-toggle='tooltip' data-placement='top' title='Sensor: "+ item_sensor.nome_sensor +" - "+ item_equip.nomeEquipamento + "' style='width: 44px; height: 44px; border: 2px solid #ccc; '"
 										
-										"<div data-toggle='tooltip' data-placement='top' title='"+ item_equip.nomeEquipamento +"' style='width: 74px; height: 74px; border: 2px solid #ccc; '"
-										
-										 + "id=" +"equip_" + item_equip.equipamento_id + " class='draggable ui-widget-content'>"
-										 	+"<img src='/static/img/equipamento.png' />"
-										 + "</div>"
+										+ "id='" + "sensor_" + item_equip.equipamento_id + "_" + item_sensor.sensor_id + "' class='draggable ui-widget-content'>"
+											 +"<img src='/static/img/sensor01.png' />"
+											 
+								      + "</div>"	 
 								);
-							
-									$.each(item_equip.sensores, function(j, item_sensor) {
-										console.log("Sensor: "+ item_sensor.sensor_id + " do Equipamento: " + item_equip.nomeEquipamento);
-		
-										$("#containment-wrapper").append(
-												"<div data-toggle='tooltip' data-placement='top' title='Sensor: "+ item_sensor.nome_sensor +" - "+ item_equip.nomeEquipamento + "' style='width: 44px; height: 44px; border: 2px solid #ccc; '"
-												
-												+ "id='" + "sensor_" + item_equip.equipamento_id + "_" + item_sensor.sensor_id + "' class='draggable ui-widget-content'>"
-													 +"<img src='/static/img/sensor01.png' />"
-													 
-										      + "</div>"	 
-										);
+								
 										
-												
-										$("#sensor_" + item_equip.equipamento_id + "_" + item_sensor.sensor_id).draggable({
-												
-												containment : "#containment-wrapper",
-												scroll : false
-										});
-									});
-
-								
-								$("#equip_" + item_equip.equipamento_id).draggable({
-									
-									containment : "#containment-wrapper",
-									scroll : false
+								$("#sensor_" + item_equip.equipamento_id + "_" + item_sensor.sensor_id).draggable({
+										
+										containment : "#containment-wrapper",
+										scroll : false
 								});
-								
 							});
 
-						},
+						
+						$("#equip_" + item_equip.equipamento_id).draggable({
+							
+							containment : "#containment-wrapper",
+							scroll : false
+						});
 						
 					});
-					////
-					//$(".cancel").click(
+					
+					getPosition();
+
+				},
 				
-				//function() {
-					
-					$.ajax({
-					  	  type: "POST",
-					  	  url: "{% url 'getEquipmentPosition' %}",
-					  	  data: {},
-					  	  	success: function(posicao){
-					  		console.log(posicao);
-					  		/*var img = new Image();
-					  		
-					  		img.onload = function() {
-					  		  //alert(this.width + 'x' + this.height);
-					  		}
-					  		img.src = '/static/img/planta_casa.jpg';*/
-					  		  
-					  		$.each(posicao, function(i, item){
-					  			//console.log("#"+item.nome);
-					  			
-					  			$("#" + item.nome).css({"top": item.Y +"px", "left": item.X +"px", position:'absolute'})
-					  	      .addClass("selecionado");
-					  			
-					  			$("#containment-wrapper").css({"background-image":"url("+img.src+")"});
-					  			$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
-					  			
-					  		});
-					  		
-					  	  }
-					 });
-					////
-					
-				//});
-					
-					
-				});
+			});
+			
+			
+			
+		};
 		
-	
+		
+		function getPosition(){
+			$.ajax({
+			  	  type: "POST",
+			  	  url: "{% url 'getEquipmentPosition' %}",
+			  	  data: {},
+			  	  	success: function(posicao){
+			  		console.log(posicao);
+			  		/*var img = new Image();
+			  		
+			  		img.onload = function() {
+			  		  //alert(this.width + 'x' + this.height);
+			  		}
+			  		img.src = '/static/img/planta_casa.jpg';*/
+			  		  
+			  		$.each(posicao, function(i, item){
+			  			//console.log("#"+item.nome);
+			  			
+			  			$("#" + item.nome).css({"top": item.Y +"px", "left": item.X +"px", position:'absolute'})
+			  	      .addClass("selecionado");
+			  			
+			  			$("#containment-wrapper").css({"background-image":"url("+img.src+")"});
+			  			$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
+			  			
+			  		});
+			  		
+			  	  }
+			 });
+			
+		};
+		
 			
 			$("#save").click(function(e) {
 				var dados = {};

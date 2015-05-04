@@ -52,48 +52,58 @@ def index(request):
 
 #@login_required
 @csrf_exempt
-def equipamentos(request):
+def equipamentos(request, *args, **kwargs):
     """
     Página principal do utilizador
     """
+    
+    idTemplate = kwargs['idTemplate']
 
     TITULO = _(u'Internet das Coisas')
+    
+    template = Template.objects.filter(id = idTemplate)
+    for i in template:
+        for j in i.equipment.all():
+            print'EQUIPAMENTO: ', i.id
 
-    equipamentos = Equipment.objects.all()
-    
-    
-    #===========================================================================
-    # response_data = [{"equipamento_id":1, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]},
-    #  {"equipamento_id":2, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]},
-    #  {"equipamento_id":3, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]}
-    #  ]
-    #===========================================================================
-    
-    
-    response_data = []
-    
-    for equipamento in equipamentos:
-        
-        dictEquip =  {"equipamento_id":equipamento.id,
-                      "nomeEquipamento":equipamento.name}
-        lSensor = []
-        for sensor in equipamento.sensor.all():
-            s = Sensor.objects.get(id=sensor.id)
-            dictSensor =  {"sensor_id":s.id,
-                           "nome_sensor":s.name}
-            lSensor.append(dictSensor)
-            print s.name
-            '''
-            response_data.append(
-                           {"equipamento_id":equipamento.id,
-                             "nomeEquipamento":equipamento.name,
-                             "sensores":[{"sensor_id":s.id,
-                                          "nome_sensor":s.name}]
-                            })
-            '''
+            equipamentos = Equipment.objects.filter(id = i.id)
             
-        dictEquip["sensores"] = lSensor
-        response_data.append(dictEquip)
+            for i in equipamentos:
+                print'TEMPLATE: ', i.name
+            
+            
+            #===========================================================================
+            # response_data = [{"equipamento_id":1, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]},
+            #  {"equipamento_id":2, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]},
+            #  {"equipamento_id":3, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]}
+            #  ]
+            #===========================================================================
+            
+            
+            response_data = []
+            
+            for equipamento in equipamentos:
+                
+                dictEquip =  {"equipamento_id":equipamento.id,
+                              "nomeEquipamento":equipamento.name}
+                lSensor = []
+                for sensor in equipamento.sensor.all():
+                    s = Sensor.objects.get(id=sensor.id)
+                    dictSensor =  {"sensor_id":s.id,
+                                   "nome_sensor":s.name}
+                    lSensor.append(dictSensor)
+                    print s.name
+                    '''
+                    response_data.append(
+                                   {"equipamento_id":equipamento.id,
+                                     "nomeEquipamento":equipamento.name,
+                                     "sensores":[{"sensor_id":s.id,
+                                                  "nome_sensor":s.name}]
+                                    })
+                    '''
+                    
+                dictEquip["sensores"] = lSensor
+                response_data.append(dictEquip)
         
         
     print json.dumps(response_data)
@@ -165,7 +175,8 @@ def getTemplate(request):
         
         #dictEquip =                                
                               
-        response_data.append({"nome":item.name,
+        response_data.append({"id":item.id,
+                              "nome":item.name,
                               "caminhoImagem":item.imagePath})
     
     

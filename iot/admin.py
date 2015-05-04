@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from iot.models import Processor, Microcomputer, PhysicalCharacteristic, Voltage, \
-GPU, OperatingSystem, Interface, Expansion, Accessory, Memory, Equipment, Sensor, Microcontroller
+GPU, OperatingSystem, Interface, Expansion, Accessory, Memory, Equipment, Sensor, Microcontroller, Template
 
 
 admin.site.register(Equipment)
@@ -27,3 +27,4 @@ admin.site.register(Accessory)
 admin.site.register(Memory)
 admin.site.register(Sensor)
 admin.site.register(Voltage)
+admin.site.register(Template)
