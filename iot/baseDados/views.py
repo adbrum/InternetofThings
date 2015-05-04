@@ -2,16 +2,15 @@
 """
 :Autor: Adriano Leal
 :Aluno: 11951
-:email l911911951@alunos.ipbeja.pt
+:email: l911911951@alunos.ipbeja.pt
 """
 
 from django import template
 from django.http.response import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-
 from iot.models import Equipment, PhysicalCharacteristic, Voltage, Memory, \
-    Microcontroller, Microcomputer, GPU, Interface, Processor, Sensor
+    Microcontroller, Microcomputer, GPU, Interface, Processor, Sensor, Template
 
 
 def criar(request):
@@ -279,6 +278,30 @@ def criar(request):
     file_sensor.write("]\n")    
     file_sensor.close()
     
+    template = Template.objects.filter()
+    
+    file_template = open("iot/fixtures/template.json", "w")
+    file_template.write("[\n")
+    qt = len(template)
+    for item in template:
+        file_template.write("\t{\n")
+        file_template.write("\t\t\"model\": \"iot.Template\",\n")
+        file_template.write("\t\t\"pk\": " + str(item.id) + ",\n")
+        file_template.write("\t\t\"fields\": {\n")
+        file_template.write("\t\t\"name\" : \"" + (item.name).encode("utf-8\n") + "\",\n")
+        file_template.write("\t\t\"imagePath\" : \"" + (item.imagePath).encode("utf-8\n") + "\",\n")
+        for i in template:
+            for j in i.equipment.all():
+                file_template.write("\t\t\"equipment\" : " + str(j.id) + ",\n")
+            
+        file_template.write("\t}\n")
+        if qt > 1:
+            file_template.write("},\n")
+        else:
+            file_template.write("}\n")
+        qt -= 1    
+    file_template.write("]\n")    
+    file_template.close()
     
         
     return HttpResponse("Ficheiros gerados com sucesso!\n")

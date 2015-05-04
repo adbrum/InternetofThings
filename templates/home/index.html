@@ -5,7 +5,7 @@
 #containment-wrapper {
 	/*width: 80%;
 	height: 600px;*/
-	border: 2px solid #ccc;
+	border: 0px;/* solid #ccc;*/
 	padding: 10px;
 	/*background-image: url(/static/img/planta_casa.jpg);*/
     background-repeat: no-repeat;
@@ -98,8 +98,9 @@
 					  //alert(this.value)
 					  selecionar(this.value);  
 				  }else {
-					  alert("NOne");
-					  $("#containment-wrapper").css({"background-image":"none"});
+					 // alert("NOne");
+					  $("#containment-wrapper").css({"background-image":"url(/static/img/planta_casa.jpg)"});
+					  $("#containment-wrapper").removeClass('draggable ui-widget-content');
 					  //alert("Vazia "+this.velue)
 				  }
 				  

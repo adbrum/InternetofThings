@@ -264,7 +264,7 @@ class RelativePosition(models.Model):
 class Template(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome do Template')
     imagePath = models.CharField(max_length=200, verbose_name='Imagem')
-    equipment = models.ManyToManyField('Equipment', blank=True, verbose_name = 'Equipamentos')
+    equipment = models.ManyToManyField('Equipment', verbose_name = 'Equipamentos')
     
     def __unicode__(self):
         return self.name

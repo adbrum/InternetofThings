@@ -1,2 +1,12 @@
 [
+	{
+		"model": "iot.Sensor",
+		"pk": 1,
+		"fields": {
+		"name" : "Monitor de Temperatura",
+		"serialNumber" : "41216531",
+		"model" : "XPTO",
+		"function" : "Medir temperatura"
+	}
+}
 ]
