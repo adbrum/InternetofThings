@@ -4,9 +4,7 @@
 		"pk": 1,
 		"fields": {
 		"name" : "Casa",
-		"imagePath" : "/static/img/planta_casa.jpg",
-		"equipment" : 1,
-		
+		"imagePath" : "/static/img/planta_casa.jpg"
 	}
 },
 	{
@@ -14,9 +12,7 @@
 		"pk": 2,
 		"fields": {
 		"name" : "Casa 2",
-		"imagePath" : "/static/img/planta_casa_2.jpg",
-		"equipment" : 1,
-		
+		"imagePath" : "/static/img/planta_casa_2.jpg"
 	}
 }
 ]

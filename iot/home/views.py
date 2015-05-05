@@ -164,21 +164,42 @@ def addEquipmentPosition(request):
     
     return HttpResponse(content_type = "application/json")
 
+
 @csrf_exempt
-def getTemplate(request):
-    template = Template.objects.all()
-   
-    response_data = []
-    
-    for item in template:
-        print'CAMINHO: ', item.name
+def getTemplate(request, *args, **kwargs):
         
-        #dictEquip =                                
-                              
-        response_data.append({"id":item.id,
-                              "nome":item.name,
-                              "caminhoImagem":item.imagePath})
+    idTemplate = kwargs['idTemplate']
     
+    print'ID TEMPLATE', idTemplate
+    
+    if request.method == 'POST':
+        print'ID TEMPLATE vPOST', idTemplate
+                
+        template = Template.objects.all()
+       
+        response_data = []
+        
+        for item in template:
+            print'CAMINHO: ', item.name
+            
+            #dictEquip =                                
+                                  
+            response_data.append({"id":item.id,
+                                  "nome":item.name,
+                                  "caminhoImagem":item.imagePath})
+    
+    else:
+        
+        print'ID TEMPLATE GET', idTemplate
+        
+        template = Template.objects.get(id = idTemplate)
+       
+        response_data = []
+                                  
+        response_data.append({"id":template.id,
+                              "nome":template.name,
+                              "caminhoImagem":template.imagePath})
+        
     
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 

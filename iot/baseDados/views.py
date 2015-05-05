@@ -289,10 +289,10 @@ def criar(request):
         file_template.write("\t\t\"pk\": " + str(item.id) + ",\n")
         file_template.write("\t\t\"fields\": {\n")
         file_template.write("\t\t\"name\" : \"" + (item.name).encode("utf-8\n") + "\",\n")
-        file_template.write("\t\t\"imagePath\" : \"" + (item.imagePath).encode("utf-8\n") + "\",\n")
-        for i in template:
-            for j in i.equipment.all():
-                file_template.write("\t\t\"equipment\" : " + str(j.id) + ",\n")
+        file_template.write("\t\t\"imagePath\" : \"" + (item.imagePath).encode("utf-8\n") + "\"\n")
+        #---------------------------------------------------- for i in template:
+            #--------------------------------------- for j in i.equipment.all():
+                # file_template.write("\t\t\"equipment\" : " + str(j.id) + ",\n")
             
         file_template.write("\t}\n")
         if qt > 1:

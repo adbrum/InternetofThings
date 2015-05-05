@@ -64,11 +64,11 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+		 var img = new Image();
 	
 	      $.ajax({
 	         type: "POST",
-	         url: "{% url 'getTemplate' %}",
+	         url: "/home/getTemplate/0/",
 	         data: {},
 	         dataType: "json",
 	         success: function(json){
@@ -80,27 +80,52 @@
 	            $.each(json, function(key, value){
 	               options += '<option value="' + value.id + '">' + value.nome + '</option>';
 	               
-	               img.src = ""+ value.caminhoImagem +"";
+	              // img.src = ""+ value.caminhoImagem +"";+
 	            });
+	            
+	           // $("#containment-wrapper").css({"background-image":"url("+img.src+")"});
+	  			//$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
 	            
 	            $("#template").html(options);
 	
 	         }
 	      });
 	      
-	      var img = new Image();
+	     
 	      var selectAnterior = "";
 			
 			$('select').on('change', function() {
 				
-				  if(this.value && this.value != selectAnterior){
-					  selectAnterior = this.value;
+				  if(this.value){
+					  var id_template = this.value;
+					  $( "#containment-wrapper" ).empty();
+					 // selectAnterior = this.value;
 					  //alert(this.value)
-					  selecionar(this.value);  
+					  
+					  
+					  $.ajax({
+					         type: "GET",
+					         url: "/home/getTemplate/" + id_template + "/" ,
+					         data: {},
+					         dataType: "json",
+					         success: function(json){
+					        	 $.each(json, function(key, value){
+					        		 
+					        		 img.src = ""+ value.caminhoImagem +"";
+					        		 //alert(img.src);
+							          
+							            $("#containment-wrapper").css({"background-image":"url("+ img.src +")"});
+							  			$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
+						            });
+					         }
+					      });
+					  
+					  selecionar(this.value);
 				  }else {
+					  location.reload();
 					 // alert("NOne");
-					  $("#containment-wrapper").css({"background-image":"url(/static/img/planta_casa.jpg)"});
-					  $("#containment-wrapper").removeClass('draggable ui-widget-content');
+					  //$("#containment-wrapper").css({"background-image":"url(/static/img/fundo_transparente.png)"});
+					  //$("#containment-wrapper").removeClass('draggable ui-widget-content');
 					  //alert("Vazia "+this.velue)
 				  }
 				  
@@ -208,8 +233,7 @@
 			  			$("#" + item.nome).css({"top": item.Y +"px", "left": item.X +"px", position:'absolute'})
 			  	      .addClass("selecionado");
 			  			
-			  			$("#containment-wrapper").css({"background-image":"url("+img.src+")"});
-			  			$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
+			  			
 			  			
 			  		});
 			  		

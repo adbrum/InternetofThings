@@ -13,6 +13,6 @@ urlpatterns = patterns('',
                        url(r'^equipamentos/(?P<idTemplate>\d+)/$', 'iot.home.views.equipamentos', name="equipamentos"),
                        url(r'^getPosition', 'iot.home.views.getEquipmentPosition', name="getEquipmentPosition"),
                        url(r'^addPosition', 'iot.home.views.addEquipmentPosition', name="addEquipmentPosition"),
-                       url(r'^getTemplate', 'iot.home.views.getTemplate', name="getTemplate"),
+                       url(r'^getTemplate/(?P<idTemplate>\d+)/$', 'iot.home.views.getTemplate', name="getTemplate"),
                        )
 
