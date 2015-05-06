@@ -64,11 +64,11 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function() {
-		 var img = new Image();
+		 
 	
 	      $.ajax({
 	         type: "POST",
-	         url: "/home/getTemplate/0/",
+	         url: "{% url 'getTemplate' %}",
 	         data: {},
 	         dataType: "json",
 	         success: function(json){
@@ -104,29 +104,30 @@
 					  
 					  
 					  $.ajax({
-					         type: "GET",
-					         url: "/home/getTemplate/" + id_template + "/" ,
-					         data: {},
+					         type: "POST",
+					         url: "{% url 'getTemplate' %}",
+					         data: {"id_template":id_template},
 					         dataType: "json",
 					         success: function(json){
-					        	 $.each(json, function(key, value){
+					        	 	 var img = new Image();
+					        		 console.log("Caminho: "+json.caminhoImagem);
 					        		 
-					        		 img.src = ""+ value.caminhoImagem +"";
+					        		 img.onload = function() {
+					        		       var height = this.height,
+					        		           width = this.width;
+					        		       $("#containment-wrapper").css({'background-image':'url('+ img.src +')', 'width': img.width+'px', 'height': img.height+'px', position:'absolute'});
+					        		    }
+						        		 img.src = ""+ json.caminhoImagem +"";
 					        		 //alert(img.src);
 							          
-							            $("#containment-wrapper").css({"background-image":"url("+ img.src +")"});
-							  			$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
-						            });
+							            //$("#containment-wrapper").css({'background-image':'url('+ img.src +')', 'width': img.width+'px', 'height': img.height+'px', position:'absolute'});
+							  			//$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
 					         }
 					      });
 					  
 					  selecionar(this.value);
 				  }else {
 					  location.reload();
-					 // alert("NOne");
-					  //$("#containment-wrapper").css({"background-image":"url(/static/img/fundo_transparente.png)"});
-					  //$("#containment-wrapper").removeClass('draggable ui-widget-content');
-					  //alert("Vazia "+this.velue)
 				  }
 				  
 				});

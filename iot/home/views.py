@@ -130,16 +130,13 @@ def equipamentos(request, *args, **kwargs):
 
 @csrf_exempt
 def getEquipmentPosition(request):
-    print'TEMPLATEXXXXXXXXXXXXXXXXXXXXXXXXXXXxx'
+
     posicao = RelativePosition.objects.all()
    
     response_data = []
     
     for item in posicao:
-        print'POSICAO VIEW ', item.nameElement
-        
-        #dictEquip =                                
-                              
+       
         response_data.append({"nome":item.nameElement,
                               "X":item.leftX,
                               "Y":item.topY})
@@ -149,7 +146,6 @@ def getEquipmentPosition(request):
 
 @csrf_exempt
 def addEquipmentPosition(request):
-    #print'RQUEST XXXXXXXXXXXXXXXXXXXXXXXXX',request.POST
     
     #Recebe a string pelo POST e a transforma em objeto.
     dados = json.loads(request.POST.get('dados'))
@@ -167,39 +163,27 @@ def addEquipmentPosition(request):
 
 @csrf_exempt
 def getTemplate(request, *args, **kwargs):
-        
-    idTemplate = kwargs['idTemplate']
     
-    print'ID TEMPLATE', idTemplate
+    idTemplate = request.POST.get("id_template")
     
-    if request.method == 'POST':
-        print'ID TEMPLATE vPOST', idTemplate
-                
-        template = Template.objects.all()
+    if idTemplate:
        
+        template = Template.objects.get(id = idTemplate)
+        response_data = {}
+                                  
+        response_data = {"id":template.id,
+                              "nome":template.name,
+                              "caminhoImagem":template.imagePath}
+    
+    else:
+ 
+        template = Template.objects.all()
         response_data = []
         
         for item in template:
-            print'CAMINHO: ', item.name
-            
-            #dictEquip =                                
-                                  
             response_data.append({"id":item.id,
                                   "nome":item.name,
                                   "caminhoImagem":item.imagePath})
-    
-    else:
-        
-        print'ID TEMPLATE GET', idTemplate
-        
-        template = Template.objects.get(id = idTemplate)
-       
-        response_data = []
-                                  
-        response_data.append({"id":template.id,
-                              "nome":template.name,
-                              "caminhoImagem":template.imagePath})
-        
     
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
