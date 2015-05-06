@@ -8,6 +8,7 @@ all:
 	python manage.py loaddata voltage.json
 	python manage.py loaddata memory.json
 	python manage.py loaddata interface.json
+	python manage.py loaddata template.json
 	
 	
 	
