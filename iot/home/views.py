@@ -173,7 +173,7 @@ def getTemplate(request, *args, **kwargs):
                                   
         response_data = {"id":template.id,
                               "nome":template.name,
-                              "caminhoImagem":template.imagePath}
+                              "caminhoImagem":str(template.imagePath)}
     
     else:
  
@@ -183,7 +183,7 @@ def getTemplate(request, *args, **kwargs):
         for item in template:
             response_data.append({"id":item.id,
                                   "nome":item.name,
-                                  "caminhoImagem":item.imagePath})
+                                  "caminhoImagem":str(item.imagePath)})
     
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 

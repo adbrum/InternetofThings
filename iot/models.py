@@ -10,6 +10,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from audit_log.models.fields import CreatingUserField, LastUserField
+from internet_of_things.settings import MEDIA_ROOT
 
 
 class Microcomputer(models.Model):
@@ -263,7 +264,8 @@ class RelativePosition(models.Model):
     
 class Template(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome do Template')
-    imagePath = models.CharField(max_length=200, verbose_name='Imagem')
+    imagePath = models.FileField(upload_to=MEDIA_ROOT, blank = True)
+    #imagePath = models.CharField(max_length=200, verbose_name='Imagem')
     equipment = models.ManyToManyField('Equipment', verbose_name = 'Equipamentos')
     
     def __unicode__(self):
