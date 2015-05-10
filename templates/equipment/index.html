@@ -1,30 +1,8 @@
 {% extends "base.html" %}
 {% load i18n admin_static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
-
-{% block coltype %}colMS{% endblock %}
-
-{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
-
-{# {% block breadcrumbs %}{% endblock %} #}
 {% block content %}
 
-<div class = "breadcrumb_div">
-	<ol class="breadcrumb">
-	  <li><a href="#" id = "portaria_bread" >{%trans 'Equipamentos'%}</a></li>
-	  <li class="active">{{ TITULO }}</li>
-	</ol>
-	<input id= "criarEquipamento" class="btn btn-primary" type="button" value="{%trans 'Criar'%}">
-	{%if tamLista != 0 %}
-		<div class="dropdown col-xs-offset-5">
-			<a href="#" data-toggle="dropdown" class="btn btn-default ">{% trans "Mais  " %}<b class="caret"></b></a>
-		  	<ul class="dropdown-menu more" role="menu" aria-labelledby="dLabel">
-		  		<li><a href="/equipments/addEquipment/" data-toggle="modal" data-target="#apagarModalEquipment" class="men_apagar">{% trans "Apagar" %}</a></li>
-		  	</ul>
-		</div>
-	{%endif%}
-</div>
 {%if tamLista == 0 %}
 	<div class="no_content">
 		<img src="/static/img/empty_arrow.png">
@@ -32,33 +10,32 @@
 	</div>
 {%else%}
 
-<table cellpadding="0" cellspacing="0" border="0" class="display sumary_table " id="tabelaLista" width="100%">
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Lista de sensores</div>
+
+  <!-- Table -->
+  <table id="tabelaLista" class="table">
 	<thead>
 		<tr>
-			<th width="38px;"><input type="checkbox" class="checkAll"></th>
-			<th>{%	trans "Nome" %}</th>
-			<th>{%	trans "Modelo" %}</th>
+			<th>{%	trans "ID" %}</th>
+			<th>{%	trans "Equipamento/Sensor" %}</th>
 		</tr>
 	</thead>
 	<tbody>
-		{% for equipment in equipments %}
+		{% for equipamento in equipamentos %}
+			{% for sensor in lSensor %}
 			<tr >
-				<td><input type="checkbox" value="{{ equipment.id }}" class="checkable" ></td>
-				<td><a href="#" class = "editEquipment" name = "{{equipment.id}}" >{{ equipment.name }}</a></td>
-				<td>{{ equipment.model }}</td>
+				<td><a href="/sensor/sensor/{{ sensor.sensor_id }}" >{{ sensor.sensor_id }}</a></td>
+				<td><a href="/sensor/sensor/{{ sensor.sensor_id }}" >{{ equipamento.name }} - {{ sensor.nome_sensor }}</a></td>
 			</tr>
+			{% endfor %}
 		{% endfor %}
 {% endif %}
 	</tbody>
-	<tfoot>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-
-		</tr>
-	</tfoot>
 </table>
+</div>
 
 {% endblock %}
 {% block endJs %}
@@ -75,10 +52,6 @@
 	                         { 'bSortable': false, 'aTargets': [ 0 ] }
 	                      ] 	
 		});
-		
-		$('.checkAll').click(function () {    
-		     $('input:checkbox.checkable').prop('checked', this.checked);    
-		 });
 		
 	
 	});

@@ -13,71 +13,37 @@ from django.template import RequestContext
 from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
-from iot import equipment
-from iot.models import Sensor, Equipment
+from iot.models import Sensor
 
 
 #from forms import AddEquipmentForm, FichaEquipmentForm
 #from iot.models import Equipment, PhysicalCharacteristic, Voltage, Memory
-def listEquipment_sensor(request, *args, **kwargs):
+def listSensors(request):
+    """
+    Lista todos os sensores de um equipamento registrado
+    """
     
-    idTemplate = kwargs['idEquipment']
+    TITULO = _(u'Equipamentos')
 
-    TITULO = _(u'Internet das Coisas')
-    
-
-    equipamentos = Equipment.objects.filter(id = idTemplate)
-    
-    for j in equipamentos:
-        print'TEMPLATE: ', j.name
-    
-    
-    #===========================================================================
-    # response_data = [{"equipamento_id":1, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]},
-    #  {"equipamento_id":2, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]},
-    #  {"equipamento_id":3, "nomeEquipamento":"EquipSEI_LA", "sensores":[{"sensor_id":2, "nome_sensor":"OLA"}]}
-    #  ]
-    #===========================================================================
-    
-    
-    response_data = []
-    
-    for equipamento in equipamentos:
-        
-        dictEquip =  {"equipamento_id":equipamento.id,
-                      "nomeEquipamento":equipamento.name}
-        lSensor = []
-        for sensor in equipamento.sensor.all():
-            s = Sensor.objects.get(id=sensor.id)
-            dictSensor =  {"sensor_id":s.id,
-                           "nome_sensor":s.name}
-            lSensor.append(dictSensor)
-            print s.name
-            
-        dictEquip["sensores"] = lSensor
-        response_data.append(dictEquip)
-        
-    
-    template = "equipment/index.html"
+    sensores = Sensor.objects.all()
+    tamLista = len(sensores)
+    template = "sensor/index.html"
     return render_to_response(template,
                               locals(),
                               context_instance=RequestContext(request)
                               )
-    #print json.dumps(response_data)
+
+
+#@csrf_exempt
+def sensor(request, *args, **kwargs):
     
+    idSensor = kwargs["idSensor"]
     
-    
-#===============================================================================
-#     TITULO = _(u'Equipamentos')
-# 
-#     equipamentos = Sensor.objects.all()
-#     tamLista = len(equipamentos)
-#     template = "equipment/index.html"
-#     return render_to_response(template,
-#                               locals(),
-#                               context_instance=RequestContext(request)
-#                               )
-#===============================================================================
+    sensor = Sensor.objects.get(id = idSensor)
+    template = "sensor/index.html"
+    return render_to_response(template,
+                              locals(),
+                              context_instance=RequestContext(request))
 
 #===============================================================================
 # 

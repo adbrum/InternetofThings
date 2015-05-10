@@ -167,10 +167,10 @@
 						console.log("Nome - equipamento "+ item_equip.nomeEquipamento);
 						$("#containment-wrapper").append(
 								
-								"<div data-toggle='tooltip' data-placement='top' title='"+ item_equip.nomeEquipamento +"' style='width: 74px; height: 74px; border: 2px solid #ccc; '"
+								"<div data-toggle='tooltip' data-placement='top' title='ID: "+ item_equip.equipamento_id +" - "+ item_equip.nomeEquipamento +"' style='width: 74px; height: 74px; border: 2px solid #ccc; '"
 								
 								 + "id=" +"equip_" + item_equip.equipamento_id + " class='draggable ui-widget-content'>"
-								 	+"<img src='/static/img/equipamento.png' />"
+								 	+"<a href='/equipments/listEquipment_sensor/"+ item_equip.equipamento_id +"'><img src='/static/img/equipamento.png' /></a>"
 								 + "</div>"
 						);
 					
@@ -181,7 +181,7 @@
 										"<div data-toggle='tooltip' data-placement='top' title='Sensor: "+ item_sensor.nome_sensor +" - "+ item_equip.nomeEquipamento + "' style='width: 44px; height: 44px; border: 2px solid #ccc; '"
 										
 										+ "id='" + "sensor_" + item_equip.equipamento_id + "_" + item_sensor.sensor_id + "' class='draggable ui-widget-content'>"
-											 +"<img src='/static/img/sensor01.png' />"
+											 +"<a href='/sensor/sensor/" + item_sensor.sensor_id + "'><img src='/static/img/sensor01.png' /></a>"
 											 
 								      + "</div>"	 
 								);
