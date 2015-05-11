@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from audit_log.models.fields import CreatingUserField, LastUserField
 from internet_of_things.settings import MEDIA_ROOT
+from django.db.models.fields import FloatField
 
 
 class Microcomputer(models.Model):
@@ -270,3 +271,10 @@ class Template(models.Model):
     
     def __unicode__(self):
         return self.name
+    
+class ReadData(models.Model):
+    temperature = FloatField()
+    humidity = FloatField()
+    pressure = FloatField()
+    dateTimeCreation = models.DateTimeField(auto_now_add=True)
+    

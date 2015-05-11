@@ -25,7 +25,7 @@ def listSensors(request):
     
     TITULO = _(u'Equipamentos')
 
-    sensores = Sensor.objects.all()
+    sensores = Sensor.objects.all().order_by('name')
     tamLista = len(sensores)
     template = "sensor/index.html"
     return render_to_response(template,
@@ -104,4 +104,3 @@ def sensor(request, *args, **kwargs):
 #                               context_instance=RequestContext(request),
 #                               )
 #===============================================================================
-

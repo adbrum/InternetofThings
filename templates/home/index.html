@@ -16,50 +16,36 @@
 <html>
 
 <boddy>
-<div id="teste">
 <!-- <input type="button" class="btn btn-default" id="btnEquip" value="Listar Equipamentos"> -->
 <form method="post" class="form-horizontal" id="formAddTemplate" style='visibility:visible;'>
 {% csrf_token %}
-	<input type="button" id="save" name="Save" value="{% trans 'Guardar' %}" class="btn btn-primary" style="float:left;"/>
-	<div class="cancel"><span class="text_small">{% trans "ou" %}</span>
-		<a href="#"  class="btn_cancelar">{% trans "Cancelar" %}</a>
-	</div>
-	<div class="col-sm-2">
-	<label for="template">Template:</label>
+
+<div class="row">
+	<div class="col-sm-6 col-md-12">
+		<label for="template">Template:</label>
 	</div >
-	<div class="col-sm-4">
-      <select class="form-control" name="template" id="template">
-		  <option value="volvo">----</option>
-	  </select>
-	  
-	 </div>
-	  
-</br>
-</br>
-
-
-<div id="containment-wrapper">
-
-<!-- 
-	{% for equipamento in equipamentos %} {% cycle rowvalue1 rowvalue2 %}
-	<div id="containment-equipamento" class="draggable ui-widget-content">
-		<div id="{{ equipamento.name }}" class="draggable ui-widget-content">
-			<p>{{ equipamento.name }}</p>
-		</div>
-		{% for sensor in equipamento.sensor.all %}
-		<div id="{{ sensor.name }}" class="draggable ui-widget-content">
-			<p>sensor: {{ sensor.name }}</p>
-		</div>
-		{% endfor %}
-
-		<div style="height: 5000px; width: 1px;"></div>
+	
+	<div class="col-sm-6 col-md-6">
+		<select class="form-control" name="template" id="template">
+			<option value="">----</option>
+		</select>
+		
 	</div>
+	
+	<div>
+		<input id="save" name="Save" class="btn btn-primary" type="button" value="{%trans 'Guardar'%}">
+	</div>
+</div>
+	  
+</br>
+</br>
 
-	{% endfor %}
- -->
+<div class="col-sm-6 col-md-12">
+	<div id="containment-wrapper">
+	
+	</div>
 </div>
 
-</div>
 </boddy>
 </html>
 <script type="text/javascript">
@@ -82,9 +68,6 @@
 	               
 	              // img.src = ""+ value.caminhoImagem +"";+
 	            });
-	            
-	           // $("#containment-wrapper").css({"background-image":"url("+img.src+")"});
-	  			//$("#containment-wrapper").css({"width": img.width+"px", "height": img.height+"px", position:'absolute'});
 	            
 	            $("#template").html(options);
 	
@@ -133,22 +116,6 @@
 				});
 			
 	
-		/*
-		$("#btnEquip").click(function() {
-			
-			var value = $( "#template" ).val();
-			if(value == ""){
-				alert("Nenhum template selecionado.");
-				
-			}else{
-				selecionar(value);
-			}
-			
-			
-			
-		});
-		*/
-		
 		function selecionar(id_template){
 			$( document ).tooltip();
 			//var id_template = id;
@@ -167,7 +134,7 @@
 						console.log("Nome - equipamento "+ item_equip.nomeEquipamento);
 						$("#containment-wrapper").append(
 								
-								"<div data-toggle='tooltip' data-placement='top' title='ID: "+ item_equip.equipamento_id +" - "+ item_equip.nomeEquipamento +"' style='width: 74px; height: 74px; border: 2px solid #ccc; '"
+								"<div data-toggle='tooltip' data-placement='top' title='ID: "+ item_equip.equipamento_id +" - "+ item_equip.nomeEquipamento +"' style='width: 51px; height: 51px; border: 2px solid #ccc; '"
 								
 								 + "id=" +"equip_" + item_equip.equipamento_id + " class='draggable ui-widget-content'>"
 								 	+"<a href='/equipments/listEquipment_sensor/"+ item_equip.equipamento_id +"'><img src='/static/img/equipamento.png' /></a>"
@@ -178,7 +145,7 @@
 								console.log("Sensor: "+ item_sensor.sensor_id + " do Equipamento: " + item_equip.nomeEquipamento);
 
 								$("#containment-wrapper").append(
-										"<div data-toggle='tooltip' data-placement='top' title='Sensor: "+ item_sensor.nome_sensor +" - "+ item_equip.nomeEquipamento + "' style='width: 44px; height: 44px; border: 2px solid #ccc; '"
+										"<div data-toggle='tooltip' data-placement='top' title='Sensor: "+ item_sensor.nome_sensor +" - "+ item_equip.nomeEquipamento + "' style='width: 25px; height: 24px; border: 2px solid #ccc; '"
 										
 										+ "id='" + "sensor_" + item_equip.equipamento_id + "_" + item_sensor.sensor_id + "' class='draggable ui-widget-content'>"
 											 +"<a href='/sensor/sensor/" + item_sensor.sensor_id + "'><img src='/static/img/sensor01.png' /></a>"
@@ -221,12 +188,6 @@
 			  	  data: {},
 			  	  	success: function(posicao){
 			  		console.log(posicao);
-			  		/*var img = new Image();
-			  		
-			  		img.onload = function() {
-			  		  //alert(this.width + 'x' + this.height);
-			  		}
-			  		img.src = '/static/img/planta_casa.jpg';*/
 			  		  
 			  		$.each(posicao, function(i, item){
 			  			//console.log("#"+item.nome);
@@ -269,42 +230,6 @@
 
 			});
 			
-			
-		/*	data = {{jsonData|safe}};
-			$.each(data, function(key, value){
-			 	element = "#"+key;
-			 	$(element).css({ top: value.y, left: value.x});
-			});*/
-			
-			
-			/*$(function(){
-				//csrftoken = getCookie('csrftoken');
-				$.ajax({
-					  type: "POST",
-					  url: "{% url 'getEquipmentPosition' %}",
-					  traditional: true,
-					  data: {id:"{{eventos.0.id}}"},
-					  beforeSend: function( xhr ) {xhr.setRequestHeader("X-CSRFToken", csrftoken);},
-					  success: function(data){
-						  $("#template").css({"background-image":"url("+data.fundo+")"});
-						  $("#publicidade").attr("src",data.publicidade);
-						  $("#visitado").children("img").attr("src",data.visitado);
-						  $("#visitante").children("img").attr("src",data.visitante);
-						  $("#competicao").attr("src",data.competicao);
-						  $("#local").html(data.instalacao);
-					  }
-				});
-			});*/
-
-			
-			/*$(document).on("draggable ui-widget-content", function( event, ui ) {
-				$("#ylocal").html(ui.position.top);
-				$("#xlocal").html(ui.position.left);
-			});*/
-			
-			
-		
-		   
 		
 			});
 </script>

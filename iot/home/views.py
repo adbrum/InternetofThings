@@ -61,12 +61,12 @@ def equipamentos(request, *args, **kwargs):
 
     TITULO = _(u'Internet das Coisas')
     
-    template = Template.objects.filter(id = idTemplate)
+    template = Template.objects.filter(id = idTemplate).order_by('name')
     for i in template:
         for j in i.equipment.all():
             print'EQUIPAMENTO: ', i.id
 
-            equipamentos = Equipment.objects.filter(id = i.id)
+            equipamentos = Equipment.objects.filter(id = i.id).order_by('name')
             
             for i in equipamentos:
                 print'TEMPLATE: ', i.name
@@ -177,7 +177,7 @@ def getTemplate(request, *args, **kwargs):
     
     else:
  
-        template = Template.objects.all()
+        template = Template.objects.all().order_by('name')
         response_data = []
         
         for item in template:
