@@ -27,23 +27,7 @@ def index(request):
     """
     
     TITULO = _(u'Internet das Coisas')
-
-    
- #==============================================================================
- #    equipamentos = Equipment.objects.all()
- #     
- #    retorno = serializers.serialize("json",  equipamentos)
- #     
- #    for i in equipamentos:
- #         
- #        for z in i.sensor.all():
- #            print z
- # 
- #     
- #     
- #    tamLista = len(equipamentos)
- #==============================================================================
-    
+  
     template = "home/index.html"
     return render_to_response(template,
                               locals(),
@@ -54,7 +38,7 @@ def index(request):
 @csrf_exempt
 def equipamentos(request, *args, **kwargs):
     """
-    Página principal do utilizador
+    Lista todos os equipamentos com os seus sensores que foram inseridos no sistema
     """
     
     idTemplate = kwargs['idTemplate']
@@ -107,29 +91,15 @@ def equipamentos(request, *args, **kwargs):
         
         
     print json.dumps(response_data)
-#===============================================================================
-#     
-#     retorno1 = {}    
-#     for i in equipamentos:
-#         
-#         for sensor in i.sensor.all():
-#             print sensor
-#             retorno1 = {i:{sensor}} 
-#             
-#             
-#     retorno = serializers.serialize("json",  equipamentos)
-#     retornof = serializers.serialize("json",  retorno1)
-# Dac
-#     tamLista = len(equipamentos)
-#     
-#     response = {"retorno":retorno, "retorno1":retornof}
-#===============================================================================
     
     #return HttpResponse(retorno, mimetype="text/javascript")
     return HttpResponse(json.dumps(response_data), content_type = "application/json")
 
 @csrf_exempt
 def getEquipmentPosition(request):
+    """
+    Pega a posição de todos os equipamentos e sensores.
+    """
 
     posicao = RelativePosition.objects.all()
    
@@ -146,6 +116,9 @@ def getEquipmentPosition(request):
 
 @csrf_exempt
 def addEquipmentPosition(request):
+    """
+    Salva a posição de todos os equipamentos e sensores.
+    """
     
     #Recebe a string pelo POST e a transforma em objeto.
     dados = json.loads(request.POST.get('dados'))
@@ -163,6 +136,9 @@ def addEquipmentPosition(request):
 
 @csrf_exempt
 def getTemplate(request, *args, **kwargs):
+    """
+    Pega os dados (Equipamentos e sensores) dos templates criados e envia para o template uma lista destes. 
+    """
     
     idTemplate = request.POST.get("id_template")
     
