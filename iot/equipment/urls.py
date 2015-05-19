@@ -13,7 +13,6 @@ urlpatterns = patterns('',
                        #========================================================
                        
                        url(r'^listEquipment_sensor/(?P<idEquipment>\d+)/$', 'iot.equipment.views.listEquipment_sensor', name="listEquipment_sensor"),
-
-                      # url(r'^addEquipment/$', 'iot.equipment.views.addEquipment',
+                       # url(r'^addEquipment/$', 'iot.equipment.views.addEquipment',
                       #     name="addEquipment"),
                        )
